@@ -1,2 +1,3 @@
-import express from 'express';
+import express, { Express } from 'express';
 
+const app = express();
