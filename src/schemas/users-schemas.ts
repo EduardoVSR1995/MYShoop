@@ -7,3 +7,8 @@ export const createUserSchema = Joi.object<CreateUserParams>({
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
 });
+
+export const signinUserSchema = Joi.object<CreateUserParams>({
+  name: Joi.string().required(),
+  email: Joi.string().email().required(),
+});
