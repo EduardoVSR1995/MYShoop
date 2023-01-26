@@ -1,5 +1,7 @@
 import { notFoundError, notmatch } from "@/error";
 import userRepository from "@/repositories/user-repositoy";
+import sessionRepository from "@/repositories/store-repository";
+
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 
@@ -18,7 +20,7 @@ async function creatUser(user: CreateUserParams ) {
 
   await userRepository.creatUser({ data: user, hashedPassword:hashedPassword });
 
-  return hashedPassword;
+  return {token: hashedPassword};
 }
 
 export type CreateUserParams = Omit<User, "id" >;
@@ -34,7 +36,13 @@ async function signinUser(emailPass: Omit<User, "id" | "name" > ) {
 
   await userRepository.creatSessionUser(user.id, hashedPassword);
 
-  return hashedPassword;
+  const useMaster = await sessionRepository.findFirstStoreUserId(user.id)
+
+  if(useMaster){
+    return {token: hashedPassword, valid: true}
+  }
+
+  return {token: hashedPassword};
 }
 
 const userService = {

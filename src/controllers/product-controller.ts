@@ -10,5 +10,4 @@ export async function listProducts(req: Request, res: Response){
     } catch (error) {
         return res.status(httpStatus.BAD_REQUEST)
     }
-
 }

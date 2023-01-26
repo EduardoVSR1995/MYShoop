@@ -5,7 +5,7 @@ import cors from "cors";
 loadEnv()
 
 import {
-  productsRoute
+  productsRoute, usersRouter
 } from "@/routers";
 
 const app = express();
@@ -15,6 +15,7 @@ app
   .use(express.json())
   .get("/check", (req, res) => res.send("OK"))
   .use("/product", productsRoute)
+  .use("/user", usersRouter)
 
 export async function init(): Promise<Express> {
     connectDb();
