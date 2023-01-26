@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  User      User      @relation(fields: [userId], references: [id])
+  nameStore String
+  Product   Product[]
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  name       String
+  email      String       @unique @db.VarChar(255)
+  password   String       @db.VarChar(255)
+  urlImage   String
+  Session    Session[]
+  Store      Store[]
+  Affiliated Affiliated[]
+  Bougth     Bougth[]
+  Addres     Addres[]
+}
+
+model Session {
+  id     Int    @id @default(autoincrement())
+  userId Int
+  User   User   @relation(fields: [userId], references: [id])
+  token  String
+}
+
+model Affiliated {
+  id        Int    @id @default(autoincrement())
+  code      String
+  cellPhone Int
+  userId    Int
+  User      User   @relation(fields: [userId], references: [id])
+}
+
+model UrlImage {
+  id        Int     @id @default(autoincrement())
+  ProductId Int
+  Product   Product @relation(fields: [ProductId], references: [id])
+  urlImage  String
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String     @db.VarChar(255)
+  packingSize String[]
+  StoreId     Int
+  CategoriId  Int
+  Categori    Categori   @relation(fields: [CategoriId], references: [id])
+  Store       Store      @relation(fields: [StoreId], references: [id])
+  UrlImage    UrlImage[]
+  Bougth      Bougth[]
+}
+
+model Categori {
+  id      Int       @id @default(autoincrement())
+  name    String
+  Product Product[]
+}
+
+model Bougth {
+  id        Int      @id @default(autoincrement())
+  UserId    Int
+  User      User     @relation(fields: [UserId], references: [id])
+  ProductId Int
+  Product   Product  @relation(fields: [ProductId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Addres {
+  cep            Int
+  phone          String @db.VarChar(255)
+  street         Int    @unique
+  postOfficeCode Int
+  UserId         Int
+  User           User   @relation(fields: [UserId], references: [id])
+}
