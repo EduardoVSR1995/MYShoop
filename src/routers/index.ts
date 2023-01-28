@@ -1,2 +1,3 @@
-export * from "./Product-router";
+export * from "./Product-rout";
 export * from "./user-rout";
+export * from "./store-rout";

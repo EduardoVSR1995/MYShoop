@@ -51,7 +51,7 @@ CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" VARCHAR(255) NOT NULL,
-    "packingSize" TEXT[] DEFAULT ARRAY['30', '100', '200']::TEXT[],
+    "packingSize" TEXT[],
     "StoreId" INTEGER NOT NULL,
     "CategoriId" INTEGER NOT NULL,
 

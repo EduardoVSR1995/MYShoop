@@ -59,6 +59,7 @@ model Product {
   description String     @db.VarChar(255)
   packingSize String[]
   StoreId     Int
+  price       Int
   CategoriId  Int
   Categori    Categori   @relation(fields: [CategoriId], references: [id])
   Store       Store      @relation(fields: [StoreId], references: [id])

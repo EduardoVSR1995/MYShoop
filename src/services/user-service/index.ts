@@ -25,12 +25,12 @@ async function creatUser(user: CreateUserParams ) {
 
 export type CreateUserParams = Omit<User, "id" >;
 
-async function signinUser(emailPass: Omit<User, "id" | "name" > ) {
-  const user =  await findFirstUserMail(emailPass.email);
+async function signinUser(emailPass: Omit<User, "id" | "name" | "urlImage" > ) {
+  const user =  await userRepository.findFirstUserMail(emailPass.email);
+ 
+  const isPasswordValid = await bcrypt.compare(emailPass.password, user.password);
 
-  const isPasswordValid = await bcrypt.compare(user.password, emailPass.password);
-
-  if(isPasswordValid) throw notmatch();
+  if(!isPasswordValid) throw notmatch();
 
   const hashedPassword = await bcrypt.hash(user.password, 12);
 
@@ -39,13 +39,21 @@ async function signinUser(emailPass: Omit<User, "id" | "name" > ) {
   const useMaster = await sessionRepository.findFirstStoreUserId(user.id)
 
   if(useMaster){
-    return {token: hashedPassword, valid: true}
+    return {token: hashedPassword}
   }
 
   return {token: hashedPassword};
 }
 
+async function autorize(userId: number) {
+  const user = await sessionRepository.findFirsSessionIdOuner(userId)
+  console.log(user)
+  if(!user) return;
+  return user.Store[0].id; 
+}
+
 const userService = {
+    autorize,
     findFirstUserMail,
     creatUser,
     signinUser
