@@ -1,8 +1,6 @@
-import { Router } from "express";
 import { cardProducts, listProducts, publiProduct, searchProduct, searchProductId } from "@/controllers";
 import { authenticateToken } from "@/middlewares";
-
-const productsRoute = Router();
+import { productsRoute } from "./postProduct-rout copy";
 
 productsRoute
   .get("/", listProducts)
