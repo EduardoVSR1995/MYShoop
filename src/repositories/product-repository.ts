@@ -24,8 +24,7 @@ async function findManyProduct(shoop: string) {
         },
       },
     },
-  }
-  );
+  });
 }
 
 async function findManyProductName(name: string) {
@@ -33,14 +32,41 @@ async function findManyProductName(name: string) {
     where: {
       name: {
         startsWith: name
-      }
-    }
-  })
-}
+      },
+    },
+    select:{
+      StoreId: false, 
+      id: true,
+      name: true,
+      description: true,
+      packingSize: true,
+      price: true,
+      CategoriId: true
+    },
+  });
+};
+
+async function findManyProductId(id: number) {
+  return prisma.product.findMany({
+    where: {
+      id
+    },
+    select:{
+      StoreId: false, 
+      id: true,
+      name: true,
+      description: true,
+      packingSize: true,
+      price: true,
+      CategoriId: true
+    },
+  });
+};
 
 const productRepository = {
   findManyProductName,
   findManyProduct,
+  findManyProductId
 };
 
 export default productRepository;

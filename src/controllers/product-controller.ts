@@ -16,7 +16,19 @@ export async function listProducts(req: Request, res: Response){
 export async function searchProduct(req: Request, res: Response){
     const productName = req.params.productName as string
     try {
-        const list = await productService.listProductName(productName)
+        const list = await productService.listProductName(productName);
+        
+        res.send(list).status(httpStatus.OK);
+    } catch (error) {
+        return res.status(httpStatus.BAD_REQUEST);
+    }
+}
+
+export async function searchProductId(req: Request, res: Response){
+    try {
+        const productName = Number(req.params.productId) as number;
+
+        const list = await productService.listProductId(productName)
         
         res.send(list).status(httpStatus.OK)
     } catch (error) {
