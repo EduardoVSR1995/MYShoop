@@ -2,23 +2,23 @@ import { prisma } from "@/config";
 
 async function findManyProduct(shoop: string) {
   return prisma.store.findMany({
-    where:{
+    where: {
       nameStore: shoop
     },
-    select:{
-      id:false,
-      Product:{
-        select:{
-        StoreId: false, 
-        id: true,
-        name: true,
-        description: true,
-        packingSize: true,
-        price: true,
-        CategoriId: true, 
-        UrlImage:{
-          select:{
-            urlImage:true
+    select: {
+      id: false,
+      Product: {
+        select: {
+          StoreId: false, 
+          id: true,
+          name: true,
+          description: true,
+          packingSize: true,
+          price: true,
+          CategoriId: true, 
+          UrlImage: {
+            select: { 
+              urlImage: true
             },
           },
         },
@@ -34,7 +34,7 @@ async function findManyProductName(name: string) {
         startsWith: name
       },
     },
-    select:{
+    select: {
       StoreId: false, 
       id: true,
       name: true,
@@ -44,14 +44,14 @@ async function findManyProductName(name: string) {
       CategoriId: true
     },
   });
-};
+}
 
 async function findManyProductId(id: number) {
   return prisma.product.findMany({
     where: {
       id
     },
-    select:{
+    select: {
       StoreId: false, 
       id: true,
       name: true,
@@ -61,18 +61,35 @@ async function findManyProductId(id: number) {
       CategoriId: true
     },
   });
-};
+}
 
 async function findManyProductCardUserId(id: number) {
   return prisma.cart.groupBy({
-    by:["ProductId"],
-    where:{
-      userId:id
+    by: ["ProductId"],
+    where: {
+      userId: id
     },
   });
-};
+}
+
+async function findFirstPubli(nameStore: string) {
+  return prisma.store.findMany({
+    where: {
+      nameStore
+    },
+    select: {
+      Publi: {
+        select: {
+          text: true,   
+          StoreId: true 
+        },  
+      },
+    },
+  });
+}
 
 const productRepository = {
+  findFirstPubli,
   findManyProductCardUserId,
   findManyProductName,
   findManyProduct,
@@ -80,3 +97,4 @@ const productRepository = {
 };
 
 export default productRepository;
+

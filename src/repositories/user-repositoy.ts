@@ -4,7 +4,7 @@ import { User } from "@prisma/client";
 async function findFirstUserMail(email: string) {
   return prisma.user.findFirst({
     where: {
-        email
+      email
     }
   });
 }
@@ -19,17 +19,16 @@ async function creatUser( CreatUserHash: CreatUserHash ) {
     data: CreatUserHash.data
   });
 
-  return creatSessionUser(user.id, CreatUserHash.hashedPassword)
-};
+  return creatSessionUser(user.id, CreatUserHash.hashedPassword);
+}
 
-async function creatSessionUser(id: number,token: string) {
+async function creatSessionUser(id: number, token: string) {
   return prisma.session.create({
-    data:{
-      userId:id,
+    data: {
+      userId: id,
       token
     }
-    }
-  );
+  });
 }
 
 const userRepository = {
@@ -39,3 +38,4 @@ const userRepository = {
 };
 
 export default userRepository;
+

@@ -5,8 +5,7 @@ import sessionRepository from "@/repositories/store-repository";
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 
-
-async function findFirstUserMail(mail:string) {
+async function findFirstUserMail(mail: string) {
   const user = await userRepository.findFirstUserMail(mail);
   
   if(user) throw notFoundError();
@@ -15,12 +14,11 @@ async function findFirstUserMail(mail:string) {
 }
 
 async function creatUser(user: CreateUserParams ) {
-  
   const hashedPassword = await bcrypt.hash(user.password, 12);
 
-  await userRepository.creatUser({ data: user, hashedPassword:hashedPassword });
+  await userRepository.creatUser({ data: user, hashedPassword: hashedPassword });
 
-  return {token: hashedPassword};
+  return { token: hashedPassword };
 }
 
 export type CreateUserParams = Omit<User, "id" >;
@@ -36,27 +34,21 @@ async function signinUser(emailPass: Omit<User, "id" | "name" | "urlImage" > ) {
 
   await userRepository.creatSessionUser(user.id, hashedPassword);
 
-  const useMaster = await sessionRepository.findFirstStoreUserId(user.id)
-
-  if(useMaster){
-    return {token: hashedPassword}
-  }
-
-  return {token: hashedPassword};
+  return { token: hashedPassword };
 }
 
 async function autorize(userId: number) {
-  const user = await sessionRepository.findFirsSessionIdOuner(userId)
-  console.log(user)
+  const user = await sessionRepository.findFirsSessionIdOuner(userId);
+
   if(!user) return;
   return user.Store[0].id; 
 }
 
 const userService = {
-    autorize,
-    findFirstUserMail,
-    creatUser,
-    signinUser
+  autorize,
+  findFirstUserMail,
+  creatUser,
+  signinUser
 };
 
 export default userService;

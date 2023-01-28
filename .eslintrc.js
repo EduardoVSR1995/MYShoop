@@ -94,7 +94,7 @@ module.exports = {
       "rules": [
         {
           "from": ["controllers"],
-          "allow": ["services", "middlewares"],
+          "allow": ["services", "middlewares", "config"],
         },
         {
           "from": ["middlewares"],

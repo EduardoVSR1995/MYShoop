@@ -4,7 +4,7 @@ import ProductRepository from "@/repositories/product-repository";
 async function listProduct(shoop: string) {
   const products = await ProductRepository.findManyProduct(shoop);
 
-  return products[0].Product ;
+  return products[0].Product;
 }
 
 async function listProductName(name: string) {
@@ -22,7 +22,13 @@ async function findManyProductCardUserId(id: number) {
   return products;
 }
 
+async function findFirstPubli(shoop: string) {
+  const product = await ProductRepository.findFirstPubli(shoop);
+  return product[0].Publi;
+}
+
 const productService = {
+  findFirstPubli,
   listProductId,
   findManyProductCardUserId,
   listProductName,

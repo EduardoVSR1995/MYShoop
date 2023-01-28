@@ -16,8 +16,9 @@ model Store {
   id        Int       @id @default(autoincrement())
   userId    Int
   User      User      @relation(fields: [userId], references: [id])
-  nameStore String
+  nameStore String    @unique
   Product   Product[]
+  Publi     Publi[]
 }
 
 model User {
@@ -44,8 +45,8 @@ model Session {
 model Publi {
   id        Int      @id @default(autoincrement())
   text      String
-  ProductId Int
-  Product   Product  @relation(fields: [ProductId], references: [id])
+  StoreId   Int
+  Store     Store  @relation(fields: [StoreId], references: [id])
 }
 
 model Cart {
@@ -84,7 +85,6 @@ model Product {
   UrlImage    UrlImage[]
   Bougth      Bougth[]
   Cart        Cart[] 
-  Publi       Publi[] 
 }
 
 model Categori {

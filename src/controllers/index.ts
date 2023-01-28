@@ -1,2 +1,2 @@
-export * from "./product-controller";
-export * from "./user-controller"
+export * from "./getProduct-controller";
+export * from "./user-controller";

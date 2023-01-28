@@ -5,9 +5,9 @@ import { autorize, signin, signUpUser } from "@/controllers";
 
 const usersRouter = Router();
 
-usersRouter.post("/signup", validateBody(createUserSchema), signUpUser)
+usersRouter
+  .post("/signup", validateBody(createUserSchema), signUpUser)
   .post("/signin", validateBody(signinUserSchema), signin)
-  .post("/signin", validateBody(signinUserSchema), signin)
-  .get("/autorize", autorize)
+  .get("/autorize", autorize);
 
 export { usersRouter };
