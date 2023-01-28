@@ -63,7 +63,17 @@ async function findManyProductId(id: number) {
   });
 };
 
+async function findManyProductCardUserId(id: number) {
+  return prisma.cart.groupBy({
+    by:["ProductId"],
+    where:{
+      userId:id
+    },
+  });
+};
+
 const productRepository = {
+  findManyProductCardUserId,
   findManyProductName,
   findManyProduct,
   findManyProductId

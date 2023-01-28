@@ -3,6 +3,8 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+
 }
 
 datasource db {
@@ -29,6 +31,7 @@ model User {
   Affiliated Affiliated[]
   Bougth     Bougth[]
   Addres     Addres[]
+  Cart       Cart[]
 }
 
 model Session {
@@ -36,6 +39,21 @@ model Session {
   userId Int
   User   User   @relation(fields: [userId], references: [id])
   token  String
+}
+
+model Publi {
+  id        Int      @id @default(autoincrement())
+  text      String
+  ProductId Int
+  Product   Product  @relation(fields: [ProductId], references: [id])
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int  
+  User      User     @relation(fields: [userId], references: [id])
+  ProductId Int
+  Product   Product  @relation(fields: [ProductId], references: [id])
 }
 
 model Affiliated {
@@ -65,6 +83,8 @@ model Product {
   Store       Store      @relation(fields: [StoreId], references: [id])
   UrlImage    UrlImage[]
   Bougth      Bougth[]
+  Cart        Cart[] 
+  Publi       Publi[] 
 }
 
 model Categori {

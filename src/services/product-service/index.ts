@@ -17,8 +17,14 @@ async function listProductId(id: number) {
   return products;
 }
 
+async function findManyProductCardUserId(id: number) {
+  const products = await ProductRepository.findManyProductCardUserId(id);
+  return products;
+}
+
 const productService = {
   listProductId,
+  findManyProductCardUserId,
   listProductName,
   listProduct,
 };
