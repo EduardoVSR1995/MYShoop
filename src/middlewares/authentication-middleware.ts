@@ -18,7 +18,6 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
         token,
       },
     });
-
     if (!session) return generateUnauthorizedResponse(res);
 
     req.userId = session.userId;
@@ -33,4 +32,4 @@ export function generateUnauthorizedResponse(res: Response) {
   res.status(httpStatus.UNAUTHORIZED).send(unauthorizedError());
 }
 
-export type AuthenticatedRequest = Request & {userId: number};
+export type AuthenticatedRequest = Request & { userId: number } & { url: string };

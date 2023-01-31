@@ -7,19 +7,27 @@ async function findFirstStoreUserId(userId: number) {
     }
   });
 }
+async function findFirsName(nameStore: string) {
+  return prisma.store.findFirst({
+    where: {
+      nameStore,
+    }
+  });
+}
 
 async function findFirsSessionIdOuner(id: number) {
   return prisma.user.findFirst({
     where: {
       id
     },
-    include: {
-      Store: true
-    },
+    // include: {
+    //   Store: true
+    // },
   });
 }
 
 const storeRepositoy = { 
+  findFirsName,
   findFirsSessionIdOuner,
   findFirstStoreUserId
 };

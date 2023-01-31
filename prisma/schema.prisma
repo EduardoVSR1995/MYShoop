@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 
 }
@@ -13,22 +13,31 @@ datasource db {
 }
 
 model Store {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  User      User      @relation(fields: [userId], references: [id])
-  nameStore String    @unique
-  Product   Product[]
-  Publi     Publi[]
+  id          Int       @id @default(autoincrement())
+  nameStore   String    @unique
+  Product     Product[]
+  StoreUser   StoreUser[]
+  Publi       Publi[]
+}
+
+model StoreUser {
+  id         Int      @id @default(autoincrement())
+  User       User     @relation(fields: [UserId], references: [id])
+  UserId     Int
+  Store      Store    @relation(fields: [StoreId], references: [id])
+  StoreId    Int
+  assignedAt DateTime @default(now())
 }
 
 model User {
   id         Int          @id @default(autoincrement())
   name       String
-  email      String       @unique @db.VarChar(255)
+  email      String       @db.VarChar(255)
   password   String       @db.VarChar(255)
   urlImage   String
+  owner      Boolean      @default(false)
+  StoreUser  StoreUser[]
   Session    Session[]
-  Store      Store[]
   Affiliated Affiliated[]
   Bougth     Bougth[]
   Addres     Addres[]
@@ -43,18 +52,20 @@ model Session {
 }
 
 model Publi {
-  id        Int      @id @default(autoincrement())
-  text      String
-  StoreId   Int
-  Store     Store  @relation(fields: [StoreId], references: [id])
+  id         Int    @id @default(autoincrement())
+  text       String
+  StoreId    Int
+  Store      Store   @relation(fields: [StoreId], references: [id])
+  productId  Int
+  Product    Product  @relation(fields: [productId], references: [id])
 }
 
 model Cart {
-  id        Int      @id @default(autoincrement())
-  userId    Int  
-  User      User     @relation(fields: [userId], references: [id])
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  User      User    @relation(fields: [userId], references: [id])
   ProductId Int
-  Product   Product  @relation(fields: [ProductId], references: [id])
+  Product   Product @relation(fields: [ProductId], references: [id])
 }
 
 model Affiliated {
@@ -84,7 +95,8 @@ model Product {
   Store       Store      @relation(fields: [StoreId], references: [id])
   UrlImage    UrlImage[]
   Bougth      Bougth[]
-  Cart        Cart[] 
+  Cart        Cart[]
+  Publi       Publi[]
 }
 
 model Categori {

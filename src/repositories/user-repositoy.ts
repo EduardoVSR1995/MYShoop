@@ -1,39 +1,78 @@
 import { prisma } from "@/config";
 import { User } from "@prisma/client";
 
-async function findFirstUserMail(email: string) {
+async function findFirstTableUserMail(StoreId: number, UserId: number ) {
+  return prisma.storeUser.findFirst({
+    where: {
+      StoreId,
+      UserId
+    },  
+  });
+}
+
+async function findFirstUserMail(email: string, StoreId: number) {
   return prisma.user.findFirst({
     where: {
       email
+    },
+    include: {
+      StoreUser: {
+        where: {
+          StoreId
+        }
+      }
     }
   });
 }
 
-type CreatUserHash = {
-  data: Omit<User, "id">,
-  hashedPassword: string
-}
-
-async function creatUser( CreatUserHash: CreatUserHash ) {
-  const user = await prisma.user.create({
-    data: CreatUserHash.data
+async function creatStorUser( data: {StoreId: number, UserId: number} ) {
+  return await prisma.storeUser.create({
+    data
   });
-
-  return creatSessionUser(user.id, CreatUserHash.hashedPassword);
 }
 
-async function creatSessionUser(id: number, token: string) {
+async function creatUser( data: Omit<User, "id">, StoreId: number ) {
+  const user = await prisma.user.create({
+    data
+  });
+  await creatStorUser({ StoreId, UserId: user.id });
+   
+  return creatSessionUser(user.id, user.password);
+}
+
+async function creatSessionUser(userId: number, token: string) {
   return prisma.session.create({
     data: {
-      userId: id,
-      token
+      userId: userId,
+      token: token
     }
   });
+}
+async function  findFirstUserToken(UserId: number, nameStore: string) {
+  return prisma.store.findFirst({
+    where: {
+      nameStore
+    },
+    select: {
+      StoreUser: {
+        where: {
+          UserId
+        },
+        include: {
+          User: true
+        }
+      }
+    }
+  }  
+  );
 }
 
 const userRepository = {
-  creatSessionUser,
+  findFirstUserToken,
+  creatStorUser,
+  findFirstTableUserMail,
   findFirstUserMail,
+  creatSessionUser,
   creatUser
 };
 

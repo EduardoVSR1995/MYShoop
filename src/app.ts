@@ -12,7 +12,6 @@ export default async function app() {
   const shoop = await shoops();
 
   const server = express();
-  
   for(let i=0; i < shoop.length; i++) {
     server
       .use(cors())
@@ -22,7 +21,6 @@ export default async function app() {
       .use(`/${shoop[i].nameStore}/product`, productsRoute)
       .use(`/${shoop[i].nameStore}/user`, usersRouter);    
   }
-
   return server; 
 }
 

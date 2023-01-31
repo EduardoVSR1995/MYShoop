@@ -1,4 +1,3 @@
-import { notFoundError } from "@/error";
 import ProductRepository from "@/repositories/product-repository";
 
 async function listProduct(shoop: string) {
@@ -17,17 +16,28 @@ async function listProductId(id: number) {
   return products;
 }
 
-async function findManyProductCardUserId(id: number) {
-  const products = await ProductRepository.findManyProductCardUserId(id);
-  return products;
+async function findManyProductCardUserId(id: number, nameStore: string ) {
+  const products = await ProductRepository.findManyProductCardUserId(id, nameStore);
+  
+  if(products[0].StoreUser.length === 0 ) return [];
+  
+  return products[0].StoreUser[0].User.Cart;
 }
 
 async function findFirstPubli(shoop: string) {
   const product = await ProductRepository.findFirstPubli(shoop);
-  return product[0].Publi;
+  return product.Publi;
+}
+
+async function creatCart(ProductId: number, userId: number, quantiti: number) {
+  for(let i=0; i < quantiti; i++) {
+    await ProductRepository.creatCart(userId, ProductId);
+  }
+  return; 
 }
 
 const productService = {
+  creatCart,
   findFirstPubli,
   listProductId,
   findManyProductCardUserId,

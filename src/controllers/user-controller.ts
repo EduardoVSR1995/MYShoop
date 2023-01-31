@@ -4,38 +4,41 @@ import userService from "@/services/user-service";
 import { AuthenticatedRequest } from "@/middlewares";
 
 export async function signUpUser(req: Request, res: Response) {
-  const { email } = req.body;
   try {
-    await userService.findFirstUserMail(email);
+    const url = req.baseUrl.split("/")[1];
     
-    const token = await userService.creatUser(req.body);  
-    res.send(token).status(httpStatus.OK);
+    const user = await userService.creatUser(req.body, url);  
+
+    res.send(user).status(httpStatus.OK);
   } catch (error) {
-    if(error.name === "NotFoundError" ) return res.status(httpStatus.CONFLICT);
+    if(error.name === "NotFoundError" ) return res.sendStatus(httpStatus.NOT_FOUND);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
 
 export async function signin(req: Request, res: Response) {
   try {
-    const token = await userService.signinUser(req.body);  
+    const url = req.baseUrl.split("/")[1];
 
+    const token = await userService.signinUser(req.body, url);  
     res.send(token).status(httpStatus.OK);
   } catch (error) {
-    if(error.name === "NotFoundError" ) return res.status(httpStatus.CONFLICT);
+    if(error.name === "NotFoundError" ) return res.sendStatus(httpStatus.NOT_FOUND);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
 
 export async function autorize(req: AuthenticatedRequest, res: Response) {
   try {
+    const url = req.baseUrl.split("/")[1];
+
     const { userId } = req;
    
-    const token = await userService.autorize(userId);  
+    await userService.autorize(userId, url);  
    
-    res.send(token).status(httpStatus.OK);
+    res.send(req.header("Authorization").split(" ")[1]).status(httpStatus.OK);
   } catch (error) {
-    if(error.name === "NotFoundError" ) return res.status(httpStatus.CONFLICT);
+    if(error.name === "notmatch" ) return res.sendStatus(httpStatus.UNAUTHORIZED);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }

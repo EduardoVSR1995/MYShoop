@@ -3,7 +3,7 @@ import httpStatus from "http-status";
 import productService from "@/services/product-service";
 import { AuthenticatedRequest } from "@/middlewares";
 
-export async function listProducts(req: Request, res: Response) {
+export async function listProducts(req: AuthenticatedRequest, res: Response) {
   const shoop = req.baseUrl.split("/")[1];
   try {
     const list = await productService.listProduct(shoop);
@@ -36,9 +36,11 @@ export async function searchProductId(req: Request, res: Response) {
   }
 }
 
-export async function cardProducts(req: AuthenticatedRequest, res: Response) {
+export async function cartProducts(req: AuthenticatedRequest, res: Response) {
   try {
-    const list = await productService.findManyProductCardUserId(req.userId);
+    const shoop = req.baseUrl.split("/")[1];
+
+    const list = await productService.findManyProductCardUserId(req.userId, shoop);
     
     res.send(list).status(httpStatus.OK);
   } catch (error) {

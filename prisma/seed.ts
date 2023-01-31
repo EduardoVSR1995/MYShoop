@@ -28,12 +28,12 @@ type picture = {
 
 async function main() {
   await prisma.urlImage.deleteMany({})
+  await prisma.cart.deleteMany({})
   await prisma.product.deleteMany({})
   await prisma.categori.deleteMany({})
   await prisma.store.deleteMany({})
+  await prisma.session.deleteMany({})
   await prisma.user.deleteMany({})
-
-  
 
   const data =  await axios.get("https://api.mercadolibre.com/sites/MLB/search?category=MLB3937&listing_type_id=gold_special&condition=new", {headers: {"Authorization":`Bearer ${process.env.TOKEN}` }}) as unknown
   const list = data as data
@@ -46,16 +46,24 @@ async function main() {
       name: "Dudu",
       email: "eduardvitor7@gmail.com",
       password: hashedPassword,
-      urlImage: "https://lh3.googleusercontent.com/ogw/AAEL6sg1I7IEWU2qlQHfNZcz0SiJ4oSa6lZcrCBCta7EpQ=s32-c-mo"
+      urlImage: "https://lh3.googleusercontent.com/ogw/AAEL6sg1I7IEWU2qlQHfNZcz0SiJ4oSa6lZcrCBCta7EpQ=s32-c-mo",
+      owner: true
     }
   })
+
   const shop = await prisma.store.create({
     data: {
-      userId: owner.id,
       nameStore: "MYShoop"
     }
   })
 
+  await prisma.storeUser.create({
+    data: {
+      UserId: owner.id,
+      StoreId: shop.id
+    }
+  })
+  
   const categori = await prisma.categori.create({
     data: {
       name: "Joias e Relógios", 
