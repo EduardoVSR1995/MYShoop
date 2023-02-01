@@ -41,7 +41,8 @@ async function findManyProductName(name: string) {
       description: true,
       packingSize: true,
       price: true,
-      CategoriId: true
+      CategoriId: true,
+      UrlImage: true
     },
   });
 }
@@ -107,6 +108,14 @@ async function findFirstPubli(nameStore: string) {
   });
 }
 
+async function findfirstId(id: number) {
+  return prisma.product.findUnique({
+    where: {
+      id
+    }
+  });
+}
+
 async function creatCart(userId: number, ProductId: number ) {
   return prisma.cart.create({
     data: {
@@ -117,6 +126,7 @@ async function creatCart(userId: number, ProductId: number ) {
 }
 
 const productRepository = {
+  findfirstId,
   creatCart,
   findFirstPubli,
   findManyProductCardUserId,

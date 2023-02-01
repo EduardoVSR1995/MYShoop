@@ -17,6 +17,7 @@ export async function listProducts(req: AuthenticatedRequest, res: Response) {
 export async function searchProduct(req: Request, res: Response) {
   const productName = req.params.productName as string;
   try {
+    console.log(req.params)
     const list = await productService.listProductName(productName);
     
     res.send(list).status(httpStatus.OK);

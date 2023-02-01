@@ -16,6 +16,11 @@ async function listProductId(id: number) {
   return products;
 }
 
+async function findProductId(id: number) {
+  const products = await ProductRepository.findfirstId(id);
+  return products;
+}
+
 async function findManyProductCardUserId(id: number, nameStore: string ) {
   const products = await ProductRepository.findManyProductCardUserId(id, nameStore);
   
@@ -37,6 +42,7 @@ async function creatCart(ProductId: number, userId: number, quantiti: number) {
 }
 
 const productService = {
+  findProductId,
   creatCart,
   findFirstPubli,
   listProductId,

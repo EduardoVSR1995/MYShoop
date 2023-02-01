@@ -1,11 +1,11 @@
-import { postProducts, postProductsCart } from "@/controllers";
+import { postfret, postProductsCart } from "@/controllers";
 import { validateBody, authenticateToken } from "@/middlewares";
-import { creatUserSchema } from "@/schemas";
+import { creatUserSchema, fretUserSchema } from "@/schemas";
 import { Router } from "express";
 
 const productsRoute = Router();
 
 productsRoute
-  .post("/", postProducts)
+  .post("/fret", validateBody(fretUserSchema), postfret)
   .post("/cart", validateBody(creatUserSchema), authenticateToken, postProductsCart);
 export { productsRoute };
