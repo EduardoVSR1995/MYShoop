@@ -27,28 +27,37 @@ async function findManyProduct(shoop: string) {
   });
 }
 
-async function findManyProductName(name: string) {
-  return prisma.product.findMany({
+async function findManyProductName(name: string, nameStore: string) {
+  return prisma.store.findUnique({
     where: {
-      name: {
-        startsWith: name
+      nameStore
       },
-    },
     select: {
-      StoreId: false, 
-      id: true,
-      name: true,
-      description: true,
-      packingSize: true,
-      price: true,
-      CategoriId: true,
-      UrlImage: true
-    },
+      Product: {
+        where: {
+          name: {
+            startsWith: name,
+            mode: "insensitive" 
+          }
+        },
+        select: {
+          StoreId: false, 
+          id: true,
+          name: true,
+          description: true,
+          packingSize: true,
+          price: true,
+          CategoriId: true,
+          UrlImage: true
+        },
+      }
+    }
+    
   });
 }
 
 async function findManyProductId(id: number) {
-  return prisma.product.findMany({
+  return prisma.product.findUnique({
     where: {
       id
     },

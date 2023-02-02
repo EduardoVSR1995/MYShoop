@@ -6,9 +6,9 @@ async function listProduct(shoop: string) {
   return products[0].Product;
 }
 
-async function listProductName(name: string) {
-  const products = await ProductRepository.findManyProductName(name);
-  return products;
+async function listProductName(name: string, shoopName: string) {
+  const products = await ProductRepository.findManyProductName(name, shoopName);
+  return products.Product;
 }
 
 async function listProductId(id: number) {

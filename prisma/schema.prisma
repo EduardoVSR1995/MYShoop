@@ -42,6 +42,7 @@ model User {
   Bougth     Bougth[]
   Addres     Addres[]
   Cart       Cart[]
+  PayMent    PayMent[]
 }
 
 model Session {
@@ -97,6 +98,7 @@ model Product {
   Bougth      Bougth[]
   Cart        Cart[]
   Publi       Publi[]
+  PayMent     PayMent[]
 }
 
 model Categori {
@@ -116,10 +118,24 @@ model Bougth {
 }
 
 model Addres {
+  id             Int    @unique
   cep            Int
   phone          String @db.VarChar(255)
-  street         Int    @unique
+  street         String  
+  house          Int
   postOfficeCode Int
   UserId         Int
   User           User   @relation(fields: [UserId], references: [id])
+}
+
+model PayMent {
+  id             Int      @unique
+  payd           Boolean  @default(false)
+  txid           String    
+  valor          Int
+  fret           Int
+  UserId         Int
+  ProductId      Int
+  Product        Product  @relation(fields: [ProductId], references: [id])
+  User           User     @relation(fields: [UserId], references: [id])
 }

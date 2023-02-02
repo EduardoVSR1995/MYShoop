@@ -2,11 +2,10 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 import productService from "@/services/product-service";
 import { AuthenticatedRequest } from "@/middlewares";
-import fretProduct from "@/services/LibCorreio-service";
+import fretProduct from "@/services/libCorreio-service";
 
 export async function postfret(req: Request, res: Response) {
   try {
-
     const fret = await fretProduct(req.body);
 
     res.send(fret).status(httpStatus.OK);  

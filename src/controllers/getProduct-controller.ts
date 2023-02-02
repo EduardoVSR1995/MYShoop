@@ -15,10 +15,12 @@ export async function listProducts(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function searchProduct(req: Request, res: Response) {
-  const productName = req.params.productName as string;
   try {
-    console.log(req.params)
-    const list = await productService.listProductName(productName);
+    const shoop = req.baseUrl.split("/")[1];
+
+    const productName = req.params.productName as string;
+
+    const list = await productService.listProductName(productName, shoop);
     
     res.send(list).status(httpStatus.OK);
   } catch (error) {
