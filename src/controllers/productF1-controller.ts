@@ -44,7 +44,19 @@ export async function cartProducts(req: AuthenticatedRequest, res: Response) {
     const shoop = req.baseUrl.split("/")[1];
 
     const list = await productService.findManyProductCardUserId(req.userId, shoop);
-    
+
+    res.send(list).status(httpStatus.OK);
+  } catch (error) {
+    return res.status(httpStatus.BAD_REQUEST);
+  }
+}
+
+export async function cartPaydProducts(req: AuthenticatedRequest, res: Response) {
+  try {
+    const shoop = req.baseUrl.split("/")[1];
+
+    const list = await productService.findManyProductCardPayd(req.userId, shoop);
+
     res.send(list).status(httpStatus.OK);
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST);

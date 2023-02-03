@@ -7,6 +7,7 @@ async function findFirstStoreUserId(userId: number) {
     }
   });
 }
+
 async function findFirsName(nameStore: string) {
   return prisma.store.findFirst({
     where: {
@@ -19,10 +20,7 @@ async function findFirsSessionIdOuner(id: number) {
   return prisma.user.findFirst({
     where: {
       id
-    },
-    // include: {
-    //   Store: true
-    // },
+    }
   });
 }
 

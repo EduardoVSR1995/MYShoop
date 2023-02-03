@@ -1,17 +1,28 @@
-import { Response, Request } from "express";
+import { Response } from "express";
 import httpStatus from "http-status";
 import { AuthenticatedRequest } from "@/middlewares";
-import paymentPix from "@/services/libPix";
+import pixService from "@/services/pix-service";
+import fretProduct from "@/services/libCorreio-service";
 
-export async function postPayment(req: Request, res: Response) {
+export async function postPayment(req: AuthenticatedRequest, res: Response) {
   try {
-    const { id, quantiti } = req.body;
-    //const userId = req.userId;
-    const url = req.baseUrl.split("/")[1];
-    //console.log(id, userId, quantiti, url)
-    const payment =  await paymentPix(id, 1, quantiti, url);  
+    const { id, quantiti, cep } = req.body;
 
-    res.send(payment).status(httpStatus.OK);
+    const userId = req.userId;
+
+    const url = req.baseUrl.split("/")[1];
+  
+    const fret = await fretProduct({ id: id, sCepDestino: cep, quantiti: quantiti });
+    
+    const payment = await pixService.paymentPix( 
+      parseInt((fret[0].Valor).replace(",", "")),
+      id,
+      userId,
+      quantiti,
+      url
+    );  
+
+    res.send({ imgQrcod: payment.imgQrcod }).status(httpStatus.OK);
   } catch (error) {
     res.sendStatus(httpStatus.BAD_REQUEST);
   }

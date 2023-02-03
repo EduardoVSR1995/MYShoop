@@ -5,9 +5,8 @@ import cors from "cors";
 loadEnv();
 
 import {
-  productsRoute, usersRouter, storeRoute
+  productsRoute, usersRouter, storeRoute, paymentRouter
 } from "@/routers";
-import { postPayment } from "./controllers/payment-controller";
 
 export default async function app() {
   const shoop = await shoops();
@@ -18,9 +17,10 @@ export default async function app() {
       .use(cors())
       .use(express.json())
       .use("/store", storeRoute)
-      .get(`/${shoop[i].nameStore}/check`, postPayment)
+      .get(`/${shoop[i].nameStore}/check`, (req, res) => res.send("OK") )
       .use(`/${shoop[i].nameStore}/product`, productsRoute)
-      .use(`/${shoop[i].nameStore}/user`, usersRouter);    
+      .use(`/${shoop[i].nameStore}/user`, usersRouter)
+      .use(`/${shoop[i].nameStore}/payment`, paymentRouter);    
   }
   return server; 
 }

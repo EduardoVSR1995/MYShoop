@@ -31,7 +31,7 @@ async function findManyProductName(name: string, nameStore: string) {
   return prisma.store.findUnique({
     where: {
       nameStore
-      },
+    },
     select: {
       Product: {
         where: {
@@ -134,7 +134,49 @@ async function creatCart(userId: number, ProductId: number ) {
   });
 }
 
+async function findFirstCart(userId: number, ProductId: number ) {
+  return prisma.cart.findFirst({
+    where: {
+      userId,
+      ProductId
+    }
+  });
+}
+
+async function deleteCart(id: number ) {
+  return prisma.cart.delete({
+    where: {
+      id
+    }
+  });
+}
+
+async function findManyProductCardPayd(UserId: number, nameStore: string) {
+  return prisma.store.findUnique({
+    where: {
+      nameStore
+    },
+    select: {
+      StoreUser: {
+        where: {
+          UserId
+        },
+        select: {
+          User: {
+            include: {
+              PayMent: true
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
 const productRepository = {
+  findManyProductCardPayd,
+  deleteCart,
+  findFirstCart,
   findfirstId,
   creatCart,
   findFirstPubli,

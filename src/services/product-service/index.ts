@@ -1,4 +1,7 @@
+import { notmatch } from "@/error";
 import ProductRepository from "@/repositories/product-repository";
+import userRepository from "@/repositories/user-repositoy";
+import { PayMent } from "@prisma/client";
 
 async function listProduct(shoop: string) {
   const products = await ProductRepository.findManyProduct(shoop);
@@ -41,7 +44,36 @@ async function creatCart(ProductId: number, userId: number, quantiti: number) {
   return; 
 }
 
+async function deleteCart(ProductId: number, userId: number) {
+  const cart = await ProductRepository.findFirstCart(userId, ProductId);  
+
+  if(!cart) throw notmatch();
+
+  await ProductRepository.deleteCart(cart.id);
+  return; 
+}
+
+type cardPay ={
+  arr: PayMent[],
+  phone?: string
+}
+ 
+async function findManyProductCardPayd(userId: number, nameStore: string ): Promise<cardPay> {
+  const products = await ProductRepository.findManyProductCardPayd(userId, nameStore);
+
+  if( products.StoreUser[0].User.PayMent.length === 0 ) return { arr: [] };
+  
+  const owner = await userRepository.findUserOwner(nameStore);
+
+  const arr = products.StoreUser[0].User.PayMent;
+  const phone = owner.StoreUser[0].User.Addres[0].phone;
+
+  return { arr: arr, phone: phone };
+}
+
 const productService = {
+  findManyProductCardPayd,
+  deleteCart,
   findProductId,
   creatCart,
   findFirstPubli,

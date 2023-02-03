@@ -118,22 +118,23 @@ model Bougth {
 }
 
 model Addres {
-  id             Int    @unique
-  cep            Int
-  phone          String @db.VarChar(255)
+  id             Int       @id @default(autoincrement())
+  phone          String    @db.VarChar(255)
   street         String  
+  city           String  
   house          Int
   postOfficeCode Int
   UserId         Int
-  User           User   @relation(fields: [UserId], references: [id])
+  User           User      @relation(fields: [UserId], references: [id])
 }
 
 model PayMent {
-  id             Int      @unique
+  id             Int      @id @default(autoincrement())
   payd           Boolean  @default(false)
   txid           String    
   valor          Int
   fret           Int
+  location       String 
   UserId         Int
   ProductId      Int
   Product        Product  @relation(fields: [ProductId], references: [id])

@@ -8,7 +8,7 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
   const authHeader = req.header("Authorization");
 
   if (!authHeader) return generateUnauthorizedResponse(res);
-
+  
   const token = authHeader.split(" ")[1];
   if (!token) return generateUnauthorizedResponse(res);
 

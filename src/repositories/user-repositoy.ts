@@ -6,7 +6,10 @@ async function findFirstTableUserMail(StoreId: number, UserId: number ) {
     where: {
       StoreId,
       UserId
-    },  
+    },
+    select: {
+      User: true
+    }  
   });
 }
 
@@ -48,6 +51,7 @@ async function creatSessionUser(userId: number, token: string) {
     }
   });
 }
+
 async function  findFirstUserToken(UserId: number, nameStore: string) {
   return prisma.store.findFirst({
     where: {
@@ -67,8 +71,28 @@ async function  findFirstUserToken(UserId: number, nameStore: string) {
   );
 }
 
+async function findUserOwner(nameStore: string) {
+  return prisma.store.findUnique({
+    where: {
+      nameStore,
+    },
+    select: {
+      StoreUser: {
+        include: {
+          User: {
+            include: {
+              Addres: true
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
 const userRepository = {
   findFirstUserToken,
+  findUserOwner,
   creatStorUser,
   findFirstTableUserMail,
   findFirstUserMail,

@@ -19,9 +19,22 @@ export async function postProductsCart(req: AuthenticatedRequest, res: Response)
     const { id, quantiti } = req.body;
     const userId = req.userId;
 
-    await productService.creatCart(id, userId, quantiti);  
+    await productService.creatCart(id, userId, quantiti);
 
-    res.sendStatus(httpStatus.OK);
+    res.send([]).status(httpStatus.OK);
+  } catch (error) {
+    res.sendStatus(httpStatus.BAD_REQUEST);
+  }
+}
+
+export async function deletProductsCart(req: AuthenticatedRequest, res: Response) {
+  try {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    await productService.deleteCart(Number(id), userId);
+
+    res.send([]).status(httpStatus.OK);
   } catch (error) {
     res.sendStatus(httpStatus.BAD_REQUEST);
   }
