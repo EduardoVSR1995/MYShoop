@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "PayMent" ADD COLUMN     "code" TEXT NOT NULL DEFAULT E'',
+ADD COLUMN     "send" BOOLEAN NOT NULL DEFAULT false;

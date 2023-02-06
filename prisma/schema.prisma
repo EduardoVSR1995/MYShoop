@@ -134,6 +134,8 @@ model PayMent {
   txid           String    
   valor          Int
   fret           Int
+  send           Boolean @default(false) 
+  code           String  @default("") 
   location       String 
   UserId         Int
   ProductId      Int

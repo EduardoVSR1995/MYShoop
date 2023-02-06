@@ -4,7 +4,7 @@ import userRepository from "@/repositories/user-repositoy";
 import fs from "fs";
 import https from "https";
 import axios from "axios";
-import payMentRepository from "@/repositories/pix-repository";
+import payMentRepository from "@/repositories/payment-repository";
 import { notmatch, invalidDataError } from "@/error";
 
 export async function paymentPix(

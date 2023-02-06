@@ -33,12 +33,11 @@ export async function autorize(req: AuthenticatedRequest, res: Response) {
     const url = req.baseUrl.split("/")[1];
 
     const { userId } = req;
-   
-    await userService.autorize(userId, url);  
-   
-    res.send(req.header("Authorization").split(" ")[1]).status(httpStatus.OK);
+
+    const boolean = await userService.autorize(userId, url);  
+     
+    res.send(boolean).status(httpStatus.OK)  
   } catch (error) {
-    if(error.name === "notmatch" ) return res.sendStatus(httpStatus.UNAUTHORIZED);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
