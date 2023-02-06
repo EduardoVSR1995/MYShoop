@@ -18,8 +18,8 @@ export default async function app() {
       .use(express.json())
       .use("/store", storeRoute)
       .get(`/${shoop[i].nameStore}/check`, (req, res) => res.send("OK") )
-      .use(`/${shoop[i].nameStore}/product`, productsRoute)
       .use(`/${shoop[i].nameStore}/user`, usersRouter)
+      .use(`/${shoop[i].nameStore}/product`, productsRoute)
       .use(`/${shoop[i].nameStore}/payment`, paymentRouter);    
   }
   return server; 

@@ -1,43 +1,44 @@
 import { notFoundError, notmatch } from "@/error";
 import userRepository from "@/repositories/user-repositoy";
 
-import { User } from "@prisma/client";
+import { Addres, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import storeRepositoy from "@/repositories/store-repository";
+import { shoops } from "@/config";
 
 async function creatUser(user: CreateUserParams, url: string ) {
   const hashedPassword = await bcrypt.hash(user.password, 12);
-  const shoop = await storeRepositoy.findFirsName(url);
 
-  const userComplet = await userRepository.findFirstUserMail(user.email, shoop.id);
+  const userComplet = await userRepository.findFirstUserMail(user.email, url);
 
   user["password"] = hashedPassword;
 
-  if( userComplet ) {
+  console.log(userComplet.StoreUser[0], "creat")
+  if( userComplet.StoreUser[0] ) {
     const verify = userComplet.StoreUser.find((value) => {
-      return userRepository.findFirstTableUserMail(shoop.id, value.UserId);
+      return userRepository.findFirstTableUserMail(userComplet.StoreUser[0].StoreId, value.UserId);
     });
 
     if(verify) throw notFoundError(); 
     
-    await userRepository.creatStorUser({ StoreId: shoop.id, UserId: userComplet.id } );
+    await userRepository.creatStorUser({ StoreId: userComplet.StoreUser[0].StoreId, UserId: userComplet.StoreUser[0].UserId } );
 
-    await userRepository.creatSessionUser(userComplet.id, user.password);
+    await userRepository.creatSessionUser(userComplet.StoreUser[0].UserId, user.password);
     
     delete user.email;
     delete user.password;
     delete user.owner;
-    delete user.name;
     
     return { ...user, token: hashedPassword }; 
   }
+
+  const shoop = await storeRepositoy.findFirsName(url);
 
   await userRepository.creatUser( user, shoop.id );
   delete user.email;
   delete user.password;
   delete user.owner;
-  delete user.name;
-  
+
   return { ...user, token: hashedPassword };
 }
 
@@ -46,19 +47,25 @@ export type CreateUserParams = Omit<User, "id" >;
 async function signinUser(emailPass: Omit<User, "id" | "name" | "urlImage">, url: string ) {
   const shoop = await storeRepositoy.findFirsName(url);
 
-  const user = await userRepository.findFirstUserMail(emailPass.email, shoop.id);
+  const middle = await userRepository.findFirstUserMail(emailPass.email, url);
 
-  if( user.StoreUser.length === 0 ) throw notmatch();
+  if( !middle.StoreUser[0].UserId ) throw notmatch();
+ 
+  const user = await userRepository.findFirstUserToken(middle.StoreUser[0].UserId, url)
+ 
+  const password = user.StoreUser[0].User.password;
 
-  const isPasswordValid = await bcrypt.compare(emailPass.password, user.password);
+  if( !password ) throw notmatch();
+
+  const isPasswordValid = await bcrypt.compare(emailPass.password, password);
 
   if(!isPasswordValid) throw notmatch();
 
-  const hashedPassword = await bcrypt.hash(user.password, 12);
+  const hashedPassword = await bcrypt.hash(password, 12);
   
-  await userRepository.creatSessionUser(user.id, hashedPassword);
+  await userRepository.creatSessionUser(middle.StoreUser[0].UserId, hashedPassword);
   
-  return { name: user.name, urlImage: user.urlImage, token: hashedPassword };
+  return { name: user.StoreUser[0].User.name, urlImage: user.StoreUser[0].User.urlImage, token: hashedPassword };
 }
 
 async function autorize(UserId: number, nameStore: string) {
@@ -69,7 +76,14 @@ async function autorize(UserId: number, nameStore: string) {
   return true; 
 }
 
+async function creatAddres(obj: Omit<Addres, "id">) {
+  const user = await userRepository.creatAddres(obj);
+
+  return true; 
+}
+
 const userService = {
+  creatAddres,
   autorize,
   creatUser,
   signinUser

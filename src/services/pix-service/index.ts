@@ -6,13 +6,16 @@ import https from "https";
 import axios from "axios";
 import payMentRepository from "@/repositories/payment-repository";
 import { notmatch, invalidDataError } from "@/error";
+import { Addres } from "@prisma/client";
 
 export async function paymentPix(
   fret: number, 
   ProductId: number, 
   userId: number, 
   quantiti: number, 
-  url: string) {
+  url: string,
+  addres: Omit<Addres, "id">
+  ) {
   const shoop = await storeRepositoy.findFirsName(url);
 
   const owner = await userRepository.findUserOwner(url);
@@ -40,7 +43,7 @@ export async function paymentPix(
 
   if( quantiti > 1 ) {    
     const fre = ( fret/quantiti)%1 === 0 ? fret/quantiti : Math.trunc(fret/quantiti);
-      
+
     for (let i = 0; i < quantiti; i++) {
       const payMent2 = await payment(
         1, 
@@ -52,12 +55,16 @@ export async function paymentPix(
         owner.StoreUser[0].User.email
       );
       delete payMent2.imgQrcod;
-          
-      await payMentRepository.creatPayMent(payMent2); 
+      
+      const location = await userRepository.creatAddres(addres);
+
+      await payMentRepository.creatPayMent({ ...payMent2, AddresId: location.id }); 
     }
     return { ...payMent, imgQrcod: imgQrcod }; 
   }
-  const payd = await payMentRepository.creatPayMent(payMent); 
+  const location = await userRepository.creatAddres(addres);
+
+  const payd = await payMentRepository.creatPayMent({ ...payMent, AddresId:location.id }); 
 
   if( !payd ) throw invalidDataError([]);
 

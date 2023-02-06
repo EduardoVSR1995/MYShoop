@@ -12,36 +12,25 @@ async function getPayMent(nameStore: string ) {
     where: {
       payd: true,
     },
-    select: {
+    include: {
       User: {
         select: {
           StoreUser: {
             where: {
               Store: {
-                nameStore,
-              },
-            },
-            select: {
-              User:{
-                select: {
-                  name: true,
-                  email: true,
-                  urlImage: true,  
-                  Addres: true
-                },
-              },
-            },
-          },
+                nameStore
+              }
+            }
+          }
         }
       },
-      Product: {        
-        select: {
-          id: true,
-          name: true,          
-          UrlImage: true  
-        }
+      Product:{
+        include: {
+          UrlImage: true
+        },
       },
-    }
+      Addres:true
+    },
   });
 }
 

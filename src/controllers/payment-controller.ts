@@ -4,29 +4,39 @@ import { AuthenticatedRequest } from "@/middlewares";
 import pixService from "@/services/pix-service";
 import fretProduct from "@/services/libCorreio-service";
 import paymentService from "@/services/payment-service";
-import userRepository from "@/repositories/user-repositoy";
 import userService from "@/services/user-service";
 
 export async function postPayment(req: AuthenticatedRequest, res: Response) {
   try {
-    const { id, quantiti, cep } = req.body;
+    const {  id, phone, quantiti, street, city, house, cep } = req.body;
 
-    const userId = req.userId;
+    const UserId = req.userId;
 
     const url = req.baseUrl.split("/")[1];
-  
+
     const fret = await fretProduct({ id: id, sCepDestino: cep, quantiti: quantiti });
-    
+    console.log(fret);
+    const addres = {
+      phone,
+      street,
+      city,
+      house: Number(house),
+      postOfficeCode: Number(cep),
+      UserId
+    }
+    console.log(addres);
     const payment = await pixService.paymentPix( 
       parseInt((fret[0].Valor).replace(",", "")),
       id,
-      userId,
+      UserId,
       quantiti,
-      url
+      url,
+      addres
     );  
-
+    console.log(payment);  
     res.send({ imgQrcod: payment.imgQrcod }).status(httpStatus.OK);
   } catch (error) {
+    console.log(error)
     res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
@@ -39,7 +49,6 @@ export async function getPayment(req: AuthenticatedRequest, res: Response) {
 
     const user = await userService.autorize(userId, url);
     
-    console.log(url, user);
     if( !user ) return res.sendStatus(httpStatus.UNAUTHORIZED);
  
     const product = await paymentService.listPayment(url);

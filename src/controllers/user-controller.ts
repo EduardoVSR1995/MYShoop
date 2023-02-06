@@ -7,6 +7,7 @@ export async function signUpUser(req: Request, res: Response) {
   try {
     const url = req.baseUrl.split("/")[1];
     
+    console.log(url, req.body);
     const user = await userService.creatUser(req.body, url);  
 
     res.send(user).status(httpStatus.OK);

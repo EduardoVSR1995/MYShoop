@@ -125,6 +125,7 @@ model Addres {
   house          Int
   postOfficeCode Int
   UserId         Int
+  PayMent        PayMent[]
   User           User      @relation(fields: [UserId], references: [id])
 }
 
@@ -139,6 +140,8 @@ model PayMent {
   location       String 
   UserId         Int
   ProductId      Int
+  AddresId       Int 
+  Addres        Addres  @relation(fields: [AddresId], references: [id])
   Product        Product  @relation(fields: [ProductId], references: [id])
   User           User     @relation(fields: [UserId], references: [id])
 }
