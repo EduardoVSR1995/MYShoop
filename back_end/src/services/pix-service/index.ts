@@ -21,7 +21,6 @@ export async function paymentPix(
   const owner = await userRepository.findUserOwner(url);
   
   const user = await userRepository.findFirstTableUserMail(shoop.id, userId);
-  console.log(user);
 
   if (!user) throw notmatch();
   
@@ -146,7 +145,6 @@ async function payment(
 
     return { ...payMent, imgQrcod: image.data.imagemQrcode };
   } catch (error) {
-    console.log(error);
     throw invalidDataError([]);
   }
 }

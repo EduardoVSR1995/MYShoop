@@ -7,7 +7,7 @@ async function listPayment(shoop: string) {
 }
 
 const paymentService = {
-    listPayment,
+  listPayment,
 };
 
 export default paymentService;

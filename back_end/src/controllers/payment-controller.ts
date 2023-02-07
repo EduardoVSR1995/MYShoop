@@ -15,7 +15,6 @@ export async function postPayment(req: AuthenticatedRequest, res: Response) {
     const url = req.baseUrl.split("/")[1];
 
     const fret = await fretProduct({ id: id, sCepDestino: cep, quantiti: quantiti });
-    console.log(fret);
     const addres = {
       phone,
       street,
@@ -23,8 +22,8 @@ export async function postPayment(req: AuthenticatedRequest, res: Response) {
       house: Number(house),
       postOfficeCode: Number(cep),
       UserId
-    }
-    console.log(addres);
+    };
+
     const payment = await pixService.paymentPix( 
       parseInt((fret[0].Valor).replace(",", "")),
       id,
@@ -33,10 +32,9 @@ export async function postPayment(req: AuthenticatedRequest, res: Response) {
       url,
       addres
     );  
-    console.log(payment);  
+    
     res.send({ imgQrcod: payment.imgQrcod }).status(httpStatus.OK);
   } catch (error) {
-    console.log(error)
     res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
