@@ -42,6 +42,24 @@ export async function deletProductsCart(req: AuthenticatedRequest, res: Response
   }
 }
 
+export async function deletProductStore(req: AuthenticatedRequest, res: Response) {
+  try {
+    const shoop = req.baseUrl.split("/")[1];
+
+    const { id } = req.params;
+    const userId = req.userId;
+
+    await userService.autorize(userId, shoop);
+
+    await productService.deleteProductStore(Number(id), shoop);
+
+    res.send([]).status(httpStatus.OK);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(httpStatus.BAD_REQUEST);
+  }
+}
+
 export async function categoryProducts(req: AuthenticatedRequest, res: Response) {
   try {      
     const shoop = req.baseUrl.split("/")[1];
@@ -91,12 +109,13 @@ export async function creatProducts(req: AuthenticatedRequest, res: Response) {
     }
     const product = await productService.creatProduct(data);   
 
-    await productService.creatUrlImage(product.id, url)
+    await productService.creatUrlImage(product.id, url);
 
-    res.send().status(httpStatus.OK);
+    res.send([]).status(httpStatus.OK);
   } catch (error) {
     console.log(error);
 
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
+

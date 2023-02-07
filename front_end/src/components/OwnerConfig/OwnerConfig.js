@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ProductContext from "../../contexts/ProductContext";
 import UserContext from "../../contexts/UserContext";
+import { deleteProductStore } from "../../services/delet";
 import { getProductPayd } from "../../services/getInfos";
 import { posCreatProduct } from "../../services/posts";
 import { getCategoris } from "../../services/product";
@@ -48,15 +49,18 @@ export default function Config() {
 
 function Choise({ choise }) {
   const [product, setProduct] = useState();
-  const { productData } = useContext(ProductContext);
+  const { productData, SetProductData } = useContext(ProductContext);
   const { setValue } = useContext(UserContext);
   
   if (choise === "Insert") {
     const [form, setForm] = useState({});
 
-    useEffect(() => {
+    function itens() { 
       const { token } = setValue();
       getCategoris(token).then((i) => setProduct({ ...product, categoryList: i })).catch( (i) => console.error(i));
+    } 
+    useEffect(() => {
+      itens();
     }, []);
     async function creatProduct() {
       const { token } = setValue();
@@ -82,8 +86,14 @@ function Choise({ choise }) {
       delete form.url2;
       delete form.url3;
       
-      const r = { ...form };      
-      posCreatProduct(token, r).then(toast("Produto criado")).catch(toast("Ouve um erro"));
+      const obj = { ...form };  
+      try {
+        await posCreatProduct(token, obj);
+        toast("Produto criado");  
+        itens();
+      } catch (error) {
+        toast("Ouve um erro");
+      }    
     }
     return (
       <Form onSubmit={e => { e.preventDefault(); creatProduct(); }} >
@@ -105,13 +115,26 @@ function Choise({ choise }) {
     );
   }
   if (choise === "remov") {
+    async function del(id) {
+      const { token } = setValue();
+
+      if(!window.confirm("Deseja remover o produto")) return;
+      try {
+        await deleteProductStore(id, token);
+        toast("Produto deletado");
+        SetProductData();
+      } catch (error) {
+        toast("Ouve um erro");
+      }
+    }
+
     return (
       <BoxOwner>
         {
           productData?.data ?
             productData.data.map((i) => {
               return (
-                <Box key={i.id} onClick={() => ""}>
+                <Box key={i.id} onClick={() => del(i.id)}>
                   {i.UrlImage.map((r) => { return (<img src={r.urlImage} />); })}
                   <p>{i.name}</p>
                 </Box>

@@ -152,6 +152,32 @@ async function deleteCart(id: number ) {
   });
 }
 
+async function deleteProductShop(id: number ) {
+  await prisma.cart.deleteMany({
+    where: {
+      ProductId: id
+    }
+  });
+
+  await prisma.publi.deleteMany({
+    where: {
+      productId: id
+    }
+  });
+
+  await prisma.urlImage.deleteMany({
+    where: {
+      ProductId: id
+    }
+  });
+
+  return prisma.product.delete({
+    where: {
+      id
+    }
+  });
+}
+
 async function findManyProductCardPayd(UserId: number, nameStore: string) {
   return prisma.store.findUnique({
     where: {
@@ -172,6 +198,22 @@ async function findManyProductCardPayd(UserId: number, nameStore: string) {
       }
     }
   });
+}
+
+async function findFirstProductIdStore(id: number, nameStore: string) {
+  const list = await prisma.store.findFirst({
+    where: {
+      nameStore
+    },
+    select: {
+      Product: {
+        where: {
+          id
+        }
+      }
+    }
+  })
+  return list.Product;
 }
 
 async function findManyCategory(nameStore: string) {
@@ -224,6 +266,7 @@ async function findCategoryName(obj: Omit<Categori, "id">) {
 const productRepository = {
   findManyProductCardUserId,
   findManyProductCardPayd,
+  findFirstProductIdStore,
   findManyProductName,
   findManyProductId,
   findManyProduct,
@@ -233,6 +276,7 @@ const productRepository = {
   findfirstId,
   findFirstPubli,
   deleteCart,
+  deleteProductShop,
   creatUrlImage,
   creatProduct,
   creatCategory,
