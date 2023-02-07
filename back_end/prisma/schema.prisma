@@ -20,6 +20,7 @@ model Store {
   Product     Product[]
   StoreUser   StoreUser[]
   Publi       Publi[]
+  Categori    Categori[]
 }
 
 model StoreUser {
@@ -40,7 +41,6 @@ model User {
   owner      Boolean      @default(false)
   StoreUser  StoreUser[]
   Session    Session[]
-  Affiliated Affiliated[]
   Bougth     Bougth[]
   Addres     Addres[]
   Cart       Cart[]
@@ -75,8 +75,7 @@ model Affiliated {
   id        Int    @id @default(autoincrement())
   code      String
   cellPhone Int
-  userId    Int
-  User      User   @relation(fields: [userId], references: [id])
+  email     String
 }
 
 model UrlImage {
@@ -104,9 +103,11 @@ model Product {
 }
 
 model Categori {
-  id      Int       @id @default(autoincrement())
-  name    String
-  Product Product[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  StoreId   Int
+  Store     Store      @relation(fields: [StoreId], references: [id])
+  Product   Product[]
 }
 
 model Bougth {

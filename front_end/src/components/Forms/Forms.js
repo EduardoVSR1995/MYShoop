@@ -5,10 +5,10 @@ import { Form, Input } from "./StyleForms";
 
 import { shopName } from "../../services/api";
 import { toast } from "react-toastify";
-import { signUp, signin } from "../../services/userApi";
+import { signUp, signin } from "../../services/userConnectApi";
 import ProductContext from "../../contexts/ProductContext";
-import { paydPix } from "../../services/usePay";
-import { removCart } from "../../services/useDelet";
+import { paydPix } from "../../services/pay";
+import { removCart } from "../../services/delet";
 
 export default function Forms({ params, type }) {
   const [forms, setForms] = useState({});

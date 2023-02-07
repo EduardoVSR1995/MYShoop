@@ -4,7 +4,7 @@ import note from "../../assets/images/notebook.png";
 import screen from "../../assets/images/tela.png";
 import { Dialog } from "../../components/Dialog/Dialog";
 import { Form, Input } from "../../components/Forms/StyleForms";
-import { postCreatShoop } from "../../services/usePosts";
+import { postCreatShoop } from "../../services/posts";
 import All from "../../index";
 import App from "../../App";
 import { store } from "../../services/api";

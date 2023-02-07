@@ -69,8 +69,7 @@ async function signinUser(emailPass: Omit<User, "id" | "name" | "urlImage">, url
 
 async function autorize(UserId: number, nameStore: string) {
   const user = await userRepository.findFirstUserToken(UserId, nameStore);
-
-  if( user.StoreUser.length === 0 || !user.StoreUser[0].User.owner) return false;
+  if( user.StoreUser.length === 0 || !user.StoreUser[0].User.owner) throw notmatch();
   
   return true; 
 }

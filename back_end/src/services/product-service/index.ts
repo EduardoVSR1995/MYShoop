@@ -1,7 +1,8 @@
-import { notmatch } from "@/error";
+import { notmatch, notFoundError } from "@/error";
+import productRepository from "@/repositories/product-repository";
 import ProductRepository from "@/repositories/product-repository";
 import userRepository from "@/repositories/user-repositoy";
-import { PayMent } from "@prisma/client";
+import { Categori, PayMent, Product } from "@prisma/client";
 
 async function listProduct(shoop: string) {
   const products = await ProductRepository.findManyProduct(shoop);
@@ -37,11 +38,33 @@ async function findFirstPubli(shoop: string) {
   return product.Publi;
 }
 
+async function findManyCategory(shoop: string) {
+  const product = await ProductRepository.findManyCategory(shoop);
+  return product;
+}
+
 async function creatCart(ProductId: number, userId: number, quantiti: number) {
   for(let i=0; i < quantiti; i++) {
     await ProductRepository.creatCart(userId, ProductId);
   }
   return; 
+}
+
+async function creatUrlImage(ProductId: number, urlImage: [string]) {
+  for(let i=0; i < urlImage.length; i++) {
+    await ProductRepository.creatUrlImage(ProductId, urlImage[i]);
+  }
+  return; 
+}
+
+async function creatProduct(obj: Omit<Product, "id"> ) {
+  return ProductRepository.creatProduct(obj);
+}
+
+async function creatCategory(obj: Omit<Categori, "id"> ) {
+  const categori = await productRepository.findCategoryName(obj);
+  if (categori) throw notFoundError();
+  return ProductRepository.creatCategory(obj);
 }
 
 async function deleteCart(ProductId: number, userId: number) {
@@ -72,15 +95,19 @@ async function findManyProductCardPayd(userId: number, nameStore: string ): Prom
 }
 
 const productService = {
-  findManyProductCardPayd,
-  deleteCart,
-  findProductId,
-  creatCart,
-  findFirstPubli,
-  listProductId,
-  findManyProductCardUserId,
   listProductName,
+  listProductId,
   listProduct,
+  findManyProductCardPayd,
+  findManyCategory,
+  findManyProductCardUserId,
+  findProductId,
+  findFirstPubli,
+  creatProduct,
+  creatCart,
+  creatUrlImage,
+  creatCategory,
+  deleteCart,
 };
 
 export default productService;

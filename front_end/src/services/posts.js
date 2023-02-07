@@ -21,3 +21,16 @@ export async function postCreatShoop(obj) {
       body: JSON.stringify(obj) })).json();
   return response;
 }
+
+export async function posCreatProduct( token, obj) {
+  const response = await conect("/product/create", 
+    { 
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify(obj)
+    });
+  return response;
+}

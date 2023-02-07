@@ -81,7 +81,8 @@ async function main() {
   
   const categori = await prisma.categori.create({
     data: {
-      name: "Joias e Relógios", 
+      name: "Joias e Relógios",
+      StoreId: shop.id
     }
   })
 

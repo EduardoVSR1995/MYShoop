@@ -1,7 +1,7 @@
 import { Box, BoxImage } from "../Products/StyleProducts";
 import { Apresentation, SalesArea, EnvPrice } from "../SalesArea/StyleSalesArea";
 import { useEffect, useState } from "react";
-import { getOneProduct } from "../../services/useGetInfos";
+import { getOneProduct } from "../../services/getInfos";
 
 function getProduct(id, setProduct) {
   const select = getOneProduct(id)

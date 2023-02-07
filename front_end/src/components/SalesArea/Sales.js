@@ -6,13 +6,13 @@ import { useContext, useEffect, useState } from "react";
 import FormDialog from "../Forms/Forms";
 import UserContext from "../../contexts/UserContext";
 import ProductContext from "../../contexts/ProductContext";
-import { getOneProduct } from "../../services/useGetInfos";
+import { getOneProduct } from "../../services/getInfos";
 import { useNavigate } from "react-router-dom";
 import { shopName } from "../../services/api";
-import { postCart } from "../../services/usePosts";
+import { postCart } from "../../services/posts";
 
 import { postFret } from "../../services/postFret";
-import { removCart } from "../../services/useDelet";
+import { removCart } from "../../services/delet";
 import { toast } from "react-toastify";
 
 export default function Sales({ type, load }) {

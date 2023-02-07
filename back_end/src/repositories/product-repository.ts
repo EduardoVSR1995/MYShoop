@@ -1,4 +1,5 @@
 import { prisma } from "@/config";
+import { Categori, Product } from "@prisma/client";
 
 async function findManyProduct(shoop: string) {
   return prisma.store.findMany({
@@ -173,17 +174,69 @@ async function findManyProductCardPayd(UserId: number, nameStore: string) {
   });
 }
 
+async function findManyCategory(nameStore: string) {
+  const list = await prisma.store.findUnique({
+    where: {
+      nameStore
+    },
+    select: {
+      Categori: {
+        select: {
+          id: true,
+          name: true
+        }
+      }
+    }
+  })
+  return list.Categori;
+}
+
+async function creatProduct(data: Omit<Product, "id">) {
+  return prisma.product.create({
+    data
+  });
+}
+
+async function creatCategory(data: Omit<Categori, "id">) {
+  return prisma.categori.create({
+    data
+  });
+}
+
+async function creatUrlImage( ProductId: number, urlImage: string) {
+  return prisma.urlImage.create({
+    data: {
+      ProductId,
+      urlImage
+    }
+  });
+}
+
+async function findCategoryName(obj: Omit<Categori, "id">) {
+  return prisma.categori.findFirst({
+    where: {
+      name: obj.name,
+      StoreId: obj.StoreId
+    }
+  });
+}
+
 const productRepository = {
-  findManyProductCardPayd,
-  deleteCart,
-  findFirstCart,
-  findfirstId,
-  creatCart,
-  findFirstPubli,
   findManyProductCardUserId,
+  findManyProductCardPayd,
   findManyProductName,
+  findManyProductId,
   findManyProduct,
-  findManyProductId
+  findManyCategory,
+  findFirstCart,
+  findCategoryName,
+  findfirstId,
+  findFirstPubli,
+  deleteCart,
+  creatUrlImage,
+  creatProduct,
+  creatCategory,
+  creatCart,
 };
 
 export default productRepository;

@@ -3,7 +3,7 @@ import { TopProduct } from "../../components/SalesArea/StyleSalesArea";
 import Sales from "../../components/SalesArea/Sales";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
-import { cart, cartPayd } from "../../services/useGetInfos";
+import { cart, cartPayd } from "../../services/getInfos";
 import PaydArea from "../../components/PaydArea/PaydArea";
 import ProductContext from "../../contexts/ProductContext";
 

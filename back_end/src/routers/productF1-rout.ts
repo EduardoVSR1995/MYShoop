@@ -1,4 +1,4 @@
-import { cartPaydProducts, cartProducts, deletProductsCart, postProductsCart } from "@/controllers";
+import { cartPaydProducts, cartProducts, categoryProducts, creatProducts, deletProductsCart, postProductsCart } from "@/controllers";
 import { authenticateToken, validateBody } from "@/middlewares";
 import { creatUserSchema } from "@/schemas";
 import { productsRoute } from "./productF2-rout";
@@ -8,6 +8,10 @@ productsRoute
   .get("/cart", cartProducts)
   .delete("/remov/:id", deletProductsCart)
   .post("/cart", validateBody(creatUserSchema), postProductsCart)
-  .get("/cart/payd", cartPaydProducts);
+  .get("/cart/payd", cartPaydProducts)
+  .get("/category", categoryProducts)
+  .post("/create", creatProducts)
+  ;
+  
 
 export { productsRoute };

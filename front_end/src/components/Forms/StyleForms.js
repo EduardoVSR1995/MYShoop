@@ -22,6 +22,14 @@ button{
   font-size: 20px;
   line-height: 18px;
 }
+select option{
+  background: red !important ;
+  height: 222px !important;
+  position: fixed !important;
+  width: 111px !important;
+  
+}
+
 a{
   font-weight: 400;
   font-size: 18px;
@@ -58,4 +66,14 @@ color: #FFFFFF;
 }
 `;
 
-export { Form, Input };
+const Afiliat = styled.span`
+  margin-top: 120px ;
+  width: 200px ;
+  form{
+    width: 100% ;
+    margin: 0px 0px 20px 0px ;
+  }
+
+`;
+
+export { Form, Input, Afiliat };
