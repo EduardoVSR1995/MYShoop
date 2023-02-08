@@ -23,7 +23,7 @@ export default function Product() {
               console.log(i);
               return(
                 <Box key={i.id} onClick={() => navigat(`${shopName}/product/${i.id}`)}>
-                  <img src={i.UrlImage.length ? i.UrlImage[0].urlImage :""}/>
+                  <img src={i.UrlImage.length ? i.UrlImage[0].urlImage :"https://avatars.githubusercontent.com/u/106880629?s=40&v=4"}/>
                   <div>{i.name}</div>
                 </Box>
               );})

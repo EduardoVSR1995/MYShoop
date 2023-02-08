@@ -5,14 +5,17 @@ const Area = styled.span`
   border-radius: 20px ;
   overflow: scroll;
   opacity: 1;
+  
 `;
 
 const Env = styled.span`
    position: initial !important;
    display: flex ;
+   flex-wrap: initial !important;
    width: 100%;
+   height: 25vw ;
    img{
-    height: 250px ; 
+    width: 100px ;
    }
    p{
     width: 80% ;
@@ -21,7 +24,25 @@ const Env = styled.span`
     text-align: initial ;
     font-size: 20px ;
     font-weight: 600 ;
+   form{
+     height: 30px;
+     width: 100% ;
+      input{
+        margin: 0px ;
+      }
+      button{
+        margin: 0px ;
+      }
+
+     }
    }
+   > button{
+    background-color: #6666F0 ;
+    width: 200px ;
+    height: 100% ;
+    margin: 0px ;
+   }
+   
 `;
 
 export { Area, Env };

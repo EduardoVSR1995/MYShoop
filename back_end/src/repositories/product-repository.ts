@@ -153,29 +153,32 @@ async function deleteCart(id: number ) {
 }
 
 async function deleteProductShop(id: number ) {
-  await prisma.cart.deleteMany({
+  const cart = prisma.cart.deleteMany({
     where: {
       ProductId: id
     }
   });
 
-  await prisma.publi.deleteMany({
+  const publi =  prisma.publi.deleteMany({
     where: {
       productId: id
     }
   });
 
-  await prisma.urlImage.deleteMany({
+  const url = prisma.urlImage.deleteMany({
     where: {
       ProductId: id
     }
   });
 
-  return prisma.product.delete({
+  const product = prisma.product.delete({
     where: {
       id
     }
   });
+  const result = await prisma.$transaction([cart, publi, url, product]);
+  console.log(result);
+  return ;
 }
 
 async function findManyProductCardPayd(UserId: number, nameStore: string) {

@@ -63,7 +63,9 @@ async function creatProduct(obj: Omit<Product, "id"> ) {
 
 async function creatCategory(obj: Omit<Categori, "id"> ) {
   const categori = await productRepository.findCategoryName(obj);
-  if (categori) throw notFoundError();
+  
+  if ( categori ) throw notFoundError();
+  
   return ProductRepository.creatCategory(obj);
 }
 

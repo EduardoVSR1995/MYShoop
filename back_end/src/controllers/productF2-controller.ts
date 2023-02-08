@@ -55,7 +55,6 @@ export async function deletProductStore(req: AuthenticatedRequest, res: Response
 
     res.send([]).status(httpStatus.OK);
   } catch (error) {
-    console.log(error);
     res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }

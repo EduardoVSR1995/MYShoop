@@ -7,7 +7,7 @@ export function Dialog({ setDialog, children, load }) {
 
   return (
     <AllBox>
-      <DialogBox onClick={() => { setDialog(""); load(userData.token);}} />
+      <DialogBox onClick={() => { setDialog(""); const i = load? load(userData.token) : "";}} />
       <ComandBox >
         {children}
       </ComandBox>

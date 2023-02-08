@@ -11,6 +11,7 @@ async function getPayMent(nameStore: string ) {
   return prisma.payMent.findMany({
     where: {
       payd: true,
+      send: false
     },
     include: {
       User: {
@@ -36,9 +37,33 @@ async function getPayMent(nameStore: string ) {
   });
 }
 
+async function updatCodePayment(id: number, code: string) {
+  return prisma.payMent.update({
+    where: {
+      id
+    },
+    data: {
+      code
+    }
+  });
+}
+
+async function updatSendPayment(id:number, send: boolean) {
+  return prisma.payMent.update({
+    where: {
+      id
+    },
+    data: {
+      send
+    }
+  });
+}
+
 const payMentRepository = {
   getPayMent,
   creatPayMent,
+  updatSendPayment,
+  updatCodePayment,
 };
 
 export default payMentRepository;

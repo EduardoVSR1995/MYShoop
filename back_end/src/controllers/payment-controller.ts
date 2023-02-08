@@ -45,13 +45,28 @@ export async function getPayment(req: AuthenticatedRequest, res: Response) {
 
     const url = req.baseUrl.split("/")[1];
 
-    const user = await userService.autorize(userId, url);
+    await userService.autorize(userId, url);
     
-    if( !user ) return res.sendStatus(httpStatus.UNAUTHORIZED);
- 
     const product = await paymentService.listPayment(url);
 
     res.send(product).status(httpStatus.OK);
+  } catch (error) {
+    res.sendStatus(httpStatus.BAD_REQUEST);
+  }
+}
+
+export async function updatCodePayment(req: AuthenticatedRequest, res: Response) {
+  try {
+    const { id, code, send } = req.body;
+    const userId = req.userId;
+
+    const url = req.baseUrl.split("/")[1];
+
+    await userService.autorize(userId, url);
+
+    await paymentService.updatCodePayment(id, code, send);
+
+    res.send([]).status(httpStatus.OK);
   } catch (error) {
     res.sendStatus(httpStatus.BAD_REQUEST);
   }
