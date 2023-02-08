@@ -12,28 +12,13 @@ async function creatUser(user: CreateUserParams, url: string ) {
   const userComplet = await userRepository.findFirstUserMail(user.email, url);
 
   user["password"] = hashedPassword;
-
-  if( userComplet.StoreUser[0] ) {
-    const verify = userComplet.StoreUser.find((value) => {
-      return userRepository.findFirstTableUserMail(userComplet.StoreUser[0].StoreId, value.UserId);
-    });
-
-    if(verify) throw notFoundError(); 
-    
-    await userRepository.creatStorUser({ StoreId: userComplet.StoreUser[0].StoreId, UserId: userComplet.StoreUser[0].UserId } );
-
-    await userRepository.creatSessionUser(userComplet.StoreUser[0].UserId, user.password);
-    
-    delete user.email;
-    delete user.password;
-    delete user.owner;
-    
-    return { ...user, token: hashedPassword }; 
-  }
+  
+  if (userComplet) throw notFoundError();
 
   const shoop = await storeRepositoy.findFirsName(url);
+  
+  await userRepository.creatUser( user, shoop.id )
 
-  await userRepository.creatUser( user, shoop.id );
   delete user.email;
   delete user.password;
   delete user.owner;
@@ -47,22 +32,22 @@ async function signinUser(emailPass: Omit<User, "id" | "name" | "urlImage">, url
   const shoop = await storeRepositoy.findFirsName(url);
 
   const middle = await userRepository.findFirstUserMail(emailPass.email, url);
-
-  if( !middle.StoreUser[0].UserId ) throw notmatch();
+  
+  if( !middle ) throw notmatch();
  
-  const user = await userRepository.findFirstUserToken(middle.StoreUser[0].UserId, url)
- 
+  const user = await userRepository.findFirstUserToken(middle.UserId, url)
+  
   const password = user.StoreUser[0].User.password;
-
+  
   if( !password ) throw notmatch();
 
   const isPasswordValid = await bcrypt.compare(emailPass.password, password);
-
+  
   if(!isPasswordValid) throw notmatch();
 
   const hashedPassword = await bcrypt.hash(password, 12);
   
-  await userRepository.creatSessionUser(middle.StoreUser[0].UserId, hashedPassword);
+  await userRepository.creatSessionUser(middle.UserId, hashedPassword);
   
   return { name: user.StoreUser[0].User.name, urlImage: user.StoreUser[0].User.urlImage, token: hashedPassword };
 }
@@ -122,15 +107,19 @@ async function creatShoopUser(obj: CreatShoop ) {
     postOfficeCode,
     UserId: user.id
   });
-  
+
   const shoop = await storeRepositoy.creatStore({
     nameStore,
     AddresId: addres.id
   });
 
+  await userRepository.creatStorUser({StoreId: shoop.id, UserId: user.id, });
+  
+  await userRepository.creatSessionUser(user.id, hashedPassword);
+  
   await app();
   
-  return { ...user, token: hashedPassword }; 
+  return { name: user.name, urlImage: user.urlImage, token: hashedPassword }; 
 }
 
 const userService = {

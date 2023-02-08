@@ -6,9 +6,9 @@ import { AuthenticatedRequest } from "@/middlewares";
 export async function signUpUser(req: Request, res: Response) {
   try {
     const url = req.baseUrl.split("/")[1];
-    
+   
     const user = await userService.creatUser(req.body, url);  
-
+    
     res.send(user).status(httpStatus.OK);
   } catch (error) {
     if(error.name === "NotFoundError" ) return res.sendStatus(httpStatus.NOT_FOUND);
@@ -19,9 +19,9 @@ export async function signUpUser(req: Request, res: Response) {
 export async function signin(req: Request, res: Response) {
   try {
     const url = req.baseUrl.split("/")[1];
-
+  
     const token = await userService.signinUser(req.body, url);
-      
+  
     res.send(token).status(httpStatus.OK);
   } catch (error) {
     if(error.name === "NotFoundError" ) return res.sendStatus(httpStatus.NOT_FOUND);
@@ -57,9 +57,11 @@ export async function creatShoop(req: Request, res: Response) {
       nameStore: req.body.nameShop,
     }
     const user = await userService.creatShoopUser(obj);
-      
-    res.send().status(httpStatus.OK);
+     
+    console.log(user);
+    res.send(user).status(httpStatus.OK);
   } catch (error) {
+    console.log(error)
     if(error.name === "NotFoundError" ) return res.sendStatus(httpStatus.NOT_FOUND);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }

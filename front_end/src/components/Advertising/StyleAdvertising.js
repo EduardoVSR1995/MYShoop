@@ -156,4 +156,25 @@ const BoxOwner = styled.span`
   }
 `;
 
-export { BoxOwner, BoxConfig, Basket, Advertising, Sub };
+const ChangeAdvers = styled.span`
+  height: 40vh;
+  opacity: 1 !important ;
+  > span{
+    height: 40vh ;
+    display: flex ;
+    justify-content: flex-start ;
+    div{
+      width: 350px ;
+    }
+  }  
+  > form{
+    top: 100px;
+    right: 0px ;
+    position: absolute ;
+    height: 130px !important;
+    width: 60% ;
+
+  }
+`;
+
+export { BoxOwner, ChangeAdvers, BoxConfig, Basket, Advertising, Sub };

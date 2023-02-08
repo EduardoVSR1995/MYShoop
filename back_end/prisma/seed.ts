@@ -42,7 +42,7 @@ async function main() {
   const list = data as data
   const listOu = list.data;
   
-  const hashedPassword = await bcrypt .hash("dudududu", 12);
+  const hashedPassword = await bcrypt.hash("dudududu", 12);
 
   const owner = await prisma.user.create({
     data:{

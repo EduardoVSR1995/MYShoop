@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import note from "../../assets/images/notebook.png";
 import screen from "../../assets/images/tela.png";
@@ -6,15 +6,16 @@ import { Dialog } from "../../components/Dialog/Dialog";
 import { Form, Input } from "../../components/Forms/StyleForms";
 import { postCreatShoop } from "../../services/posts";
 import All from "../../index";
-import App from "../../App";
 import { store } from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import UserContext from "../../contexts/UserContext";
 
 export default function PageCreat() {
   const [ dialog, setDialog ] = useState();
   const [ forms, setForms ] = useState();
-
-  function reload() {
+  const { setValue } = useContext(UserContext);
+  async function reload() {
     store().then((i) => {
       setForms({ ...forms, shoops: i });
     } );
@@ -23,20 +24,25 @@ export default function PageCreat() {
     reload();
   }, [] );
   async function creat() {
-    const i = await postCreatShoop(forms);
-    await All();
-    App();
-    navigat("/"+forms.nameShop); 
-    window.location.href="/"+forms.nameShop;    
-    reload();
+    try {
+      const user = await postCreatShoop(forms);
+      setValue(user);
+      await All();
+      await reload();
+
+      navigat("/"+forms.nameShop); 
+      window.location.href="/"+forms.nameShop; 
+    } catch (error) {
+      toast("Ouve um erro");
+    }
   }
   const navigat =  useNavigate();
-
+  console.log(forms);
   return(
     <AllBox>
       { dialog ? 
         <Dialog setDialog={setDialog} >
-          <Form onSubmit={ async() => await creat() } >
+          <Form onSubmit={ async(e) => { e.preventDefault(); await creat(); }} >
             <Input required type={"text"} maxLength={254} placeholder={"Url da foto"} onChange={e => setForms({ ...forms, url: e.target.value })} />
             <Input required placeholder={"Nome"} onChange={e => setForms({ ...forms, name: e.target.value })} />
             <Input required type={"email"} placeholder={"E-mail"} onChange={e => setForms({ ...forms, email: e.target.value })} />

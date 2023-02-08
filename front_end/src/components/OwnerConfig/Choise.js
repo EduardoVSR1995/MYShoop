@@ -7,7 +7,7 @@ import { getProductPayd } from "../../services/getInfos";
 import { updateProductPayCode } from "../../services/patch";
 import { posCreatProduct } from "../../services/posts";
 import { getCategoris } from "../../services/product";
-import { BoxOwner } from "../Advertising/StyleAdvertising";
+import { BoxOwner, ChangeAdvers } from "../Advertising/StyleAdvertising";
 import { Area, Env } from "../EnvArea/EnvArea";
 import { Afiliat, Form, Input } from "../Forms/StyleForms";
 import { Box } from "../Products/StyleProducts";
@@ -179,21 +179,44 @@ export default function Choise({ choise }) {
     );
   }
   if (choise === "advertising") {
+    const [ change, setChang ] = useState();
+    function env(id) {
+
+    }
+    
     return(
-      <BoxOwner>
+      <>
         {
-          productData?.data ?
-            productData.data.map((i) => {
-              return (
-                <Box key={i.id} onClick={() => ""}>
-                  {i.UrlImage.map((r) => { return (<img src={r.urlImage} />); })}
-                  <p>{i.name}</p>
+          change ?
+            <ChangeAdvers>
+              <BoxOwner>
+                <Box onClick={ () => setChang("") }>
+                  { change.UrlImage.map((r) => { return (<img src={ r.urlImage } />); })}
+                  <p>{ change.name }</p>
                 </Box>
-              );
-            })
-            : ""
+              </BoxOwner>
+              <Form onSubmit={(e) => { e.preventDefault(); env(product.id); }} >
+                <Input pattern={"^[A-Za-z0-9]{4,9}"} placeholder={"Texto de apresentação do produto"} onChange={ e => setChang({ ...change, text: e.target.value })} ></Input>
+                <button type={"submit"}>Enviar</button>
+              </Form> 
+            </ChangeAdvers>
+            :
+            <BoxOwner>
+              {
+                productData?.data ?
+                  productData.data.map((i, index) => {
+                    return (
+                      <Box key={i.id} onClick={ () => setChang({ ...i }) }>
+                        {i.UrlImage.map((r) => { return (<img src={r.urlImage} />); })}
+                        <p>{i.name}</p>
+                      </Box>
+                    );
+                  })
+                  : ""
+              }
+            </BoxOwner>
         }
-      </BoxOwner>
+      </>
     );
   }
   if ( choise === "registerAfi" ) {
@@ -207,9 +230,4 @@ export default function Choise({ choise }) {
       </Afiliat> 
     );
   }
-  return (
-    <>
-
-    </>
-  );
 }

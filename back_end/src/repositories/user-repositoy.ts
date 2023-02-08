@@ -16,19 +16,16 @@ async function findFirstTableUserMail(StoreId: number, UserId: number ) {
 }
 
 async function findFirstUserMail(email: string, nameStore: string) {
-  return prisma.store.findUnique({
+  return prisma.storeUser.findFirst({
     where: {
-      nameStore
-    },
-    select: {
-      StoreUser: {
-        where: {
-          User:{
-            email,
-          },
-        },
+      User: {
+        email
+      },
+      Store: {
+        nameStore
       }
     }
+    
   });
 }
 
