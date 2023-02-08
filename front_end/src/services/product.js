@@ -21,3 +21,16 @@ export async function getCategoris(token) {
   return response;
 }
 
+export async function changeAdvertising(obj, token) {
+  const response = await conect("/product/advertising", 
+    { 
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${ token }`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(obj) 
+    });
+  return response;
+}
+

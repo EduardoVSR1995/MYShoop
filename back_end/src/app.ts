@@ -11,7 +11,6 @@ export default async function app() {
   loadEnv();
   
   const shoop = await shoops();
-  console.log(shoop)
   const server = express();
 
   server

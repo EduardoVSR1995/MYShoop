@@ -55,10 +55,10 @@ model Session {
 }
 
 model Publi {
-  id         Int    @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   text       String
-  StoreId    Int
-  Store      Store   @relation(fields: [StoreId], references: [id])
+  StoreId    Int    
+  Store      Store    @relation(fields: [StoreId], references: [id])
   productId  Int
   Product    Product  @relation(fields: [productId], references: [id])
 }

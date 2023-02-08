@@ -6,7 +6,7 @@ import { deleteProductStore } from "../../services/delet";
 import { getProductPayd } from "../../services/getInfos";
 import { updateProductPayCode } from "../../services/patch";
 import { posCreatProduct } from "../../services/posts";
-import { getCategoris } from "../../services/product";
+import { changeAdvertising, getCategoris } from "../../services/product";
 import { BoxOwner, ChangeAdvers } from "../Advertising/StyleAdvertising";
 import { Area, Env } from "../EnvArea/EnvArea";
 import { Afiliat, Form, Input } from "../Forms/StyleForms";
@@ -180,10 +180,17 @@ export default function Choise({ choise }) {
   }
   if (choise === "advertising") {
     const [ change, setChang ] = useState();
-    function env(id) {
+    async function env(id) {
+      const { token } = setValue();
 
+      try {
+        await changeAdvertising({ id: id, text: change.text }, token);
+        toast("Propaganda no lugar");
+      } catch (error) {
+        toast("Ouve um erro");
+      }
     }
-    
+    console.log(change);
     return(
       <>
         {
@@ -195,8 +202,8 @@ export default function Choise({ choise }) {
                   <p>{ change.name }</p>
                 </Box>
               </BoxOwner>
-              <Form onSubmit={(e) => { e.preventDefault(); env(product.id); }} >
-                <Input pattern={"^[A-Za-z0-9]{4,9}"} placeholder={"Texto de apresentação do produto"} onChange={ e => setChang({ ...change, text: e.target.value })} ></Input>
+              <Form onSubmit={(e) => { e.preventDefault(); env(change.id); }} >
+                <Input placeholder={"Texto de apresentação do produto"} onChange={ e => setChang({ ...change, text: e.target.value })} ></Input>
                 <button type={"submit"}>Enviar</button>
               </Form> 
             </ChangeAdvers>
@@ -204,7 +211,7 @@ export default function Choise({ choise }) {
             <BoxOwner>
               {
                 productData?.data ?
-                  productData.data.map((i, index) => {
+                  productData.data.map((i) => {
                     return (
                       <Box key={i.id} onClick={ () => setChang({ ...i }) }>
                         {i.UrlImage.map((r) => { return (<img src={r.urlImage} />); })}

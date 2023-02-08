@@ -1,5 +1,5 @@
 import { prisma } from "@/config";
-import { Store } from "@prisma/client";
+import { Publi, Store } from "@prisma/client";
 
 async function findFirstStoreUserId(userId: number) {
   return prisma.session.findFirst({
@@ -13,6 +13,17 @@ async function findFirsName(nameStore: string) {
   return prisma.store.findFirst({
     where: {
       nameStore,
+    }
+  });
+}
+
+async function findFirsAdvers(nameStore: string) {
+  return prisma.store.findFirst({
+    where: {
+      nameStore,
+    },
+    include: {
+      Publi: true
     }
   });
 }
@@ -31,8 +42,21 @@ async function creatStore(data: Omit<Store, "id">) {
   });
 }
 
+async function upsertAdvers(id: number, data: Omit<Publi, "id"> ) {
+  return prisma.publi.upsert({
+    where: {
+      id
+    },
+    create: data
+    ,
+    update: data
+  });
+}
+
 const storeRepositoy = { 
+  upsertAdvers,
   creatStore,
+  findFirsAdvers,
   findFirsName,
   findFirsSessionIdOuner,
   findFirstStoreUserId
