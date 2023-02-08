@@ -34,3 +34,17 @@ export async function posCreatProduct( token, obj) {
     });
   return response;
 }
+
+export async function postAfiliat( obj, token ) {
+  console.log(obj);
+  const response = await conect("/user/afiliat", 
+    { 
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${ token }`,
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify(obj)
+    });
+  return response;
+}

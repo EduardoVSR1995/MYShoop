@@ -5,7 +5,7 @@ import UserContext from "../../contexts/UserContext";
 import { deleteProductStore } from "../../services/delet";
 import { getProductPayd } from "../../services/getInfos";
 import { updateProductPayCode } from "../../services/patch";
-import { posCreatProduct } from "../../services/posts";
+import { posCreatProduct, postAfiliat } from "../../services/posts";
 import { changeAdvertising, getCategoris } from "../../services/product";
 import { BoxOwner, ChangeAdvers } from "../Advertising/StyleAdvertising";
 import { Area, Env } from "../EnvArea/EnvArea";
@@ -60,7 +60,6 @@ export default function Choise({ choise }) {
         toast("Ouve um erro");
       }    
     }
-    console.log(form);
     return (
       <Form onSubmit={e => { e.preventDefault(); creatProduct(); }} >
         <Input onChange={e => setForm({ ...form, creatCategory: e.target.value })} placeholder={"Nova categoria aqui"}/>
@@ -186,11 +185,11 @@ export default function Choise({ choise }) {
       try {
         await changeAdvertising({ id: id, text: change.text }, token);
         toast("Propaganda no lugar");
+        window.location.reload();
       } catch (error) {
         toast("Ouve um erro");
       }
     }
-    console.log(change);
     return(
       <>
         {
@@ -227,13 +226,28 @@ export default function Choise({ choise }) {
     );
   }
   if ( choise === "registerAfi" ) {
+    const [ change, setChang ] = useState();
+    async function afiliat() {
+      const { token } = setValue();
+
+      try {
+        const code = await postAfiliat({ email: change.email, cellPhone: change.cellPhone }, token);
+
+        setChang({ ...change, code: code.code });
+        toast("Afiliado(a) inserido!");
+      } catch (error) {
+        toast("Ouve um erro");
+      }
+    }
+    console.log(change);
     return(
       <Afiliat>   
-        <Form onSubmit={e => ""}>
-          <Input required type={"email"} placeholder={"E-mail"} onChange={e => setProduct({ ...product, email: e.target.value })} />
+        <Form onSubmit={e => { e.preventDefault(); afiliat(); }}>
+          <Input required type={"email"} placeholder={"E-mail"} onChange={e => setChang({ ...change, email: e.target.value })} />
+          <Input required type={"text"} placeholder={"Numero de telefone"} maxLength={9} pattern={"[0-9]{8,9}"} onChange={e => setChang({ ...change, cellPhone: e.target.value })} />
           <button type={"submit"} > Cadastrar afiliado(a) </button>
         </Form>
-        O codigo do afiliado aparece aqui {` => ${product?.code ? product.code : ""} <= `} basta colocalo ao final de cada link de produto.
+        O codigo do afiliado aparece aqui {` => ${change?.code ? "code="+change.code : ""} <= `} basta colocalo ao final de cada link de produto.
       </Afiliat> 
     );
   }

@@ -1,7 +1,7 @@
 import { advertising, cartPaydProducts, cartProducts, categoryProducts, creatProducts, deletProductsCart, deletProductStore, postProductsCart } from "@/controllers";
 import { authenticateToken, validateBody } from "@/middlewares";
 import { creatUserSchema } from "@/schemas";
-import { productsRoute } from "./productF2-rout";
+import { productsRoute } from "./productR2-rout";
 
 productsRoute
   .all("/*", authenticateToken)
@@ -13,6 +13,7 @@ productsRoute
   .delete("/remov/:id", deletProductsCart)
   .delete("/remov/store/:id", deletProductStore)
   .put("/advertising", advertising)
+  
   ;
   
 

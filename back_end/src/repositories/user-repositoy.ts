@@ -1,5 +1,5 @@
 import { prisma } from "@/config";
-import { Addres, User } from "@prisma/client";
+import { Addres, Affiliated, User } from "@prisma/client";
 
 async function findFirstTableUserMail(StoreId: number, UserId: number ) {
   return prisma.storeUser.findFirst({
@@ -78,6 +78,23 @@ async function  findFirstUserToken(UserId: number, nameStore: string) {
   );
 }
 
+async function  findFirstAfiliat(email: string, nameStore: string) {
+  return prisma.store.findFirst({
+    where: {
+      nameStore
+    },
+    include: {
+      Affiliated: {
+        where: {
+          email
+        },
+      },
+      _count: true
+    }
+  }  
+  );
+}
+
 async function findUserOwner(nameStore: string) {
   return prisma.store.findUnique({
     where: {
@@ -103,9 +120,17 @@ async function creatAddres(data: Omit<Addres, "id">) {
   });
 }
 
+async function creatAfiliat(data: Omit<Affiliated, "id">) {
+  return prisma.affiliated.create({
+    data
+  });
+}
+
 const userRepository = {
   creatUserAlone,
   creatAddres,
+  creatAfiliat,
+  findFirstAfiliat,
   findFirstUserToken,
   findUserOwner,
   creatStorUser,

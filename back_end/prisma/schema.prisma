@@ -20,6 +20,7 @@ model Store {
   Product     Product[]
   StoreUser   StoreUser[]
   Publi       Publi[]
+  Affiliated  Affiliated[]
   Categori    Categori[]
 }
 
@@ -72,10 +73,12 @@ model Cart {
 }
 
 model Affiliated {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   code      String
   cellPhone Int
   email     String
+  StoreId   Int
+  Store     Store      @relation(fields: [StoreId], references: [id])
 }
 
 model UrlImage {
