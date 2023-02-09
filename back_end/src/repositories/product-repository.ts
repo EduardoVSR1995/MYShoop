@@ -266,6 +266,37 @@ async function findCategoryName(obj: Omit<Categori, "id">) {
   });
 }
 
+async function findSoldProducts(nameStore: string) {
+  return prisma.payMent.findMany({
+    where: {
+      send: true
+    },
+    select: {
+      User: {
+        select: {
+          name: true,
+          email: true,
+          StoreUser:{
+            where: {
+              Store: {
+                nameStore             
+              }              
+            }
+          }
+        }
+      },
+      Product: {
+        select: {
+          name: true,
+          description: true,
+          price: true,
+          UrlImage: true,
+        },
+      }
+    },
+  });
+}
+
 const productRepository = {
   findManyProductCardUserId,
   findManyProductCardPayd,
@@ -274,6 +305,7 @@ const productRepository = {
   findManyProductId,
   findManyProduct,
   findManyCategory,
+  findSoldProducts,
   findFirstCart,
   findCategoryName,
   findfirstId,

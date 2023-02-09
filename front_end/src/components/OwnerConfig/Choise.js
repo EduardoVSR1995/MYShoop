@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import ProductContext from "../../contexts/ProductContext";
 import UserContext from "../../contexts/UserContext";
 import { deleteProductStore } from "../../services/delet";
-import { getProductPayd } from "../../services/getInfos";
+import { getProductPayd, getProductSold } from "../../services/getInfos";
 import { updateProductPayCode } from "../../services/patch";
 import { posCreatProduct, postAfiliat } from "../../services/posts";
 import { changeAdvertising, getCategoris } from "../../services/product";
@@ -249,6 +249,45 @@ export default function Choise({ choise }) {
         </Form>
         O codigo do afiliado aparece aqui {` => ${change?.code ? "code="+change.code : ""} <= `} basta colocalo ao final de cada link de produto.
       </Afiliat> 
+    );
+  }
+  if (choise === "salesAmount") {
+    const [ sold, setSold ] = useState();
+    
+    async function get() {
+      const { token } = setValue();
+      try {
+        const list = await getProductSold(token);  
+        setSold({ ...sold, list: list });
+      } catch (error) {
+      };
+    }    
+    useEffect(() => {
+      get();
+    }, []);
+    console.log(sold, sold?.list && sold?.list.length>0  ? ((sold.list.reduce((soma, i) => { return  soma + i.Product.price; }, 0))/100).toFixed(2)  : "");
+    return (
+      <Area>
+        {
+          sold?.list && sold?.list.length>0  ? sold.list.map((i, index) => {
+            return (
+              <>
+                <Env key={index}>
+                  <img src={i.Product.UrlImage[0].urlImage} />
+                  <p>
+                    Name:        { i.Product.name} <br />
+                    Comprador:   { i.User.name}    <br />
+                    Email:       { i.User.email}   <br />
+                    Preço:       { (i.Product.price/100).toFixed(2)} <br />
+                  </p>
+                </Env>
+              </>
+            );
+          })
+            : "Ainda não a produtos vendidos"
+        }
+        Total de vendas R$ { sold?.list && sold?.list.length>0  ? ((sold.list.reduce((soma, i) => { return  soma + i.Product.price; }, 0))/100).toFixed(2)  : "" }
+      </Area>
     );
   }
 }

@@ -52,3 +52,15 @@ export async function getProductPayd(token) {
     });
   return response;
 }
+
+export async function getProductSold(token) {
+  const response = await conect("/user/sold", 
+    { 
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${ token }`,
+        "Content-Type": "application/json"
+      }
+    });
+  return response;
+}

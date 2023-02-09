@@ -33,4 +33,3 @@ export async function changeAdvertising(obj, token) {
     });
   return response;
 }
-

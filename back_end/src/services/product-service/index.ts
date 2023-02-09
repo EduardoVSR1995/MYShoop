@@ -105,10 +105,17 @@ async function findManyProductCardPayd(userId: number, nameStore: string ): Prom
   return { arr: arr, phone: phone };
 }
 
+async function findSoldProducts( nameStore: string ) {
+  const products = await ProductRepository.findSoldProducts(nameStore);
+
+  return products;
+}
+
 const productService = {
   listProductName,
   listProductId,
   listProduct,
+  findSoldProducts,
   findManyProductCardPayd,
   findManyCategory,
   findManyProductCardUserId,
