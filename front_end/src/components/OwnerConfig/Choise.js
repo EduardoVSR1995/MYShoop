@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import ProductContext from "../../contexts/ProductContext";
 import UserContext from "../../contexts/UserContext";
 import { deleteProductStore } from "../../services/delet";
-import { getProductPayd, getProductSold } from "../../services/getInfos";
+import { getAfiliate, getProductPayd, getProductSold } from "../../services/getInfos";
 import { updateProductPayCode } from "../../services/patch";
 import { posCreatProduct, postAfiliat } from "../../services/posts";
 import { changeAdvertising, getCategoris } from "../../services/product";
@@ -265,7 +265,6 @@ export default function Choise({ choise }) {
     useEffect(() => {
       get();
     }, []);
-    console.log(sold, sold?.list && sold?.list.length>0  ? ((sold.list.reduce((soma, i) => { return  soma + i.Product.price; }, 0))/100).toFixed(2)  : "");
     return (
       <Area>
         {
@@ -288,6 +287,40 @@ export default function Choise({ choise }) {
         }
         Total de vendas R$ { sold?.list && sold?.list.length>0  ? ((sold.list.reduce((soma, i) => { return  soma + i.Product.price; }, 0))/100).toFixed(2)  : "" }
       </Area>
+    );
+  }
+  if (choise === "listAfiliat") {
+    const [ sold, setSold ] = useState();
+    
+    async function get() {
+      const { token } = setValue();
+      try {
+        const list = await getAfiliate(token);  
+        setSold({ ...sold, list: list });
+      } catch (error) {
+      };
+    }    
+    useEffect(() => {
+      get();
+    }, []);
+    console.log(sold);
+    return (
+      <Afiliat>
+        <span>
+          {
+            sold?.list && sold?.list.length>0  ? sold.list.map((i, index) => {
+              return (
+                <p>
+                  Email:  { i.email} <br/>
+                  code:   code={ i.code} <br/>
+                  Telefone:   { i.cellPhone} <br/>
+                </p>
+              );
+            })
+              : "Ainda não a afiliados"
+          }
+        </span>  
+      </Afiliat>
     );
   }
 }

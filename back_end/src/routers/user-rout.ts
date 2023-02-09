@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createUserSchema, signinUserSchema } from "@/schemas";
 import { authenticateToken, validateBody } from "@/middlewares";
-import { autorize, creatAfiliat, getSold, signin, signUpUser } from "@/controllers";
+import { autorize, creatAfiliat, getAllAfiliat, getSold, signin, signUpUser } from "@/controllers";
 
 const usersRouter = Router();
 
@@ -11,6 +11,7 @@ usersRouter
   .all("/*", authenticateToken)
   .get("/autorize", autorize)
   .post("/afiliat", creatAfiliat)
+  .get("/afiliat", getAllAfiliat)
   .get("/sold", getSold);
 
 export { usersRouter };

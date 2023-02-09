@@ -79,6 +79,12 @@ async function creatAfiliat(cellPhone: number, email: string, nameStore: string)
   return code; 
 }
 
+async function getAllAfiliat(nameStore: string) {
+  const list = await userRepository.findFirstManyAfiliat(nameStore);
+  
+  return list[0].Affiliated; 
+}
+
 type CreatShoop = {
   name: string,
   email: string,
@@ -137,6 +143,7 @@ async function creatShoopUser(obj: CreatShoop ) {
 }
 
 const userService = {
+  getAllAfiliat,
   creatAfiliat,
   creatShoopUser,
   creatAddres,

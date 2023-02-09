@@ -45,14 +45,14 @@ a{
 `;
 
 const Input = styled.input`
-margin: 20px 0px 0px 0px ;
-width: 70vw;
-height: 35px;
-border-radius: 10px;
-background: #C8C8F4;
-border: 0 none;
-text-align: center ;
-color: #FFFFFF;
+  margin: 20px 0px 0px 0px ;
+  width: 70vw;
+  height: 35px;
+  border-radius: 10px;
+  background: #C8C8F4;
+  border: 0 none;
+  text-align: center ;
+  color: #FFFFFF;
   font-weight: 400;
   font-size: 20px;
   line-height: 18px;
@@ -69,11 +69,29 @@ color: #FFFFFF;
 const Afiliat = styled.span`
   margin-top: 120px ;
   width: 200px ;
+  
   form{
     width: 100% ;
     margin: 0px 0px 20px 0px ;
   }
+  
+  > span{
+    width: 100%;
+    height: 70vh;
+    overflow: scroll;
+    border-radius: 20px;
+    p{
+      width: 300px ;
+      height: 100px;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: initial ;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
 
+  
 `;
 
 export { Form, Input, Afiliat };

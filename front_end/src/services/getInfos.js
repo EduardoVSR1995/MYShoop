@@ -64,3 +64,15 @@ export async function getProductSold(token) {
     });
   return response;
 }
+
+export async function getAfiliate(token) {
+  const response = await conect("/user/afiliat", 
+    { 
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${ token }`,
+        "Content-Type": "application/json"
+      }
+    });
+  return response;
+}

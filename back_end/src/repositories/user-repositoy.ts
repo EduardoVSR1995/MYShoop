@@ -114,6 +114,17 @@ async function findUserOwner(nameStore: string) {
   });
 }
 
+async function findFirstManyAfiliat(nameStore: string) {
+  return prisma.store.findMany({
+    where: {
+      nameStore,
+    },
+    select: {
+      Affiliated: true
+    }
+  });
+}
+
 async function creatAddres(data: Omit<Addres, "id">) {
   return prisma.addres.create({
     data
@@ -127,6 +138,7 @@ async function creatAfiliat(data: Omit<Affiliated, "id">) {
 }
 
 const userRepository = {
+  findFirstManyAfiliat,
   creatUserAlone,
   creatAddres,
   creatAfiliat,
