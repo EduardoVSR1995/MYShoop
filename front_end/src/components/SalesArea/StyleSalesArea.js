@@ -70,6 +70,9 @@ width: 75% ;
 h1{
   font-weight: 600;
   font-size: 30px;
+   > h2{
+    font-weight: 300 ;
+  }
 }
 input{
   margin: 20px 0px 0px 20px ;

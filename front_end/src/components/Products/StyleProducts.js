@@ -30,14 +30,14 @@ const BoxImage = styled.div`
 
 const Box = styled.div`
   margin: 0px 5px 10px 5px  ;
-  width: 20vw;
-  height: 40vh;
-  border-radius: 15px ;
+  width: 12vw;
+  height: 35vh;
+  border-radius: 12px ;
   border: 1px solid #6666F0 ;
   display: flex ;
   img{
     border-radius: 15px ;
-    width: 20vw;
+    width: 100%;
     height: 80%;
   }
   div{

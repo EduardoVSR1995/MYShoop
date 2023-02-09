@@ -147,6 +147,9 @@ const BoxOwner = styled.span`
     overflow: auto ;
     width: 170px ;
     display: initial ;
+    > img{
+      height: 35vh;
+    }
     div{
       opacity: 1 ;
     }

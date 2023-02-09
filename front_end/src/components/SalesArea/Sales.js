@@ -78,7 +78,7 @@ export default function Sales({ type, load }) {
     });
     setDialog(true);
   }
-
+  console.log(product);
   return (
     <>
       <DialogBox />
@@ -97,6 +97,7 @@ export default function Sales({ type, load }) {
         <Apresentation>
           <h1>
             {product?.name}
+            <h2>{product?.description}</h2>
           </h1>
           {type ?
             ""
