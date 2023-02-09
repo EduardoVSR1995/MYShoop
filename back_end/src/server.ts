@@ -1,14 +1,11 @@
-import app, { init } from "@/app";
+import app, { init, service} from "@/app";
 
 const port = + process.env.PORT || 4000;
 
-export default async function server() {
-  init().then( async () => {
-    (await app()).listen(port, () => {
-      /* eslint-disable-next-line no-console */
-      console.log(`Server is listening on port ${port}.`);
-    });
+init().then( async () => {
+  await app();
+  service.listen(port, () => {
+    /* eslint-disable-next-line no-console */
+    console.log(`Server is listening on port ${port}.`);
   });
-}
-
-server();
+});

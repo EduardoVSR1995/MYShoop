@@ -5,7 +5,6 @@ import { Addres, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import storeRepositoy from "@/repositories/store-repository";
 import app from "@/app";
-import { verify } from "crypto";
 
 async function creatUser(user: CreateUserParams, url: string ) {
   const hashedPassword = await bcrypt.hash(user.password, 12);
@@ -72,7 +71,7 @@ async function creatAfiliat(cellPhone: number, email: string, nameStore: string)
 
   if ( verify.Affiliated[0] ) throw notFoundError()
 
-  const code = 100+verify._count.Affiliated;
+  const code = 100 + verify.cont;
 
   await userRepository.creatAfiliat({code: `${ code }`, cellPhone, email, StoreId: verify.id  });
 
@@ -81,7 +80,6 @@ async function creatAfiliat(cellPhone: number, email: string, nameStore: string)
 
 async function getAllAfiliat(nameStore: string) {
   const list = await userRepository.findFirstManyAfiliat(nameStore);
-  
   return list[0].Affiliated; 
 }
 

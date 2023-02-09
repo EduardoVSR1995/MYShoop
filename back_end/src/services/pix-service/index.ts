@@ -7,6 +7,7 @@ import axios from "axios";
 import payMentRepository from "@/repositories/payment-repository";
 import { notmatch, invalidDataError } from "@/error";
 import { Addres } from "@prisma/client";
+import paymentService from "../payment-service";
 
 export async function paymentPix(
   fret: number, 
@@ -14,6 +15,7 @@ export async function paymentPix(
   userId: number, 
   quantiti: number, 
   url: string,
+  code: string,
   addres: Omit<Addres, "id">
   ) {
   const shoop = await storeRepositoy.findFirsName(url);
@@ -58,19 +60,22 @@ export async function paymentPix(
       
       const location = await userRepository.creatAddres(addres);
 
-      await payMentRepository.creatPayMent({ ...payMent2, AddresId: location.id }); 
+      await payMentRepository.creatPayMent({ ...payMent2, AddresId: location.id, StoreId: shoop.id }); 
+      
+      await paymentService.createAffiliatPayment(code, product.price);
     }
     return { ...payMent, imgQrcod: imgQrcod }; 
   }
   const location = await userRepository.creatAddres(addres);
 
-  const payd = await payMentRepository.creatPayMent({ ...payMent, AddresId:location.id }); 
-
+  const payd = await payMentRepository.creatPayMent({ ...payMent, AddresId:location.id, StoreId: shoop.id }); 
+  
+  await paymentService.createAffiliatPayment(code, product.price);
+  
   if( !payd ) throw invalidDataError([]);
-
+  
   return { ...payMent, imgQrcod: imgQrcod };  
 }
-
 const pixService = {
   paymentPix
 };

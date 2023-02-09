@@ -8,7 +8,7 @@ import userService from "@/services/user-service";
 
 export async function postPayment(req: AuthenticatedRequest, res: Response) {
   try {
-    const {  id, phone, quantiti, street, city, house, cep } = req.body;
+    const {  id, phone, quantiti, street, city, house, cep, code } = req.body;
 
     const UserId = req.userId;
 
@@ -30,7 +30,8 @@ export async function postPayment(req: AuthenticatedRequest, res: Response) {
       UserId,
       quantiti,
       url,
-      addres
+      code,
+      addres,
     );  
     
     res.send({ imgQrcod: payment.imgQrcod }).status(httpStatus.OK);
@@ -45,8 +46,7 @@ export async function getPayment(req: AuthenticatedRequest, res: Response) {
 
     const url = req.baseUrl.split("/")[1];
 
-    await userService.autorize(userId, url);
-    
+    await userService.autorize(userId, url)
     const product = await paymentService.listPayment(url);
 
     res.send(product).status(httpStatus.OK);

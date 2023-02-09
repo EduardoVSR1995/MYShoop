@@ -1,29 +1,29 @@
 import { createContext, useState } from "react";
-import { shopName } from "../services/api";
 
 const UserContext = createContext();
 export default UserContext;
 
 export function UserProvider({ children }) {
-  const [userData, setUserData] = useState({});
-  let local = shopName;
+  const [ userData, setUserData ] = useState({});
+  let local = "/"+window.location.pathname.split("/")[1];
+  const code = new URLSearchParams(window.location.search).get("code");
   
-  function setValue(value, url) {
+  function setValue(value, url) {    
     const item = window.localStorage.getItem(local);
     if( !local ) {
       local = url;
     };
     if(item && value === undefined) {
       const obj = JSON.parse(item);
-      setUserData({ ...userData, ...obj });
-      return { ...userData, ...obj };
+      setUserData( code ? { ...userData, ...obj, code: code } : { ...userData, ...obj } );
+      return code ? { ...userData, ...obj, code: code } : { ...userData, ...obj };
     };
     if(value) {
-      window.localStorage.setItem(local, JSON.stringify(value));
-      setUserData({ ...userData, ...value });
+      window.localStorage.setItem(local, JSON.stringify( code ? { ...value, code: code } : { ...value }));
+      setUserData( code ? { ...userData, ...value, code: code } : { ...userData, ...value });
     }
     setUserData({ ...JSON.parse(item) });
-    return { ...userData };
+    return { ...JSON.parse(item) };
   }
 
   return (

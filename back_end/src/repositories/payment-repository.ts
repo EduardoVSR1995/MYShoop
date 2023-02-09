@@ -1,5 +1,5 @@
 import { prisma } from "@/config";
-import { PayMent } from "@prisma/client";
+import { PayMent, SalesAffiliated } from "@prisma/client";
 
 async function creatPayMent(data: Omit<PayMent, "id" | "code" | "send">) {
   return prisma.payMent.create({
@@ -8,32 +8,35 @@ async function creatPayMent(data: Omit<PayMent, "id" | "code" | "send">) {
 }
 
 async function getPayMent(nameStore: string ) {
-  return prisma.payMent.findMany({
+  return prisma.store.findFirst({
     where: {
-      payd: true,
-      send: false
-    },
-    include: {
-      User: {
-        select: {
-          email: true,
-          name: true,
-          StoreUser: {
-            where: {
-              Store: {
-                nameStore
-              }
-            },
-          }
-        }
+      nameStore,
       },
-      Product:{
-        include: {
-          UrlImage: true
+    select:{
+      PayMent: {
+        where:{
+          send: false,
+          payd: true
         },
-      },
-      Addres:true
-    },
+        select: {
+          id: true,
+          code: true,
+          User: {
+            select:{
+              name: true,
+              email: true
+            },
+          },
+          Product: {
+            select: {
+              name: true,
+              UrlImage: true
+            },
+          },
+          Addres:true
+        }
+      }
+    }
   });
 }
 
@@ -59,7 +62,15 @@ async function updatSendPayment(id:number, send: boolean) {
   });
 }
 
+async function createAffiliatedPayment(data: Omit<SalesAffiliated, "id">) {
+  return prisma.salesAffiliated.create({
+    data
+  })
+
+}
+
 const payMentRepository = {
+  createAffiliatedPayment,
   getPayMent,
   creatPayMent,
   updatSendPayment,

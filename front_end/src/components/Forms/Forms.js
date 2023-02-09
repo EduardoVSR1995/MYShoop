@@ -17,28 +17,34 @@ export default function Forms({ params, type }) {
 
   const navigate = useNavigate();
 
-  async function form(e, forms) {
-    e.preventDefault();
-
+  async function form(forms) {
     try {
       let user;
-
+      console.log(userData);
       if (params === "dialog") {
-        const imgPix = await paydPix(
-          userData.token,
-          productData.id,
-          productData.cont,
-          forms.fone,
-          forms.street,
-          forms.city,
-          forms.homeNumber,
-          forms.cep
-        );
-        const valid = imgPix.imgQrcod ? setForms({ ...forms, imgQrcod: imgPix.imgQrcod }) : "";
-        if(type) {
-          removCart(type, userData.token);
-        };
-        return;
+        try {
+          toast("Aguarde o QR Code");
+          setForms({ ...forms, activ: true });
+          const imgPix = await paydPix(
+            userData.token,
+            productData.id,
+            productData.cont,
+            forms.fone,
+            forms.street,
+            forms.city,
+            forms.homeNumber,
+            forms.cep,
+            userData.code,
+          );
+          const valid = imgPix.imgQrcod ? setForms({ ...forms, imgQrcod: imgPix.imgQrcod }) : "";
+          if(type) {
+            removCart(type, userData.token);
+          };
+          return;
+        } catch (error) {
+          setForms({ ...forms, activ: false });
+          toast("Ouve um erro");
+        }
       }
       if (params === "signin") {
         user = await signin(forms.email, forms.password);
@@ -63,7 +69,7 @@ export default function Forms({ params, type }) {
 
   if (params === "signup") {
     return (
-      <Form onSubmit={e => verifi(e, forms)}>
+      <Form onSubmit={e => verifi(e, forms) }>
         <Input required type={"text"} maxLength={254} placeholder={"Url da foto"} onChange={e => setForms({ ...forms, url: e.target.value })} />
         <Input required placeholder={"Nome"} onChange={e => setForms({ ...forms, name: e.target.value })} />
         <Input required type={"email"} placeholder={"E-mail"} onChange={e => setForms({ ...forms, email: e.target.value })} />
@@ -80,7 +86,7 @@ export default function Forms({ params, type }) {
       forms.imgQrcod ?
         <img src={forms.imgQrcod} />
         :
-        <Form onSubmit={e => form(e, forms)}>
+        <Form onSubmit={e => { e.preventDefault(); const i = forms.activ ? "" : form(forms);}}>
           <Input required maxLength={8} pattern={"^[0-9]{8}$"} type={"text"} placeholder="cep" onChange={e => setForms({ ...forms, cep: e.target.value })} />
           <Input required placeholder="Cidade" onChange={e => setForms({ ...forms, city: e.target.value })} />
           <Input required placeholder="Nome da rua" onChange={e => setForms({ ...forms, street: e.target.value })} />
@@ -94,7 +100,7 @@ export default function Forms({ params, type }) {
   };
 
   return (
-    <Form onSubmit={e => form(e, forms)}>
+    <Form onSubmit={e => {e.preventDefault(); form( forms);}}>
       <Input required type={"email"} placeholder={"E-mail"} onChange={e => setForms({ ...forms, email: e.target.value })} />
       <Input required type={"password"} placeholder={"Senha"} onChange={e => setForms({ ...forms, password: e.target.value })} />
       <button type={"submit"} value={"Submit"}>Entrar</button>

@@ -66,7 +66,6 @@ export async function getAllAfiliat(req: AuthenticatedRequest, res: Response) {
 
     res.send(list).status(httpStatus.OK);
   } catch (error) {
-    console.log(error)
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }

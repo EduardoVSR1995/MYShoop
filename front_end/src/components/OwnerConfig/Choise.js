@@ -116,7 +116,7 @@ export default function Choise({ choise }) {
 
   if (choise === "ProductEnv") {
     function load() {
-      const { token } = setValue();  
+      const { token } = setValue();
       getProductPayd(token).then((i) => setProduct({ ...product, list: [...i] })).catch((i) => console.error(i));
     }
     useEffect(() => {
@@ -144,6 +144,7 @@ export default function Choise({ choise }) {
         toast("Ouve um erro");
       };
     }
+    console.log(product);
     return (
       <Area>
         {
@@ -161,7 +162,7 @@ export default function Choise({ choise }) {
                     Nome da rua:  { i.Addres.street}  <br />
                     Numero da casa:    { i.Addres.house}  <br />
                     Numero do telefone:{ i.Addres.phone}  <br />
-                    {i.code !=="" ? <> Codigon De envio: { i.code} </> : "" }
+                    {i.code !== "" ? <> Codigo De envio: { i.code} </> : "" }
                     <Form onSubmit={(e) => { e.preventDefault(); atualization(i.id); }} >
                       <Input pattern={"^[A-Za-z0-9]{4,9}"} placeholder={"Codigo de envio"} onChange={ e => setProduct({ ...product, code: e.target.value })} ></Input>
                       <button type={"submit"}>Enviar</button>
@@ -314,6 +315,7 @@ export default function Choise({ choise }) {
                   Email:  { i.email} <br/>
                   code:   code={ i.code} <br/>
                   Telefone:   { i.cellPhone} <br/>
+                  {i.SalesAffiliated.length>0 ? "Total vendido R$ "+(i.SalesAffiliated.reduce((soma, i) => { return  soma + i.value; }, 0)/100).toFixed(2) : ""}
                 </p>
               );
             })

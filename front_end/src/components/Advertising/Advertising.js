@@ -12,14 +12,13 @@ import OwnerConfig from "../OwnerConfig/OwnerConfig";
 export default function Adverti() {
   const { setValue } = useContext(UserContext);
   const [product, setProduct] = useState();
-
-  useEffect(() => {
-    const value = setValue();
-    cart(value?.token)
+  function load(token) {
+    console.log(token);
+    cart(token)
       .then((i) => {
         advertisingGet()
           .then((v) => {
-            autorize(value?.token).then((va) => { setProduct({ ...product, list: i, advertising: v, bar: va }); });});
+            autorize(token).then((va) => { setProduct({ ...product, list: i, advertising: v, bar: va }); });});
       })
       .catch((i) => {
         advertisingGet()
@@ -28,10 +27,13 @@ export default function Adverti() {
           })
           .catch((i) => console.error(i));
       });
+  }
+  useEffect(() => {
+    const { token } = setValue();
+    load(token);
   }, []);
 
   const navigat = useNavigate();
-
   return (
     <>
       <Advertising>

@@ -8,7 +8,8 @@ export async function paydPix(
   street,
   city,
   house,
-  cep
+  cep,
+  code
 ) {
   const response = await conect("/payment/pix", 
     { method: "POST",
@@ -24,6 +25,7 @@ export async function paydPix(
         city,
         house,
         cep,
+        code
       }),
     });
   return response;

@@ -24,6 +24,7 @@ export default function User() {
       .catch((i) => console.error(i));
   }    
   useEffect(() => {
+    setValue();
     const { token } = setValue();
     setProductData({ ...productData, load });
     load(token);

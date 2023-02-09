@@ -79,7 +79,7 @@ async function  findFirstUserToken(UserId: number, nameStore: string) {
 }
 
 async function  findFirstAfiliat(email: string, nameStore: string) {
-  return prisma.store.findFirst({
+  const afiliat = await prisma.store.findFirst({
     where: {
       nameStore
     },
@@ -89,10 +89,14 @@ async function  findFirstAfiliat(email: string, nameStore: string) {
           email
         },
       },
-      _count: true
     }
   }  
   );
+  const cont = await prisma.affiliated.aggregate({
+    _count:true
+  });
+  
+  return {...afiliat , cont: cont._count};
 }
 
 async function findUserOwner(nameStore: string) {
@@ -120,9 +124,16 @@ async function findFirstManyAfiliat(nameStore: string) {
       nameStore,
     },
     select: {
-      Affiliated: true
+      Affiliated: {
+        select: {
+          email: true,
+          code: true,
+          cellPhone: true,
+          SalesAffiliated: true,        
+        },
+      }
     }
-  });
+  });  
 }
 
 async function creatAddres(data: Omit<Addres, "id">) {

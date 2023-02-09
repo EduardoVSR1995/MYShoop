@@ -6,13 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { shopName } from "../../services/api";
 import UserContext from "../../contexts/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ProductContext from "../../contexts/ProductContext";
 
 export default function Toop({ to }) { 
-  const { userData } = useContext(UserContext);
+  const { userData, setValue } = useContext(UserContext);
   const { productData, SetProductData, setProductData } = useContext(ProductContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setValue();
+  }, []);
+
   return(
     <>
       <Top>

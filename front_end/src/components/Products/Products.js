@@ -20,7 +20,6 @@ export default function Product() {
         { 
           productData?.data ? 
             productData.data.map( (i) => {
-              console.log(i);
               return(
                 <Box key={i.id} onClick={() => navigat(`${shopName}/product/${i.id}`)}>
                   <img src={i.UrlImage.length ? i.UrlImage[0].urlImage :"https://avatars.githubusercontent.com/u/106880629?s=40&v=4"}/>

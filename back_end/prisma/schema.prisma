@@ -13,24 +13,25 @@ datasource db {
 }
 
 model Store {
-  id          Int       @id @default(autoincrement())
-  nameStore   String    @unique
+  id          Int          @id @default(autoincrement())
+  nameStore   String       @unique
   AddresId    Int
-  Addres      Addres    @relation(fields: [AddresId], references: [id])
+  PayMent     PayMent[]
   Product     Product[]
   StoreUser   StoreUser[]
   Publi       Publi[]
   Affiliated  Affiliated[]
   Categori    Categori[]
+  Addres      Addres       @relation(fields: [AddresId], references: [id])
 }
 
 model StoreUser {
-  id         Int      @id @default(autoincrement())
-  User       User     @relation(fields: [UserId], references: [id])
-  UserId     Int
-  Store      Store    @relation(fields: [StoreId], references: [id])
-  StoreId    Int
-  assignedAt DateTime @default(now())
+  id         Int           @id @default(autoincrement())
+  User       User          @relation(fields: [UserId], references: [id])
+  UserId     Int     
+  Store      Store         @relation(fields: [StoreId], references: [id])
+  StoreId    Int     
+  assignedAt DateTime      @default(now())
 }
 
 model User {
@@ -49,42 +50,50 @@ model User {
 }
 
 model Session {
-  id     Int    @id @default(autoincrement())
-  userId Int
-  User   User   @relation(fields: [userId], references: [id])
+  id     Int              @id @default(autoincrement())
+  userId Int          
+  User   User             @relation(fields: [userId], references: [id])
   token  String
 }
 
 model Publi {
-  id         Int      @id @default(autoincrement())
-  text       String
-  StoreId    Int    
-  Store      Store    @relation(fields: [StoreId], references: [id])
-  productId  Int
-  Product    Product  @relation(fields: [productId], references: [id])
+  id         Int          @id @default(autoincrement())
+  text       String    
+  StoreId    Int        
+  Store      Store        @relation(fields: [StoreId], references: [id])
+  productId  Int    
+  Product    Product      @relation(fields: [productId], references: [id])
 }
 
 model Cart {
-  id        Int     @id @default(autoincrement())
-  userId    Int
-  User      User    @relation(fields: [userId], references: [id])
-  ProductId Int
-  Product   Product @relation(fields: [ProductId], references: [id])
+  id        Int           @id @default(autoincrement())
+  userId    Int      
+  User      User          @relation(fields: [userId], references: [id])
+  ProductId Int      
+  Product   Product       @relation(fields: [ProductId], references: [id])
 }
 
 model Affiliated {
-  id        Int     @id @default(autoincrement())
-  code      String
-  cellPhone Int
-  email     String
-  StoreId   Int
-  Store     Store      @relation(fields: [StoreId], references: [id])
+  id                 Int        @id @default(autoincrement())
+  code               String     @unique
+  cellPhone          Int
+  email              String
+  StoreId            Int
+  SalesAffiliated    SalesAffiliated[]
+  Store              Store      @relation(fields: [StoreId], references: [id])
+}
+model SalesAffiliated {
+  id            Int              @id @default(autoincrement())
+  code          String
+  value         Int
+  Affiliated    Affiliated      @relation(fields: [code], references: [code])
+
 }
 
 model UrlImage {
-  id        Int     @id @default(autoincrement())
-  ProductId Int
-  Product   Product @relation(fields: [ProductId], references: [id])
+  id        Int        @id @default(autoincrement())
+  ProductId Int   
+  Product   Product    @relation(fields: [ProductId], references: [id])
   urlImage  String
 }
 
@@ -106,7 +115,7 @@ model Product {
 }
 
 model Categori {
-  id        Int       @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   name      String
   StoreId   Int
   Store     Store      @relation(fields: [StoreId], references: [id])
@@ -142,13 +151,15 @@ model PayMent {
   txid           String    
   valor          Int
   fret           Int
-  send           Boolean @default(false) 
-  code           String  @default("") 
+  send           Boolean   @default(false) 
+  code           String    @default("") 
   location       String 
   UserId         Int
+  StoreId        Int
   ProductId      Int
   AddresId       Int 
-  Addres        Addres  @relation(fields: [AddresId], references: [id])
-  Product        Product  @relation(fields: [ProductId], references: [id])
-  User           User     @relation(fields: [UserId], references: [id])
+  Store          Store      @relation(fields: [StoreId], references: [id])
+  Addres         Addres     @relation(fields: [AddresId], references: [id])
+  Product        Product    @relation(fields: [ProductId], references: [id])
+  User           User       @relation(fields: [UserId], references: [id])
 }

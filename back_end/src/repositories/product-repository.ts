@@ -177,7 +177,6 @@ async function deleteProductShop(id: number ) {
     }
   });
   const result = await prisma.$transaction([cart, publi, url, product]);
-  console.log(result);
   return ;
 }
 

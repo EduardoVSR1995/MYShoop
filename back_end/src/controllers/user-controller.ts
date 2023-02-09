@@ -2,8 +2,6 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 import userService from "@/services/user-service";
 import { AuthenticatedRequest } from "@/middlewares";
-import storeRepositoy from "@/repositories/store-repository";
-import productRepository from "@/repositories/product-repository";
 import productService from "@/services/product-service";
 
 export async function signUpUser(req: Request, res: Response) {
@@ -61,10 +59,8 @@ export async function creatShoop(req: Request, res: Response) {
     }
     const user = await userService.creatShoopUser(obj);
      
-    console.log(user);
     res.send(user).status(httpStatus.OK);
   } catch (error) {
-    console.log(error)
     if(error.name === "NotFoundError" ) return res.sendStatus(httpStatus.NOT_FOUND);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
@@ -77,12 +73,11 @@ export async function getSold(req: AuthenticatedRequest, res: Response) {
     const { userId } = req;
 
     await userService.autorize(userId, url);  
-    console.log(url, userId);
+
     const list = await productService.findSoldProducts(url);
 
     res.send(list).status(httpStatus.OK)  
   } catch (error) {
-    console.log(error);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
