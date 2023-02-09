@@ -9,6 +9,8 @@ import { signUp, signin } from "../../services/userConnectApi";
 import ProductContext from "../../contexts/ProductContext";
 import { paydPix } from "../../services/pay";
 import { removCart } from "../../services/delet";
+import { postCreatShoop } from "../../services/posts";
+import All from "../..";
 
 export default function Forms({ params, type }) {
   const [forms, setForms] = useState({});
@@ -20,7 +22,6 @@ export default function Forms({ params, type }) {
   async function form(forms) {
     try {
       let user;
-      console.log(userData);
       if (params === "dialog") {
         try {
           toast("Aguarde o QR Code");
@@ -67,6 +68,17 @@ export default function Forms({ params, type }) {
     return form(e, forms);
   };
 
+  async function creat() {
+    try {
+      const user = await postCreatShoop(forms);
+      setValue(user);
+      await All();
+      navigate("/"+forms.nameShop); 
+    } catch (error) {
+      toast("Ouve um erro");
+    }
+  }
+
   if (params === "signup") {
     return (
       <Form onSubmit={e => verifi(e, forms) }>
@@ -96,6 +108,23 @@ export default function Forms({ params, type }) {
           <button type={"submit"}>Finalizar compra</button>
         </Form>
 
+    );
+  };
+  if( params === "create") {
+    return(
+      <Form onSubmit={ async(e) => { e.preventDefault(); await creat(); }} >
+        <Input required type={"text"} maxLength={254} placeholder={"Url da foto"} onChange={e => setForms({ ...forms, url: e.target.value })} />
+        <Input required placeholder={"Nome"} onChange={e => setForms({ ...forms, name: e.target.value })} />
+        <Input required type={"email"} placeholder={"E-mail"} onChange={e => setForms({ ...forms, email: e.target.value })} />
+        <Input required minLength={6} type={"password"} placeholder={"Senha"} onChange={e => setForms({ ...forms, password: e.target.value })} />
+        <Input required maxLength={8} pattern={"^[0-9]{8}$"} type={"text"} placeholder="cep" onChange={e => setForms({ ...forms, cep: e.target.value })} />
+        <Input required placeholder="Cidade" onChange={e => setForms({ ...forms, city: e.target.value })} />
+        <Input required placeholder="Nome da rua" onChange={e => setForms({ ...forms, street: e.target.value })} />
+        <Input required placeholder="Numero da casa" onChange={e => setForms({ ...forms, homeNumber: e.target.value })} />
+        <Input required placeholder="Numero de telefone" onChange={e => setForms({ ...forms, phone: e.target.value })} />
+        <Input required placeholder="Nome da loja" pattern={"^[aA-zZ]{2,8}$"} onChange={e => setForms({ ...forms, nameShop: e.target.value })} />
+        <button type={"submit"} >Criar loja</button>
+      </Form>
     );
   };
 

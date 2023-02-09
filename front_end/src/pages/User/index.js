@@ -17,7 +17,11 @@ export default function User() {
       .then((value) => {
         cartPayd(token)
           .then((i) => {
-            setProduct({ ...product, cart: [ ...value ], cartPayd: [ ...i.arr ], phone: i.phone });
+            setProduct({ 
+              ...product, 
+              cart: [ ...value ], 
+              cartPayd: [ ...i.arr ], 
+              phone: i.phone });
           })
           .catch((i) => console.error(i));
       })
@@ -29,7 +33,6 @@ export default function User() {
     setProductData({ ...productData, load });
     load(token);
   }, []);
-  console.log(product);
   return (
     <>
       <TopProduct>
@@ -37,7 +40,8 @@ export default function User() {
       </TopProduct> 
       {
         product.cartPayd.length > 0 ?
-          product.cartPayd.map((i, index) => { return <PaydArea key={index} type={i.ProductId} oneProduct={{ ...i, phone: product.phone }} />; })
+          product.cartPayd.map((i, index) => { 
+            return <PaydArea key={index} type={i.ProductId} oneProduct={{ ...i, phone: product.phone }} />; })
           :
           ""
       }
