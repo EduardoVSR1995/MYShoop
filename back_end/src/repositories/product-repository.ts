@@ -266,34 +266,36 @@ async function findCategoryName(obj: Omit<Categori, "id">) {
 }
 
 async function findSoldProducts(nameStore: string) {
-  return prisma.payMent.findMany({
+  return prisma.store.findUnique({
     where: {
-      send: true
+      nameStore
     },
     select: {
-      User: {
+      PayMent: {
+        where: {
+          send: true,
+          payd: true,
+        },
         select: {
-          name: true,
-          email: true,
-          StoreUser:{
-            where: {
-              Store: {
-                nameStore             
-              }              
+          code: true,
+          User: {
+            select: {
+              name: true,
+              email: true,
+            },
+          },
+          Product:{
+            select: {
+              name: true,
+              price: true,
+              UrlImage: true                
+              }
             }
           }
         }
-      },
-      Product: {
-        select: {
-          name: true,
-          description: true,
-          price: true,
-          UrlImage: true,
-        },
       }
-    },
-  });
+    })
+  ;
 }
 
 const productRepository = {

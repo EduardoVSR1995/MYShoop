@@ -8,10 +8,8 @@ import userService from "@/services/user-service";
 export async function allShoop(req: Request, res: Response) {
   try {      
     const list = await shoops();
-    console.log(list);
     res.send(list).status(httpStatus.OK);
   } catch (error) {
-    console.log(error);
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
@@ -32,7 +30,6 @@ export async function advertising(req: AuthenticatedRequest, res: Response) {
 
     res.send([]).status(httpStatus.OK);
   } catch (error) {
-    console.log(error)
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }

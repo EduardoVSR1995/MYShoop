@@ -75,7 +75,6 @@ export async function getSold(req: AuthenticatedRequest, res: Response) {
     await userService.autorize(userId, url);  
 
     const list = await productService.findSoldProducts(url);
-
     res.send(list).status(httpStatus.OK)  
   } catch (error) {
     return res.sendStatus(httpStatus.BAD_REQUEST);

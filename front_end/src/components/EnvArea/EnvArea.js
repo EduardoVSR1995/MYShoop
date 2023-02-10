@@ -8,6 +8,22 @@ const Area = styled.span`
   
 `;
 
+const SoldList = styled.span`
+  height: 70%;
+  border-radius: 20px ;
+  overflow: scroll;
+  opacity: 1;
+  > span{
+    height: 18vh ;
+    border: solid 1px #000000 ;
+    > img{
+      height: 100% ;
+    }
+  }
+
+  
+`;
+
 const Env = styled.span`
    position: initial !important;
    display: flex ;
@@ -45,4 +61,4 @@ const Env = styled.span`
    
 `;
 
-export { Area, Env };
+export { Area, Env, SoldList };

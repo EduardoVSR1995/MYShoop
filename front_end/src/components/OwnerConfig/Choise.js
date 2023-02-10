@@ -8,7 +8,7 @@ import { updateProductPayCode } from "../../services/patch";
 import { posCreatProduct, postAfiliat } from "../../services/posts";
 import { changeAdvertising, getCategoris } from "../../services/product";
 import { BoxOwner, ChangeAdvers } from "../Advertising/StyleAdvertising";
-import { Area, Env } from "../EnvArea/EnvArea";
+import { Area, Env, SoldList } from "../EnvArea/EnvArea";
 import { Afiliat, Form, Input } from "../Forms/StyleForms";
 import { Box } from "../Products/StyleProducts";
 
@@ -40,6 +40,7 @@ function Incert() {
   const [product, setProduct] = useState();
   const [form, setForm] = useState({});
   const { setValue } = useContext(UserContext);
+  const { SetProductData } = useContext(ProductContext);
 
   function itens() { 
     const { token } = setValue();
@@ -74,6 +75,7 @@ function Incert() {
       await posCreatProduct(token, obj);
       toast("Produto criado");  
       itens();
+      SetProductData();
     } catch (error) {
       toast("Ouve um erro");
     }    
@@ -95,7 +97,7 @@ function Incert() {
       <Input onChange={e => setForm({ ...form, url3: e.target.value })} maxLength={254} placeholder={"Url da foto do produto"}/>
       <Input onChange={e => setForm({ ...form, description: e.target.value })} required placeholder={"Descrição"}/>
       <Input onChange={e => setForm({ ...form, price: e.target.value })} type={"text"} maxLength={7} title={"Formato 0000,00 usar virgula não ponto"} pattern={"[0-9]{1,4},[0-9]{2}"} required placeholder={"Valor"}/>
-      <Input onChange={e => setForm({ ...form, packingSize: e.target.value })} pattern="[0-9]" required placeholder={"Tamanho meddio do produto em cm L x A x C"}/>
+      <Input onChange={e => setForm({ ...form, packingSize: e.target.value })} pattern="^[0-9]{1,3}" required placeholder={"Tamanho meddio do produto em cm L x A x C"}/>
       <button type={"submit"}>Enviar</button>
     </Form>
   );
@@ -137,12 +139,12 @@ function Remov() {
 }
 
 function ProductEnv() {
-  const { setProduct, product } = useContext(ProductContext);
+  const [ product, setProduct ] = useState();
   const { setValue } = useContext(UserContext);
 
   function load() {
     const { token } = setValue();
-    getProductPayd(token).then((i) => setProduct({ ...product, list: [...i] })).catch((i) => console.error(i));
+    getProductPayd(token).then(i => setProduct({ ...product, list: [...i] })).catch((i) => console.error(i));
   }
   useEffect(() => {
     load();
@@ -163,7 +165,7 @@ function ProductEnv() {
     const { token } = setValue();
     try {
       await updateProductPayCode(token, { send: true, id: id });  
-      toast("Produto entregue enviado");
+      toast("Produto entregue");
       load();
     } catch (error) {
       toast("Ouve um erro");
@@ -192,7 +194,7 @@ function ProductEnv() {
                     <button type={"submit"}>Enviar</button>
                   </Form>
                 </p>
-                <button onClick={ () => send(i.id) } > Produto entregue </button>
+                <button onClick={ () => i.code !== "" ? send(i.id) : "" } > Produto entregue </button>
               </Env>
             </>
           );
@@ -293,7 +295,7 @@ function SalesAmount() {
     get();
   }, []);
   return (
-    <Area>
+    <SoldList>
       {
         sold?.list && sold?.list.length>0  ? sold.list.map((i, index) => {
           return (
@@ -305,6 +307,7 @@ function SalesAmount() {
                   Comprador:   { i.User.name}    <br />
                   Email:       { i.User.email}   <br />
                   Preço:       { (i.Product.price/100).toFixed(2)} <br />
+                  codigo:      { i.code } 
                 </p>
               </Env>
             </>
@@ -313,7 +316,7 @@ function SalesAmount() {
           : "Ainda não a produtos vendidos"
       }
       Total de vendas R$ { sold?.list && sold?.list.length>0  ? ((sold.list.reduce((soma, i) => { return  soma + i.Product.price; }, 0))/100).toFixed(2)  : "" }
-    </Area>
+    </SoldList>
   );
 }
 

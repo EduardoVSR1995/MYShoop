@@ -5,7 +5,7 @@ import Products from "../../components/Products/Products";
 export default function Layout() {  
   return(
     <>
-      <Top />
+      <Top to={"/"} />
       <Advertising />
       <Products />
     </>

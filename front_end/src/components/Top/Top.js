@@ -21,7 +21,7 @@ export default function Toop({ to }) {
   return(
     <>
       <Top>
-        <Link to={ to ? shopName+"/"+to : shopName }>
+        <Link to={ to ? ( to === "/" ?  "/" : shopName+"/"+to) : shopName }>
           <Bar>
             {shopName?.replace(/\//g, "")}
           </Bar>
