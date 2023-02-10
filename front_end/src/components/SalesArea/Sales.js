@@ -78,7 +78,6 @@ export default function Sales({ type, load }) {
     });
     setDialog(true);
   }
-  console.log(product);
   return (
     <>
       <DialogBox />

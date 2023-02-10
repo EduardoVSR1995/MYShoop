@@ -36,7 +36,6 @@ export async function posCreatProduct( token, obj) {
 }
 
 export async function postAfiliat( obj, token ) {
-  console.log(obj);
   const response = await conect("/user/afiliat", 
     { 
       method: "POST",

@@ -18,7 +18,6 @@ export default function PaydArea({ type, oneProduct }) {
     getProduct(type, setProduct);
   }, [type]);
 
-  console.log(oneProduct);
   return (
     <>
       <SalesArea>

@@ -96,9 +96,11 @@ function CreatArea() {
   async function creat() {
     try {
       const user = await postCreatShoop(forms);
-      setValue(user);
+      toast("Criamos sua loja!!");
+      setValue(user, "/"+forms.nameShop );
       await All();
-      navigate("/"+forms.nameShop); 
+      navigate("/"+forms.nameShop);
+      window.location.href= "/"+forms.nameShop;
     } catch (error) {
       toast("Ouve um erro");
     }
@@ -111,10 +113,10 @@ function CreatArea() {
       <Input required type={"email"} placeholder={"E-mail"} onChange={e => setForms({ ...forms, email: e.target.value })} />
       <Input required minLength={6} type={"password"} placeholder={"Senha"} onChange={e => setForms({ ...forms, password: e.target.value })} />
       <Input required maxLength={8} pattern={"^[0-9]{8}$"} type={"text"} placeholder="cep" onChange={e => setForms({ ...forms, cep: e.target.value })} />
-      <Input required placeholder="Cidade" onChange={e => setForms({ ...forms, city: e.target.value })} />
-      <Input required placeholder="Nome da rua" onChange={e => setForms({ ...forms, street: e.target.value })} />
-      <Input required placeholder="Numero da casa" onChange={e => setForms({ ...forms, homeNumber: e.target.value })} />
-      <Input required placeholder="Numero de telefone" onChange={e => setForms({ ...forms, phone: e.target.value })} />
+      <Input required placeholder="Cidade" pattern={"[aA-zZ]"} onChange={e => setForms({ ...forms, city: e.target.value })} />
+      <Input required placeholder="Nome da rua" pattern={"[aA-zZ]"} onChange={e => setForms({ ...forms, street: e.target.value })} />
+      <Input required placeholder="Numero da casa" pattern={"[0-9]"} onChange={e => setForms({ ...forms, homeNumber: e.target.value })} />
+      <Input required placeholder="Numero de telefone" maxLength={9} pattern={"[0-9]{8,9}"}  onChange={e => setForms({ ...forms, phone: e.target.value })} />
       <Input required placeholder="Nome da loja" pattern={"^[aA-zZ]{2,8}$"} onChange={e => setForms({ ...forms, nameShop: e.target.value })} />
       <button type={"submit"} >Criar loja</button>
     </Form>
@@ -161,7 +163,7 @@ function Dialog({ type }) {
         <Input required placeholder="Cidade" onChange={e => setForms({ ...forms, city: e.target.value })} />
         <Input required placeholder="Nome da rua" onChange={e => setForms({ ...forms, street: e.target.value })} />
         <Input required placeholder="Numero da casa" onChange={e => setForms({ ...forms, homeNumber: e.target.value })} />
-        <Input required placeholder="Numero de telefone" onChange={e => setForms({ ...forms, fone: e.target.value })} />
+        <Input required placeholder="Numero de telefone" maxLength={9} pattern={"[0-9]{8,9}"} onChange={e => setForms({ ...forms, fone: e.target.value })} />
         <h1>Total do pedido R$ {(productData.price / 100).toFixed(2)} </h1>
         <button type={"submit"}>Finalizar compra</button>
       </Form>

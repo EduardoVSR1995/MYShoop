@@ -10,7 +10,7 @@ export function UserProvider({ children }) {
   
   function setValue(value, url) {    
     const item = window.localStorage.getItem(local);
-    if( !local ) {
+    if( url ) {
       local = url;
     };
     if(item && value === undefined) {
