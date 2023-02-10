@@ -16,7 +16,7 @@ const Products = styled.div`
 
 const BoxImage = styled.div`
   display: flex; 
-  width: 20vw;
+  width: 13vw;
   overflow: scroll;
   div{
     img{
@@ -30,13 +30,32 @@ const BoxImage = styled.div`
 
 const Box = styled.div`
   margin: 0px 5px 10px 5px  ;
-  width: 12vw;
-  height: 35vh;
+  width: 13vw;
+  height: 20vh;
   border-radius: 12px ;
   border: 1px solid #6666F0 ;
   display: flex ;
   img{
     border-radius: 15px ;
+    width: 25vw;
+    height: 80%;
+  }
+  div{
+    margin: 5px ;
+    height: 15%;
+    overflow: auto ;
+  }
+`;
+
+const BoxLayout = styled.div`
+  margin: 0px 5px 10px 5px  ;
+  width: 13vw;
+  height: 25vh;
+  border-radius: 12px ;
+  border: 1px solid #6666F0 ;
+  display: flex ;
+  img{
+    border-radius: 11px ;
     width: 100%;
     height: 80%;
   }
@@ -47,4 +66,4 @@ const Box = styled.div`
   }
 `;
 
-export { Products, Box, BoxImage };
+export { Products, Box, BoxImage, BoxLayout };

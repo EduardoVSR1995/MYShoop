@@ -69,10 +69,10 @@ function Signup() {
     }
   };
 
-  function verifi(e) {
+  function verifi(e, forms) {
     e.preventDefault();
     if (forms.password !== forms.confirmPassword) return alert("As senhas tem que ser iguais");
-    return form(e, forms);
+    return form(forms);
   };
 
   return (

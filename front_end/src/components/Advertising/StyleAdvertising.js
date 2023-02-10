@@ -140,7 +140,7 @@ const BoxOwner = styled.span`
   overflow: scroll !important ;
   display: flex;
   justify-content: space-around ;
-  div{
+  > div{
     padding: 0px ;
     opacity: 1 !important;
     position: initial !important;
@@ -148,7 +148,8 @@ const BoxOwner = styled.span`
     width: 170px ;
     display: initial ;
     > img{
-      height: 35vh;
+      width: 100%;
+      height: 100% ;
     }
     div{
       opacity: 1 ;
