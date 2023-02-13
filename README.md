@@ -26,6 +26,10 @@ npm run myshoop:up
 ```bash
 npm run myshoop:dow
 ```
+## To generate the pix
+
+To see the pix and its complete functionalities you need to put the `client-Id`, `client_secret` and the p12 homologation file from the manager net in the root of the back_end, in the `.env` file and put the name of the `p12` file in front of the. `HOMOLOGACAO_ROUT =. /` </br>
+Ex: `HOMOLOGACAO_ROUT =./homologacao-1234test.p12`
 
 ## Technologies applied so far
 <div styled="display: flex;">
