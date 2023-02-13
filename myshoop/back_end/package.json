@@ -30,9 +30,9 @@
     "docker:dev:load-envs": "dotenv -e .env",
     "docker:dev:migration:run": "npm run docker:dev:load-envs prisma migrate deploy",
     "docker:dev:migration:generate": "npm run docker:dev:load-envs prisma migrate dev",
-    "docker:dev:create": "npm run docker:dev:migration:generate && npm run docker:dev:migration:run && npm run docker:dev:seed && npm run docker:dev",
-    "docker:dev:up": "sudo docker-compose up --build",
-    "docker:dev:down": "sudo docker-compose down"
+    "docker:dev:create": "npm run docker:dev:migration:generate && npm run docker:dev:migration:run && npm run docker:dev:seed && npm run docker:dev:run",
+    "myshoop:up": "docker-compose up --build",
+    "myshoop:down": "docker-compose down -v"
   },
   "keywords": [
     "back-end",
