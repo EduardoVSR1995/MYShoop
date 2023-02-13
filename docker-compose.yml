@@ -1,0 +1,51 @@
+version: "3.8"
+services: 
+  front_end:
+    build: ./myshoop/front_end
+    container_name: myshoop-front
+    volumes:
+      - build_react:/var/www/html
+    depends_on:
+      - myshoop_server
+
+  myshoop_server:
+    container_name: myshoop_server
+    build: ./myshoop/back_end
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - postgresDB
+    volumes: 
+      - ./linkr_server:/usr/src
+      - /usr/src/node_modules
+    entrypoint: dockerize -wait tcp://${POSTGRES_IMAGE_DB_DOCKER}:5432 -timeout 20s docker-entrypoint.sh
+    command: "npm run dev"
+
+  postgresDB:
+    image: postgres:13
+    container_name: postgres
+    env_file:
+      - .env
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+    restart: always
+    volumes:
+      - progresDB:/data/postgres
+
+    nginx:
+      build: ./myshoop/nginx
+      container_name: nginx
+      ports:
+        - 80:80
+      volumes:
+        - build_react:/var/www/html
+      depends_on:
+        - front_end
+volumes:
+  front_end:
+  progresDB:

@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    container_name: buyshoop_development
+    container_name: myshoop
     build: .
     env_file:
       - .env
@@ -10,21 +10,22 @@ services:
     depends_on:
       - postgresDB
     volumes:
-      - .:/app
+      - .:/app/src
 
   postgresDB:
     image: postgres:13
-    container_name: postgresDB
+    container_name: postgres
     env_file:
       - .env
     ports:
-      - 5433:${POSTGRES_PORT}
-    restart: always
-    volumes:
-      - progresDB:/data/postgres
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DATABASE}
+    restart: always
+    volumes:
+      - progresDB:/data/postgres
 
 volumes:
+  app:
   progresDB:

@@ -1,8 +1,8 @@
-FROM node:15-alpine
+FROM node:18
 
 WORKDIR /app
 
-COPY . ./app
+COPY . ./
 
 RUN npm i
 

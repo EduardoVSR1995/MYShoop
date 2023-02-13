@@ -20,11 +20,19 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "dev:load-envs": "dotenv -e .env.development",
+    "dev:load-envs": "dotenv -e .env",
     "migration:run": "npm run dev:load-envs prisma migrate deploy",
     "migration:generate": "npm run dev:load-envs prisma migrate dev",
     "dev:seed": "npm run dev:load-envs prisma db seed",
-    "dev": "NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
+    "dev": "NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts",
+    "docker:dev:run": "NODE_ENV=docker nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts",
+    "docker:dev:seed": "npm run docker:dev:load-envs prisma db seed",
+    "docker:dev:load-envs": "dotenv -e .env",
+    "docker:dev:migration:run": "npm run docker:dev:load-envs prisma migrate deploy",
+    "docker:dev:migration:generate": "npm run docker:dev:load-envs prisma migrate dev",
+    "docker:dev:create": "npm run docker:dev:migration:generate && npm run docker:dev:migration:run && npm run docker:dev:seed && npm run docker:dev",
+    "docker:dev:up": "sudo docker-compose up --build",
+    "docker:dev:down": "sudo docker-compose down"
   },
   "keywords": [
     "back-end",

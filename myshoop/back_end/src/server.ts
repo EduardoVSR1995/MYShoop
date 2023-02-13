@@ -1,6 +1,6 @@
 import app, { init, service} from "@/app";
 
-const port = + process.env.PORT || 4000;
+const port = + process.env.PORT ;
 
 init().then( async () => {
   await app();
