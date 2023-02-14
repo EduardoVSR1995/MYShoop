@@ -12,11 +12,22 @@ jobs:
     runs-on: self-hosted
 
     env: 
-      PORT: ${{ secrets.PORT }}
-      POSTGRES_IMAGE_DB_DOCKER: ${{ secrets.POSTGRES_IMAGE_DB_DOCKER }}
-      POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+      POSTGRES_USERNAME:  ${{ secrets.POSTGRES_USERNAME }} 
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_IMAGE_DB_DOCKER: ${{ secrets.POSTGRES_IMAGE_DB_DOCKER }}
+      POSTGRES_PORT:  ${{ secrets.POSTGRES_PORT }}
       POSTGRES_DATABASE: ${{ secrets.POSTGRES_DATABASE }}
+      PORT: ${{ secrets.PORT }}
+
+      DATABASE_URL: postgres://${{secrets.POSTGRES_USERNAME}}:${{secrets.POSTGRES_PASSWORD}}@${{secrets.POSTGRES_IMAGE_DB_DOCKER}}:${{secrets.POSTGRES_PORT}}/${{secrets.POSTGRES_DATABASE}}?schema=public
+
+      CLIENT_ID: ${{secrets.POSTGRES_USERNAME}}
+      CLIENT_SECRET: ${{secrets.POSTGRES_USERNAME}}
+      HOMOLOGACAO_ROUT: ${{secrets.POSTGRES_USERNAME}}
+      
+      URL_GENET: ${{secrets.POSTGRES_USERNAME}}
+
+
 
     steps:
     - uses: actions/checkout@v3
