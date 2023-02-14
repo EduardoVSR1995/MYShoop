@@ -16,38 +16,38 @@ jobs:
     - name: Clean all
         
       run: |
-        POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }} 
-        POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-        POSTGRES_IMAGE_DB_DOCKER=${{ secrets.POSTGRES_IMAGE_DB_DOCKER }}
-        POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
-        POSTGRES_DATABASE=${{ secrets.POSTGRES_DATABASE }}
-        PORT=${{ secrets.PORT }}
+        export POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }} 
+        export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+        export POSTGRES_IMAGE_DB_DOCKER=${{ secrets.POSTGRES_IMAGE_DB_DOCKER }}
+        export POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
+        export POSTGRES_DATABASE=${{ secrets.POSTGRES_DATABASE }}
+        export PORT=${{ secrets.PORT }}
 
-        DATABASE_URL=postgres://${{secrets.POSTGRES_USERNAME}}:${{secrets.POSTGRES_PASSWORD}}@${{secrets.POSTGRES_IMAGE_DB_DOCKER}}:${{secrets.POSTGRES_PORT}}/${{secrets.POSTGRES_DATABASE}}?schema=public
+        export DATABASE_URL=postgres://${{secrets.POSTGRES_USERNAME}}:${{secrets.POSTGRES_PASSWORD}}@${{secrets.POSTGRES_IMAGE_DB_DOCKER}}:${{secrets.POSTGRES_PORT}}/${{secrets.POSTGRES_DATABASE}}?schema=public
 
-        CLIENT_ID=${{secrets.POSTGRES_USERNAME}}
-        CLIENT_SECRET=${{secrets.POSTGRES_USERNAME}}
-        HOMOLOGACAO_ROUT=${{secrets.POSTGRES_USERNAME}}
+        export CLIENT_ID=${{secrets.POSTGRES_USERNAME}}
+        export CLIENT_SECRET=${{secrets.POSTGRES_USERNAME}}
+        export HOMOLOGACAO_ROUT=${{secrets.POSTGRES_USERNAME}}
 
-        URL_GENET=${{secrets.POSTGRES_USERNAME}}
+        export URL_GENET=${{secrets.POSTGRES_USERNAME}}
     
         docker-compose -f "docker-compose.yml" down -v
     - name: Build the Docker image
       run: |
-        export export POSTGRES_USERNAME:${{ secrets.POSTGRES_USERNAME }} 
-        export export POSTGRES_PASSWORD:${{ secrets.POSTGRES_PASSWORD }}
-        export export POSTGRES_IMAGE_DB_DOCKER:${{ secrets.POSTGRES_IMAGE_DB_DOCKER }}
-        export export POSTGRES_PORT:${{ secrets.POSTGRES_PORT }}
-        export export POSTGRES_DATABASE:${{ secrets.POSTGRES_DATABASE }}
-        export export PORT:${{ secrets.PORT }}
-
-        export export DATABASE_URL:postgres://${{secrets.POSTGRES_USERNAME}}:${{secrets.POSTGRES_PASSWORD}}@${{secrets.POSTGRES_IMAGE_DB_DOCKER}}:${{secrets.POSTGRES_PORT}}/${{secrets.POSTGRES_DATABASE}}?schema=public
-
-        export export CLIENT_ID:${{secrets.POSTGRES_USERNAME}}
-        export export CLIENT_SECRET:${{secrets.POSTGRES_USERNAME}}
-        export export HOMOLOGACAO_ROUT:${{secrets.POSTGRES_USERNAME}}
-
-        export export URL_GENET:${{secrets.POSTGRES_USERNAME}}
+        export POSTGRES_USERNAME:${{ secrets.POSTGRES_USERNAME }} 
+        export POSTGRES_PASSWORD:${{ secrets.POSTGRES_PASSWORD }}
+        export POSTGRES_IMAGE_DB_DOCKER:${{ secrets.POSTGRES_IMAGE_DB_DOCKER }}
+        export POSTGRES_PORT:${{ secrets.POSTGRES_PORT }}
+        export POSTGRES_DATABASE:${{ secrets.POSTGRES_DATABASE }}
+        export PORT:${{ secrets.PORT }}
+  
+        export DATABASE_URL:postgres://${{secrets.POSTGRES_USERNAME}}:${{secrets.POSTGRES_PASSWORD}}@${{secrets.POSTGRES_IMAGE_DB_DOCKER}}:${{secrets.POSTGRES_PORT}}/${{secrets.POSTGRES_DATABASE}}?schema=public
+  
+        export CLIENT_ID:${{secrets.POSTGRES_USERNAME}}
+        export CLIENT_SECRET:${{secrets.POSTGRES_USERNAME}}
+        export HOMOLOGACAO_ROUT:${{secrets.POSTGRES_USERNAME}}
+  
+        export URL_GENET:${{secrets.POSTGRES_USERNAME}}
     
-        docker-compose -f "docker-compose.yml" up -d --build
+        export docker-compose -f "docker-compose.yml" up -d --build
         
