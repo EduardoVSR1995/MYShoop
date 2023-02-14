@@ -272,7 +272,7 @@ function RegisterAfi() {
     <Afiliat>   
       <Form onSubmit={e => { e.preventDefault(); afiliat(); }}>
         <Input required type={"email"} placeholder={"E-mail"} onChange={e => setChang({ ...change, email: e.target.value })} />
-        <Input required type={"text"} placeholder={"Numero de telefone"} maxLength={9} pattern={"[0-9]{8,9}"} onChange={e => setChang({ ...change, cellPhone: e.target.value })} />
+        <Input required type={"text"} placeholder={"Numero de telefone"} maxLength={11} pattern={"[0-9]{10,11}"} onChange={e => setChang({ ...change, cellPhone: e.target.value })} />
         <button type={"submit"} > Cadastrar afiliado(a) </button>
       </Form>
       O codigo do afiliado aparece aqui {` => ${change?.code ? "code="+change.code : ""} <= `} basta colocalo ao final de cada link de produto.
