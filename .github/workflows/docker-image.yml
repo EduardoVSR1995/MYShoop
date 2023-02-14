@@ -6,11 +6,14 @@ on:
     
 jobs:
 
+ 
   build:
 
     runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v3
+    - name: Clean all
+      run: docker-compose -f "docker-compose.yml" down -v
     - name: Build the Docker image
-      run: cd.. docker build . --file Dockerfile --tag node:$(date +%s)
+      run: docker-compose -f "docker-compose.yml" up -d --build
