@@ -11,6 +11,13 @@ jobs:
 
     runs-on: self-hosted
 
+    env: 
+      PORT: ${{ secrets.PORT }}
+      POSTGRES_IMAGE_DB_DOCKER: ${{ secrets.POSTGRES_IMAGE_DB_DOCKER }}
+      POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_DATABASE: ${{ secrets.POSTGRES_DATABASE }}
+
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
