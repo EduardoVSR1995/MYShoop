@@ -10,6 +10,7 @@ jobs:
   build:
 
     runs-on: self-hosted
+    STEP_VARIABLE: STEP
 
     steps:
     - uses: actions/checkout@v3
