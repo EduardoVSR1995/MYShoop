@@ -12,7 +12,7 @@ services:
     container_name: myshoop_server
     build: ./myshoop/back_end
     env_file:
-      - .env.example
+      - .env
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -27,7 +27,7 @@ services:
     image: postgres:13
     container_name: myshoopDB
     env_file:
-      - .env.example
+      - .env
     ports:
       - 2345:${POSTGRES_PORT}
     environment:

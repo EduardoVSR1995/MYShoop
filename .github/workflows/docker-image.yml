@@ -14,6 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
+      with: 
+        PORT: ${{secrets.PORT}}
+        POSTGRES_IMAGE_DB_DOCKER: ${{secrets.POSTGRES_IMAGE_DB_DOCKER}}
+        POSTGRES_PORT: ${{secrets.POSTGRES_PORT}}
+        POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+        POSTGRES_DATABASE: ${{secrets.POSTGRES_DATABASE}}
+
       run:  docker-compose -f "docker-compose.yml" down -v
     - name: Build the Docker image
       run: docker-compose -f "docker-compose.yml" up -d --build
