@@ -10,12 +10,10 @@ jobs:
   build:
 
     runs-on: self-hosted
-    env:
-      STEP_VARIABLE: STEP
-
+  
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
-      run:  docker-compose -f "dotenv -e' DATABASE_URL=postgres://postgres:dd@myshoopDB:5432/myshoop?schema=public' && docker-compose.yml" down -v
+      run:  docker-compose -f "dotenv -e .env.example docker-compose.yml" down -v
     - name: Build the Docker image
       run: docker-compose -f "docker-compose.yml" up -d --build
