@@ -12,19 +12,19 @@ jobs:
     runs-on: self-hosted
     steps:
 
-    env: 
-      POSTGRES_USERNAME: postgres 
-      POSTGRES_PASSWORD: dd 
-      POSTGRES_IMAGE_DB_DOCKER: myshoopDB 
-      POSTGRES_PORT: 5432 
-      POSTGRES_DATABASE: myshoop 
-      PORT: 4000 
-      DATABASE_URL: postgres://${{POSTGRES_USERNAME}}:${{POSTGRES_PASSWORD}}@${{POSTGRES_IMAGE_DB_DOCKER}}:${{POSTGRES_PORT}}/${{POSTGRES_DATABASE}}?schema=public
-
     - uses: actions/checkout@v3
     - name: Clean all
       run: 
         docker-compose -f "docker-compose.yml" down -v
+      env: 
+        POSTGRES_USERNAME: postgres 
+        POSTGRES_PASSWORD: dd 
+        POSTGRES_IMAGE_DB_DOCKER: myshoopDB 
+        POSTGRES_PORT: 5432 
+        POSTGRES_DATABASE: myshoop 
+        PORT: 4000 
+        DATABASE_URL: postgres://${{POSTGRES_USERNAME}}:${{POSTGRES_PASSWORD}}@${{POSTGRES_IMAGE_DB_DOCKER}}:${{POSTGRES_PORT}}/${{POSTGRES_DATABASE}}?schema=public
+
     - name: Build the Docker image
       run: 
         docker-compose -f "docker-compose.yml" up -d --build
