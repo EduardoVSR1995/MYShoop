@@ -9,7 +9,7 @@ jobs:
   build:
 
     runs-on: self-hosted
-    with: 
+    env: 
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       HOMOLOGACAO_ROUT: ${{ secrets.HOMOLOGACAO_ROUT }}
