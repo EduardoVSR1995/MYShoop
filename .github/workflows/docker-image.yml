@@ -9,7 +9,7 @@ jobs:
   build:
 
     runs-on: self-hosted
-    env: 
+    with: 
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       HOMOLOGACAO_ROUT: ${{ secrets.HOMOLOGACAO_ROUT }}
@@ -19,7 +19,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Clean all
       run:  docker-compose -f "docker-compose.yml" down -v
-    - name: Create .env file
+    - name: Build the Docker image
+    
       run: | 
           echo "POSTGRES_USERNAME=postgres" > .env
           echo "POSTGRES_PASSWORD=dd" >> .env
@@ -36,8 +37,5 @@ jobs:
           
           echo "URL_GENET= ${{URL_GENET}}" >> .env
 
-    - name: Copy .env file to container
-      run: docker cp .env myshoop_server:/app/.env
-
-    - name: Build the Docker image
-      run: docker-compose -f "docker-compose.yml" up -d --build
+         docker cp .env myshoop_server:/app/.env
+         docker-compose -f "docker-compose.yml" up -d --build
