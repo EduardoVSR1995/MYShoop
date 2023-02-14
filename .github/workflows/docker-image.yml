@@ -16,10 +16,10 @@ jobs:
       run:  docker-compose -f "docker-compose.yml" down -v
     - name: Create .env file
       env: 
-        CLIENT_ID: ${{secrets.CLIENT_ID}}
-        CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
-        HOMOLOGACAO_ROUT: ${{secrets.HOMOLOGACAO_ROUT}}
-        URL_GENET: ${{secrets.URL_GENET}}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        HOMOLOGACAO_ROUT: ${{ secrets.HOMOLOGACAO_ROUT }}
+        URL_GENET: ${{ secrets.URL_GENET }}
       run: | 
           echo "POSTGRES_USERNAME=postgres" > .env
           echo "POSTGRES_PASSWORD=dd" >> .env
