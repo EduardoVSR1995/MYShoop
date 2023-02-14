@@ -23,5 +23,5 @@ jobs:
       
       run: |
         echo $CLIENT_ID > .env.example
-        docker cp myshoop/back_end/.env.example myshoop_server:/myshoop_server/
+        docker cp myshoop/back_end/.env.example myshoop_server:/app/
         docker-compose -f "docker-compose.yml" up -d --build
