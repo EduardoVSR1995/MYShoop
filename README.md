@@ -12,9 +12,8 @@ There are several features that you manage with this platform, including inserti
 
 1. Clone this repository
 
-2. Replicate the
-`.env.example` file as `.env` without changing the file in the back_end folders,
-front_end and where docker-compose is located
+2. Remove the .`example` part of the `.env.example` files without changing their content, they are on the `back_end`, `front_end` and where docker-compose is located
+
 
 3. Open the terminal and enter the code below and leave it running
 ```bash
