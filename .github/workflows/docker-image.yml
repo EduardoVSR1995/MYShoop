@@ -11,7 +11,7 @@ jobs:
     runs-on: self-hosted
     
     env:  
-      PORT: 400
+      PORT: ${{400}}
       POSTGRES_IMAGE_DB_DOCKER: myshoopDB
       POSTGRES_PORT: 5432
       POSTGRES_PASSWORD: dd
