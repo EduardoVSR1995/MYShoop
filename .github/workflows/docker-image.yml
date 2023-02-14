@@ -21,20 +21,20 @@ jobs:
         HOMOLOGACAO_ROUT: ${{secrets.HOMOLOGACAO_ROUT}}
         URL_GENET: ${{secrets.URL_GENET}}
       run: | 
-        echo "POSTGRES_USERNAME=postgres" >> .env
-        echo "POSTGRES_PASSWORD=dd" >> .env
-        echo "POSTGRES_IMAGE_DB_DOCKER=myshoopDB" >> .env
-        echo "POSTGRES_PORT=5432" >> .env
-        echo "POSTGRES_DATABASE=myshoop" >> .env
-        echo "PORT=4000" >> .env
-        
-        echo "DATABASE_URL=postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_IMAGE_DB_DOCKER}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?schema=public" >> .env
-        
-        echo "CLIENT_ID =${{CLIENT_ID}}" >> .env
-        echo "CLIENT_SECRET =${{CLIENT_SECRET}}" >> .env
-        echo "HOMOLOGACAO_ROUT =${{HOMOLOGACAO_ROUT}}" >> .env
-        
-        echo "URL_GENET= ${{URL_GENET}}" >> .env
+          echo "POSTGRES_USERNAME=postgres" > .env
+          echo "POSTGRES_PASSWORD=dd" >> .env
+          echo "POSTGRES_IMAGE_DB_DOCKER=myshoopDB" >> .env
+          echo "POSTGRES_PORT=5432" >> .env
+          echo "POSTGRES_DATABASE=myshoop" >> .env
+          echo "PORT=4000" >> .env
+          
+          echo "DATABASE_URL=postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_IMAGE_DB_DOCKER}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?schema=public" >> .env
+          
+          echo "CLIENT_ID =${{CLIENT_ID}}" >> .env
+          echo "CLIENT_SECRET =${{CLIENT_SECRET}}" >> .env
+          echo "HOMOLOGACAO_ROUT =${{HOMOLOGACAO_ROUT}}" >> .env
+          
+          echo "URL_GENET= ${{URL_GENET}}" >> .env
 
     - name: Copy .env file to container
       run: docker cp .env myshoop_server:/app/.env
