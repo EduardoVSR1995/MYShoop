@@ -5,19 +5,18 @@ on:
     branches: [ "main" ]
     
 jobs:
-
  
   build:
 
     runs-on: self-hosted
-    env: 
-      POSTGRES_USERNAME: postgres 
-      POSTGRES_PASSWORD: dd 
-      POSTGRES_IMAGE_DB_DOCKER: myshoopDB 
-      POSTGRES_PORT: 5432 
-      POSTGRES_DATABASE: myshoop 
-      PORT: 4000 
-      DATABASE_URL: postgres://postgres:dd@myshoopDB:5432/myshoop?schema=public
+    
+    env:  
+      PORT: 400
+      POSTGRES_IMAGE_DB_DOCKER: myshoopDB
+      POSTGRES_PORT: 5432
+      POSTGRES_PASSWORD: dd
+      POSTGRES_DATABASE: myshoop
+    
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
