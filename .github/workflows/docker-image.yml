@@ -22,20 +22,20 @@ jobs:
     - name: Build the Docker image
     
       run: | 
-          echo "POSTGRES_USERNAME=postgres" > .env
-          echo "POSTGRES_PASSWORD=dd" >> .env
-          echo "POSTGRES_IMAGE_DB_DOCKER=myshoopDB" >> .env
-          echo "POSTGRES_PORT=5432" >> .env
-          echo "POSTGRES_DATABASE=myshoop" >> .env
-          echo "PORT=4000" >> .env
+          echo "POSTGRES_USERNAME=postgres" > .env.example
+          echo "POSTGRES_PASSWORD=dd" >> .env.example
+          echo "POSTGRES_IMAGE_DB_DOCKER=myshoopDB" >> .env.example
+          echo "POSTGRES_PORT=5432" >> .env.example
+          echo "POSTGRES_DATABASE=myshoop" >> .env.example
+          echo "PORT=4000" >> .env.example
           
-          echo "DATABASE_URL=postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_IMAGE_DB_DOCKER}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?schema=public" >> .env
+          echo "DATABASE_URL=postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_IMAGE_DB_DOCKER}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?schema=public" >> .env.example
           
-          echo "CLIENT_ID =${{CLIENT_ID}}" >> .env
-          echo "CLIENT_SECRET =${{CLIENT_SECRET}}" >> .env
-          echo "HOMOLOGACAO_ROUT =${{HOMOLOGACAO_ROUT}}" >> .env
+          echo "CLIENT_ID =${{CLIENT_ID}}" >> .env.example
+          echo "CLIENT_SECRET =${{CLIENT_SECRET}}" >> .env.example
+          echo "HOMOLOGACAO_ROUT =${{HOMOLOGACAO_ROUT}}" >> .env.example
           
-          echo "URL_GENET= ${{URL_GENET}}" >> .env
+          echo "URL_GENET= ${{URL_GENET}}" >> .env.example
 
-         docker cp .env myshoop_server:/app/.env
+         docker cp .env.example myshoop_server:/app/.env.example
          docker-compose -f "docker-compose.yml" up -d --build
