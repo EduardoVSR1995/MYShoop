@@ -20,7 +20,8 @@ jobs:
     - name: Clean all
       run:  docker-compose -f "docker-compose.yml" down -v 
     - name: Build the Docker image
-      
+
+
       run: |
         docker-compose -f "docker-compose.yml" up -d --build
         echo "CLIENT_ID= $CLIENT_ID" > .env
