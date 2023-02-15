@@ -27,4 +27,4 @@ jobs:
         echo $CLIENT_SECRET > .env.example
         echo $HOMOLOGACAO_ROUT > .env.example
         echo $URL_GENET > .env.example
-        docker cp .env.example myshoop_server:/app/myshoop/back_end/.env.example
+        docker cp .env.example myshoop_server:/app/myshoop/back_end/
