@@ -12,7 +12,7 @@ export async function store() {
 //}
   
 export async function conect( url, body ) {   
-  return await (await fetch("/api/"+shopName+url, body)).json();
+  return await (await fetch("/api"+shopName+url, body)).json();
 }
 
 //export async function conect( url, body ) {   
