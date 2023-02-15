@@ -30,7 +30,7 @@ jobs:
 
 
       run: |
-        docker-compose -f "docker-compose.yml" up -d --build
+        sudo docker-compose -f "docker-compose.yml" up -d --build
         echo "CLIENT_ID= $CLIENT_ID" > .env
         echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
