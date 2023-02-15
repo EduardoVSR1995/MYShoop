@@ -43,7 +43,7 @@ services:
       - build_myshoop:/var/www/html
     depends_on:
       - app_react
-
+      
 volumes:
   build_myshoop:
   progresDB:
