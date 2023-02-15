@@ -27,4 +27,6 @@ jobs:
         echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
         echo "URL_GENET= $URL_GENET" >> .env
-        docker cp .env myshoop_server:/myshoop/back_end/.env
+      - name: Copy .env file to container
+        run: 
+          docker cp .env myshoop_server:/myshoop/back_end/.env
