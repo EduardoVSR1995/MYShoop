@@ -22,6 +22,6 @@ jobs:
     - name: Build the Docker image
       
       run: |
+        docker-compose -f "docker-compose.yml" up -d --build
         echo $CLIENT_ID > .env.example
         docker cp .env.example myshoop_server:/app/.env
-        docker-compose -f "docker-compose.yml" up -d --build
