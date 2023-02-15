@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
-      run:  sudo docker-compose -f "docker-compose.yml" down --volumes myshoop_server --volumes app_react
+      run:  sudo docker-compose -f "docker-compose.yml" down -v myshoop_server && sudo docker-compose -f "docker-compose.yml" down -v app_react
     - name: Build the Docker image
 
 
