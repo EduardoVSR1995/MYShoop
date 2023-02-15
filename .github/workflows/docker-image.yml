@@ -23,5 +23,5 @@ jobs:
       
       run: |
         echo $CLIENT_ID > .env.example
-        docker cp .env.example app:/app/
+        docker cp .env.example app:/app/.env
         docker-compose -f "docker-compose.yml" up -d --build
