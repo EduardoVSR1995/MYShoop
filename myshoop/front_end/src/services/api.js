@@ -13,7 +13,7 @@ export async function store() {
   
 export async function conect( url, body ) {
   console.log(url);   
-  return await (await fetch(""+shopName+url, body)).json();
+  return await (await fetch("/ola/"+shopName+url, body)).json();
 }
 
 //export async function conect( url, body ) {   
