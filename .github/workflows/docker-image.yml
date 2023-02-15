@@ -16,11 +16,13 @@ jobs:
       URL_GENET: ${{ secrets.URL_GENET }}
       
     steps:
-    
+
     - uses: actions/checkout@v3
      
     - name: Clean all
-      run: sudo docker-compose -f "docker-compose.yml" rm -f app_react myshoop_server
+      run: |
+        sudo docker-compose -f "docker-compose.yml" rm -f app_react
+        sudo docker-compose -f "docker-compose.yml" rm -f myshoop_server
     - name: Build the Docker image
       run: |
         sudo docker-compose -f "docker-compose.yml" up -d --no-recreate
