@@ -11,8 +11,6 @@ services:
   myshoop_server:
     container_name: myshoop_server
     build: ./myshoop/back_end
-    env_file:
-      - .env.example
     ports:
       - 4000:4000
     depends_on:

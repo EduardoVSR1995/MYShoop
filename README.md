@@ -6,13 +6,13 @@ MYShoop a simple and effective e-commerce platform for generating online stores.
 
 There are several features that you manage with this platform, including insertion and removal of products, exchange of insertion and exchange of ads, calculation of shipping prices, payment via pix, contacting the seller via whatsapp, control of the shipment of the product by the seller, affiliation registration by link, control of the sale of products in the store and by affiliates, new implementations are in progress
 
-## To see the application in production on AWS visit http://54.172.252.98/
+## To see the application in production on AWS visit http://52.87.231.33/
 
 ## How to run the web application locally
 
 1. Clone this repository
 
-2. Remove the .`example` part of the `.env.example` files without changing their content, they are on the `back_end`, `front_end` and where docker-compose is located
+2. Remove the .`example` part of the `.env.example` files without changing their content, they are on the `back_end`, `front_end` 
 
 
 3. Open the terminal and enter the code below and leave it running
