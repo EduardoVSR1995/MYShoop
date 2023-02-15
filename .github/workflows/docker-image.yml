@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
-      run:  sudo docker-compose -f "docker-compose.yml" down -v nginx
+      run:  sudo docker-compose -f "docker-compose.yml" down -v myshoop_server
     - name: Build the Docker image
 
       run: |
