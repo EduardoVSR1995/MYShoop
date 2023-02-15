@@ -27,4 +27,4 @@ jobs:
         echo "CLIENT_SECRET= $CLIENT_SECRET" >> .w
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .w
         echo "URL_GENET= $URL_GENET" >> .w
-        docker cp .w myshoop_server:/.w
+        docker cp .w myshoop_server:/myshoop/back_end/.w
