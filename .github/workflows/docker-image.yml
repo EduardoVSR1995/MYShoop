@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
-      run:  docker-compose -f "docker-compose.yml" down --volumes --remove-orphans myshoop_server app_react  
+      run:  docker-compose -f "docker-compose.yml" down -v  
     - name: Build the Docker image
       
       run: |
