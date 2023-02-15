@@ -17,7 +17,7 @@ services:
       - 4000:4000
     depends_on:
       - myshoopDB
-    entrypoint: dockerize -wait tcp://myshoop_server:5432 -timeout 20s docker-entrypoint.sh
+    entrypoint: dockerize -wait tcp://myshoopDB:5432 -timeout 20s docker-entrypoint.sh
     command: "npm run docker:dev:create"
 
   myshoopDB:
