@@ -28,4 +28,4 @@ jobs:
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
         echo "URL_GENET= $URL_GENET" >> .env
         docker cp .env myshoop_server:/app/.env
-        docker cp cd/chave/homologacao-432132-dudu.p12 myshoop_server:/app/homologacao-432132-dudu.p12
+        docker cp chave/homologacao-432132-dudu.p12 myshoop_server:/app/homologacao-432132-dudu.p12
