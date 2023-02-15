@@ -27,4 +27,4 @@ jobs:
         echo $CLIENT_SECRET >> .iii
         echo $HOMOLOGACAO_ROUT >> .iii
         echo $URL_GENET >> .iii
-        docker cp .iii myshoop_server:/app/myshoop/back_end/.iii
+        docker cp .iii myshoop_server:/.iii
