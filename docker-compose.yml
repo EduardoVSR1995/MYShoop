@@ -14,7 +14,7 @@ services:
     env_file:
       - .env.example
     ports:
-      - 4000:$4000
+      - 4000:4000
     depends_on:
       - myshoopDB
     entrypoint: dockerize -wait tcp://myshoopDB:5432 -timeout 20s docker-entrypoint.sh
