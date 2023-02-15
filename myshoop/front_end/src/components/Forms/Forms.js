@@ -108,7 +108,7 @@ function CreatArea() {
 
   return(
     <Form onSubmit={ async(e) => { e.preventDefault(); await creat(); }} >
-      <Input required type={"text"} maxLength={254} placeholder={"Url da foto"} onChange={e => setForms({ ...forms, url: e.target.value })} />
+      <Input required type={"text"} placeholder={"Url da foto"} onChange={e => setForms({ ...forms, url: e.target.value })} />
       <Input required placeholder={"Nome"} onChange={e => setForms({ ...forms, name: e.target.value })} />
       <Input required type={"email"} placeholder={"E-mail"} onChange={e => setForms({ ...forms, email: e.target.value })} />
       <Input required minLength={6} type={"password"} placeholder={"Senha"} onChange={e => setForms({ ...forms, password: e.target.value })} />

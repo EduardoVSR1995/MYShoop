@@ -12,7 +12,7 @@ export async function postCart(id, quantiti, token) {
 }
 
 export async function postCreatShoop(obj) {
-  const response = (await fetch(process.env.REACT_APP_API_BASE_URL+"/user/creat", 
+  const response = (await fetch("/api/user/creat", 
     { 
       method: "POST",
       headers: {
