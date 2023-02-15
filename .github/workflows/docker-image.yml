@@ -23,7 +23,7 @@ jobs:
 
 
       run: |
-        sudo docker-compose -f "docker-compose.yml" up -d --build
+        sudo docker-compose -f "docker-compose.yml" up -d --build myshoop_app_react myshoop_myshoop_server
         echo "CLIENT_ID= $CLIENT_ID" > .env
         echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
