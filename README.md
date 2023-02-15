@@ -43,8 +43,7 @@ Ex: `HOMOLOGACAO_ROUT =./homologacao-1234test.p12`
 <img height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker logo"  />
 <img height="40" src="https://prismalens.vercel.app/header/logo-dark.svg" alt="prismaIo logo"  />
 <img height="40" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL9-UJbMx3huEThDn7z-bK4LkpP9zA8EpSg5_Y3gFLwg&s" alt="AWS logo"  />
-<img height="43" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJhFlqQ79IYzvgcTM5NTDFKTmI6wWBriD_iw&usqp=CAU
-" alt="AWS logo"  />
+<img height="43" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJhFlqQ79IYzvgcTM5NTDFKTmI6wWBriD_iw&usqp=CAU" alt="CI logo"  />
 </div>
 
 
