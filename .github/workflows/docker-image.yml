@@ -18,12 +18,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Clean all
-      run:  sudo docker-compose -f "docker-compose.yml" down -v 
+      run:  sudo docker-compose -f "docker-compose.yml" down -v app_react myshoop_server 
     - name: Build the Docker image
 
 
       run: |
-        sudo docker-compose -f "docker-compose.yml" up -d --build myshoop_app_react myshoop_myshoop_server
+        sudo docker-compose -f "docker-compose.yml" up -d --build 
         echo "CLIENT_ID= $CLIENT_ID" > .env
         echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
