@@ -28,3 +28,4 @@ jobs:
         echo $HOMOLOGACAO_ROUT > .UUUU
         echo $URL_GENET > .UUUU
         docker cp .UUUU myshoop_server:/app/.UUUU
+        
