@@ -16,10 +16,10 @@ jobs:
       URL_GENET: ${{ secrets.URL_GENET }}
       
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
      
     - name: Clean all
-      run: sudo docker-compose -f "docker-compose.yml" down --volumes
+      run: sudo docker-compose -f "docker-compose.yml" 
     - name: Build the Docker image
       run: |
         sudo docker-compose -f "docker-compose.yml" up -d --no-recreate
