@@ -17,6 +17,8 @@ jobs:
       
     steps:
     - uses: actions/checkout@v3
+      with:
+      fetch-depth: 0
     - name: Clean all
       run: sudo docker-compose -f "docker-compose.yml" down --volumes --remove-orphans myshoop_build_myshoop
     - name: Build the Docker image
