@@ -11,7 +11,8 @@ export async function store() {
 //  return store;
 //}
   
-export async function conect( url, body ) {   
+export async function conect( url, body ) {
+  console.log(url);   
   return await (await fetch(""+shopName+url, body)).json();
 }
 
