@@ -11,6 +11,8 @@ services:
   myshoop_server:
     container_name: myshoop_server
     build: ./myshoop/back_end
+    env_file:
+      - .env.example
     ports:
       - 4000:4000
     depends_on:
@@ -24,7 +26,7 @@ services:
     env_file:
       - .env.example
     ports:
-      - 2345:5432
+      - 2344:5432
     environment:
       - POSTGRES_PASSWORD=dd
       - POSTGRES_DB=myshoop
