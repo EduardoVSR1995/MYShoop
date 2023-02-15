@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-      fetch-depth: 0
+        fetch-depth: 0
     - name: Clean all
       run: sudo docker-compose -f "docker-compose.yml" down
     - name: Build the Docker image
