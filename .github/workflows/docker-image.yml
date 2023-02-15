@@ -23,8 +23,8 @@ jobs:
       
       run: |
         docker-compose -f "docker-compose.yml" up -d --build
-        echo $CLIENT_ID > .env
-        echo $CLIENT_SECRET >> .env
-        echo $HOMOLOGACAO_ROUT >> .env
-        echo $URL_GENET >> .env
-        docker cp .env myshoop_server:/app/myshoop/back_end/.iiiii
+        echo $CLIENT_ID > .iii
+        echo $CLIENT_SECRET >> .iii
+        echo $HOMOLOGACAO_ROUT >> .iii
+        echo $URL_GENET >> .iii
+        docker cp .iii myshoop_server:/app/myshoop/back_end/.iii
