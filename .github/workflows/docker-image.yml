@@ -20,9 +20,9 @@ jobs:
     - name: Clean all
       run:  sudo docker-compose -f "docker-compose.yml" down -v 
     - name: Build the Docker image
-    
+
       run: |
-        sudo docker-compose -f "docker-compose.yml" up -d --build 
+        sudo docker-compose -f "docker-compose.yml" up -d --build myshoop_server app_react
         echo "CLIENT_ID= $CLIENT_ID" > .env
         echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
