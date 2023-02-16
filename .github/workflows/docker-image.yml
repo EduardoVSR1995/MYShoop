@@ -25,7 +25,7 @@ jobs:
         
     - name: Build the Docker image
       run: |
-        sudo docker-compose build --no-cache app_react myshoop_server
+        sudo docker-compose -d --build --no-cache 
         echo "CLIENT_ID= $CLIENT_ID" > .env
         echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
         echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
