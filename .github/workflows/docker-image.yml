@@ -21,13 +21,13 @@ jobs:
      
     - name: Clean all
       run: |
-        sudo docker rmi -f app_react myshoop_server
+        sudo docker stop app_react | docker rm app_react | docker rmi $(docker ps -a -f ancestor=app_react -q)
     - name: Build the Docker image
-      run: |
-        sudo docker-compose -f "docker-compose.yml" up -d --build
-        echo "CLIENT_ID= $CLIENT_ID" > .env
-        echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
-        echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
-        echo "URL_GENET= $URL_GENET" >> .env
-        sudo docker cp .env myshoop_server:/app/.env
-        sudo docker cp   ../../../../../chaves/homologacao-432132-dudu.p12 myshoop_server:/app/homologacao-432132-dudu.p12
+      # run: |
+        # sudo docker-compose -f "docker-compose.yml" up --build
+        # echo "CLIENT_ID= $CLIENT_ID" > .env
+        # echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
+        # echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
+        # echo "URL_GENET= $URL_GENET" >> .env
+        # sudo docker cp .env myshoop_server:/app/.env
+        # sudo docker cp   ../../../../../chaves/homologacao-432132-dudu.p12 myshoop_server:/app/homologacao-432132-dudu.p12
