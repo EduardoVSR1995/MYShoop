@@ -24,13 +24,14 @@ jobs:
         sudo docker rm nginx
         sudo docker rm app_react
         sudo docker rm myshoop_server
+        docker rmi $(docker images -q -f "dangling=true")
         
     - name: Build the Docker image
       run: |
-        # sudo docker-compose -f "docker-compose.yml" up --build
-        # echo "CLIENT_ID= $CLIENT_ID" > .env
-        # echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
-        # echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
-        # echo "URL_GENET= $URL_GENET" >> .env
-        # sudo docker cp .env myshoop_server:/app/.env
-        # sudo docker cp   ../../../../../chaves/homologacao-432132-dudu.p12 myshoop_server:/app/homologacao-432132-dudu.p12
+        sudo docker-compose -f "docker-compose.yml" up --build
+        echo "CLIENT_ID= $CLIENT_ID" > .env
+        echo "CLIENT_SECRET= $CLIENT_SECRET" >> .env
+        echo "HOMOLOGACAO_ROUT= $HOMOLOGACAO_ROUT" >> .env
+        echo "URL_GENET= $URL_GENET" >> .env
+        sudo docker cp .env myshoop_server:/app/.env
+        sudo docker cp   ../../../../../chaves/homologacao-432132-dudu.p12 myshoop_server:/app/homologacao-432132-dudu.p12
