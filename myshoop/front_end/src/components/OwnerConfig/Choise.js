@@ -97,7 +97,7 @@ function Incert() {
       <Input onChange={e => setForm({ ...form, url3: e.target.value })} maxLength={254} placeholder={"Url da foto do produto"}/>
       <Input onChange={e => setForm({ ...form, description: e.target.value })} required placeholder={"Descrição"}/>
       <Input onChange={e => setForm({ ...form, price: e.target.value })} type={"text"} maxLength={7} title={"Formato 0000,00 usar virgula não ponto"} pattern={"[0-9]{1,4},[0-9]{2}"} required placeholder={"Valor"}/>
-      <Input onChange={e => setForm({ ...form, packingSize: e.target.value })} pattern="^[0-9]{1,3}" required placeholder={"Tamanho meddio do produto em cm L x A x C"}/>
+      <Input onChange={e => setForm({ ...form, packingSize: e.target.value })} pattern="^[0-9]{1,3}" required placeholder={"Tamanho medio do produto em cm L x A x C"}/>
       <button type={"submit"}>Enviar</button>
     </Form>
   );
