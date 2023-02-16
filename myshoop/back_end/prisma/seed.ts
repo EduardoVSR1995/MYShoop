@@ -29,7 +29,7 @@ type picture = {
 async function main() {
   const store = await prisma.store.findFirst({})
 
-  if( store ) return;
+  // if( store ) return;
 
   await prisma.publi.deleteMany({})
   await prisma.urlImage.deleteMany({})
