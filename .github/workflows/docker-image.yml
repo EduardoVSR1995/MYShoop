@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v3
      
     - name: Clean all
-      run: sudo docker-compose -f "docker-compose.yml" rm -f myshoop_server app_react
+      run: sudo docker-compose -f "docker-compose.yml" rm -f myshoop_server
     - name: Build the Docker image
       run: |
         sudo docker-compose -f "docker-compose.yml" up -d --no-recreate --build
