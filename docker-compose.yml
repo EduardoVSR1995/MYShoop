@@ -47,3 +47,8 @@ services:
 volumes:
   build_myshoop:
   progresDB:
+
+conditions:
+  myshoopDB_ready:
+    condition: service_healthy
+    service: myshoopDB
