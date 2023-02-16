@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v3
      
     - name: Clean all
-      run: sudo docker-compose rm -f --rmi build_myshoop
+      run: sudo docker-compose rm -f --rmi all -v build_myshoop
     - name: Build the Docker image
       run: |
         sudo docker-compose -f "docker-compose.yml" up -d app_react myshoop_server
