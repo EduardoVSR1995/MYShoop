@@ -27,7 +27,7 @@ jobs:
         sudo docker rm nginx
         sudo docker rm app_react
         sudo docker rm myshoop_server
-        docker rmi $(docker images -q -f "dangling=true")
+        docker rmi -f $(docker images -q -f "dangling=true")
         
     - name: Build the Docker image
       run: |
