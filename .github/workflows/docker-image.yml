@@ -21,7 +21,8 @@ jobs:
      
     - name: Clean all
       run: | 
-        sudo docker rmi -f myshoop_nginx:latest myshoop_app_react:latest myshoop_myshoop_server:latest
+        sudo docker volume rm build_myshoop
+
         
     - name: Build the Docker image
       run: |
