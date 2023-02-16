@@ -21,7 +21,10 @@ jobs:
      
     - name: Clean all
       run: |
-        sudo docker stop app_react | docker rm app_react | docker rmi $(docker ps -a -f ancestor=app_react -q)
+        sudo rmi myshoop_nginx:latest
+        sudo rmi myshoop_app_react:latest
+        sudo rmi myshoop_myshoop_server:latest
+        
     - name: Build the Docker image
       run: |
         # sudo docker-compose -f "docker-compose.yml" up --build
