@@ -21,7 +21,7 @@ jobs:
      
     - name: Clean all
       run: | 
-        sudo docker volume rm build_myshoop
+        sudo docker-compose -f "docker-compose.yml" down -v
 
         
     - name: Build the Docker image
