@@ -12,7 +12,6 @@ export async function store() {
 //}
   
 export async function conect( url, body ) {
-  console.log(url);   
   return await (await fetch("/api"+shopName+url, body)).json();
 }
 
