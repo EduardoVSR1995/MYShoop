@@ -156,7 +156,7 @@ function Dialog({ type }) {
   }
   return (
     forms.imgQrcod ?
-      <img src={forms.imgQrcod} />
+      <img src={ forms.imgQrcod } />
       :
       <Form onSubmit={e => { e.preventDefault(); const i = forms.activ ? "" : form(forms);}}>
         <Input required maxLength={8} pattern={"^[0-9]{8}$"} type={"text"} placeholder="cep" onChange={e => setForms({ ...forms, cep: e.target.value })} />
