@@ -117,7 +117,7 @@ function CreatArea() {
       <Input required placeholder="Nome da rua" pattern={"[aA-zZ]{2, 20}"} onChange={e => setForms({ ...forms, street: e.target.value })} />
       <Input required placeholder="Numero da casa" pattern={"[0-9]{1,5}"} onChange={e => setForms({ ...forms, homeNumber: e.target.value })} />
       <Input required placeholder="Numero de telefone" maxLength={11} pattern={"[0-9]{10,11}"}  onChange={e => setForms({ ...forms, phone: e.target.value })} />
-      <Input required placeholder="Nome da loja" pattern={"^[aA-zZ]{2,8}$"} maxLength={8} onChange={e => setForms({ ...forms, nameShop: e.target.value })} />
+      <Input required placeholder="Nome da loja" pattern={"^[aA-zZ]{2,8}$"} title={"Nome com até 8 letras"} maxLength={8} onChange={e => setForms({ ...forms, nameShop: e.target.value })} />
       <button type={"submit"} >Criar loja</button>
     </Form>
   );
