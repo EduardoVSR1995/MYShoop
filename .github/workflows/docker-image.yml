@@ -25,9 +25,8 @@ jobs:
         sudo docker rm nginx app_react myshoop_server
         sudo docker rmi -f myshoop_nginx:latest myshoop_app_react:latest myshoop_myshoop_server:latest
         sudo docker volume rm myshoop_build_myshoop
-
+    
     - name: Build the Docker image
-
       run: |
         sudo docker-compose -f "docker-compose.yml" up -d --build
         echo "CLIENT_ID= $CLIENT_ID" > .env
