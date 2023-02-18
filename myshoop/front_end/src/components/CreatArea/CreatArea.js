@@ -108,6 +108,5 @@ const Creat = styled.span`
       }
     }  
 }
-  
 `;
 export { Creat, AllBox };
