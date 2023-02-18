@@ -101,7 +101,6 @@ const Creat = styled.span`
             }
           }
         }  
-
         > span{
             height:50vh ;
             width: 100vw ;   
