@@ -42,6 +42,7 @@ a{
   align-items: center;
   justify-content: center;
 }
+
 `;
 
 const Input = styled.input`
@@ -64,6 +65,9 @@ const Input = styled.input`
 ::placeholder{
   color: #FFFFFF;
 }
+@media (max-width: 1000px) {        
+      width: 100vw ;
+  }
 `;
 
 const Afiliat = styled.span`

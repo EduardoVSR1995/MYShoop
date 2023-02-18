@@ -13,6 +13,7 @@ span{
 `;
 
 const Creat = styled.span`
+  
   margin: 0px !important ;
   height: 100vh ;
   background: linear-gradient(270.31deg, #FD4646 -3.73%, rgba(0, 10, 255, 0.5) 99.75%);    
@@ -75,40 +76,38 @@ const Creat = styled.span`
       height: 100% ;
     }
   }
-
+  
   @media (max-width: 1000px) {
-        flex-wrap: wrap ;
-        justify-content: center ;
-        > div{
-          width: 100% ;
+    flex-wrap: wrap ;
+    justify-content: center ;
+      
+    > div{
+          width: 100vh ;
           height:20% ;
-        }
-
-   
-  }
-  @media (max-width: 600px) {        
-    div{
-      width: 100% ;
-      word-wrap: break-word ;
-    }
-    span{
-      width: 80% ;
-      
-      
-      .screen{
-        position: absolute ;
-        width: 65% ;
-        height: 220px ;
-        border-radius: 20px ;
-        margin-bottom: 25px ;
+          button{
+          width: 100% ;   
+          }
+          > div{
+            >div{
+            width: 100% ;  
+            > span{
+              width: 100% ;   
+              }
+            }
+          }
+        }  
       }
+  @media (max-width: 600px) {            
+    span{
+      width: 100vh;
       img{
-        position: relative;
-        width: 100% ;
-        height: 100% ;
-      } 
-    }
-  }
-
+        width: 80vh;
+      }
+      .screen{
+        width: 65vh;
+      }
+    }  
+}
+  
 `;
 export { Creat, AllBox };

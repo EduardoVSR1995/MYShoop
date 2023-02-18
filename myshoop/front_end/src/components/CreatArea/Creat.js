@@ -33,7 +33,8 @@ export default function Page() {
         <div>
           Crie sua loja online 
           <button onClick={ () => setDialog(true) }> Vamos começar  </button>
-          <div>Ou entre em alguma de nossas lojas !!
+          <div>
+            Ou entre em alguma de nossas lojas !!
             <div>
               {forms?.shoops ? forms.shoops.map((i) => <span onClick={() => { navigat("/"+i.nameStore); window.location.href="/"+i.nameStore; } } > {i.nameStore}</span>) : "" }
             </div>
