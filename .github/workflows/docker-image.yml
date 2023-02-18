@@ -21,6 +21,7 @@ jobs:
      
     - name: Clean all
       run: | 
+        sudo docker-compose -f "docker-compose.yml" up -d --build
         sudo docker stop nginx app_react myshoop_server
         sudo docker rm nginx app_react myshoop_server
         sudo docker rmi -f myshoop_nginx:latest myshoop_app_react:latest myshoop_myshoop_server:latest
