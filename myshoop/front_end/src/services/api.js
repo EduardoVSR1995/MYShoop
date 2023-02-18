@@ -16,4 +16,3 @@ export async function conect( url, body ) {
 //export async function conect( url, body ) {   
 //  return await (await fetch("http://localhost:4000"+shopName+url, body)).json();
 //}
-
