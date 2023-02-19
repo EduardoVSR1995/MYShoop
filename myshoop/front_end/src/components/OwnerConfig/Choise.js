@@ -98,7 +98,7 @@ function Incert() {
       <Input onChange={e => setForm({ ...form, description: e.target.value })} required placeholder={"Descrição"}/>
       <Input onChange={e => setForm({ ...form, price: e.target.value })} type={"text"} maxLength={7} title={"Formato 0000,00 usar virgula não ponto"} pattern={"[0-9]{1,4},[0-9]{2}"} required placeholder={"Valor"}/>
       <Input onChange={e => setForm({ ...form, packingSize: e.target.value })} pattern="^[0-9]{1,3}" required placeholder={"Tamanho em cm² do produto"}/>
-      <button type={"submit"}>Env</button>
+      <button type={"submit"}>Adicionar produto</button>
     </Form>
   );
 }
@@ -199,7 +199,7 @@ function ProductEnv() {
             </>
           );
         })
-          : "Ainda não a produtos para envio"
+          : <h2>Ainda não a produtos para envio</h2>
       }
     </Area>
   );
@@ -275,7 +275,7 @@ function RegisterAfi() {
         <Input required type={"text"} placeholder={"Numero de telefone"} maxLength={11} pattern={"[0-9]{10,11}"} onChange={e => setChang({ ...change, cellPhone: e.target.value })} />
         <button type={"submit"} > Cadastrar afiliado(a) </button>
       </Form>
-      O codigo do afiliado aparece aqui {` => ${change?.code ? "code="+change.code : ""} <= `} basta colocalo ao final de cada link de produto.
+      <h2>O codigo do afiliado aparece aqui {` => ${change?.code ? "code="+change.code : ""} <= `} basta colocalo ao final de cada link de produto.</h2>
     </Afiliat> 
   );
 }
@@ -313,9 +313,9 @@ function SalesAmount() {
             </>
           );
         })
-          : "Ainda não a produtos vendidos"
+          : <h2>Ainda não a produtos vendidos</h2>
       }
-      Total de vendas R$ { sold?.list && sold?.list.length>0  ? ((sold.list.reduce((soma, i) => { return  soma + i.Product.price; }, 0))/100).toFixed(2)  : "" }
+      { sold?.list && sold?.list.length>0 ? <h2>Total de vendas R$ { sold?.list && sold?.list.length>0  ? ((sold.list.reduce((soma, i) => { return  soma + i.Product.price; }, 0))/100).toFixed(2)  : "" }</h2> : ""}
     </SoldList>
   );
 }
@@ -348,7 +348,7 @@ function ListAfiliat() {
               </p>
             );
           })
-            : "Ainda não a afiliados"
+            : <h2>Ainda não a afiliados</h2>
         }
       </span>  
     </Afiliat>

@@ -33,8 +33,10 @@ const ComandBox = styled.span`
     border-radius: 20px ;
     background: #FFFFFF ;
     @media (max-width: 1000px) {        
-      width: 100vw ;
-  }
+      h1{
+        font-size: 50px ;
+      }   
+    }
 `;
 
 const DialogBox = styled.div`
@@ -45,5 +47,5 @@ const DialogBox = styled.div`
     height: 100vh;
     background: #000000 ;
     opacity: 0.8 ;
-    
+  
 `;

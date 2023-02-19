@@ -203,6 +203,7 @@ const BoxOwner = styled.span`
   p{
     overflow: scroll;
   }
+  
 `;
 
 const ChangeAdvers = styled.span`
@@ -223,6 +224,26 @@ const ChangeAdvers = styled.span`
     height: 130px !important;
     width: 60% ;
 
+  }
+  @media (max-width: 1000px) {   
+    display: flex ;
+
+    > span{
+      height: 40vh ;
+    div{
+      width: 350px ;
+    }
+  }  
+  > form{
+    top: 400px ;
+    width: 100% ;
+    left: 0px ;
+    height: 250px !important ;
+    input{
+      font-size: 40px ;
+
+    }
+  } 
   }
 `;
 
