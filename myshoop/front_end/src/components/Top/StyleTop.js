@@ -23,6 +23,13 @@ const UserBox = styled.h1`
   .hiden{
     display: none;
   }
+  @media (max-width: 1000px) {    
+    img{
+      height: 100px ;
+    }
+    font-size: 30px ;
+  }
+
 `;
 
 const Top = styled.div`
@@ -69,6 +76,23 @@ const Top = styled.div`
     margin-right: 20px;
   }
 }
+@media (max-width: 1000px) {    
+  top: 0px ;
+  height: 110px ;
+  div{
+    width: 100% ;
+    height: 150px ;
+  }
+  span{
+    width: 30vw ;
+    input{
+      height: 120px ;
+    }
+    img{
+      top: 80px ;
+    }
+   }
+  }
 `;
 
 const Logout = styled.div`
