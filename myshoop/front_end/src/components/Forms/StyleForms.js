@@ -42,7 +42,15 @@ a{
   align-items: center;
   justify-content: center;
 }
+@media (max-width: 1000px) {        
+     button{
+       width: 100vw ;
+       height: 100px ;
+       font-size: 50px ;
+      
 
+     }
+  }
 `;
 
 const Input = styled.input`
@@ -67,6 +75,9 @@ const Input = styled.input`
 }
 @media (max-width: 1000px) {        
       width: 100vw ;
+      height: 100px ;
+      font-size: 50px ;
+     
   }
 `;
 
