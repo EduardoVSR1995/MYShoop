@@ -16,5 +16,9 @@ export default styled.div`
   font-size: 30px;
   line-height: 18px;
 
+  @media (max-width: 1000px) {        
+   height: 200px ;
+   font-size: 60px ;
+  }
 `;
 

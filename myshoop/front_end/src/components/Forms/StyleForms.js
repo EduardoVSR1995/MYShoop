@@ -48,6 +48,9 @@ a{
        height: 100px ;
        font-size: 50px ;
      }
+     a{
+      font-size: 40px ;
+     }
   }
 `;
 
