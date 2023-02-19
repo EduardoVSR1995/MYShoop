@@ -24,6 +24,17 @@ const Basket = styled.div`
     position:absolute ;
     width: 25px ;
   }
+  @media (max-width: 1000px) {        
+    > div{
+      font-size: 40px;
+      width: 80px ;
+      height: 80px ;
+      bottom: 40px ;
+    }
+    > img{
+      width: 80px ;
+    }
+  }
 
 `;
 
@@ -43,37 +54,66 @@ const Advertising = styled.div`
     align-items: center;
     justify-content: center;
     
-    h1{
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 30px;
-      margin: 20px ;
-      height: 90% ;
-      width: 100%;  
+      h1{
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        margin: 20px ;
+        height: 90% ;
+        width: 100%;  
+        > div{
+          height: 50px ;
+        }
+      }
+      h2{
+        width: 60%;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        color: #7E7E7E;
+      }
       > div{
-        height: 50px ;
+        height: 100% ;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      
+          img{
+            max-height: 100% ;
+            width: 15vw;
+          }
       }
     }
-    h2{
-      width: 60%;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 30px;
-      color: #7E7E7E;
-    }
-    > div{
-      height: 100% ;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      
-      img{
-      max-height: 100% ;
-      width: 15vw;
-    }
   }
+  @media (max-width: 1000px) {        
+    margin: 200px 0px 130px 20px ;
+    .merchan{
+        span{
+          h1{
+            width: 60%;  
+            font-size: 60px;
+            > a{
+              width: 50% ;
+              > div{
+                height: 100px ;
+              }
+            }
+            > h2{
+              font-size: 45px;
+              
+            }  
+          }
+        > div{
+          width: 40%;
+            img{
+              height: 100% ;
+              width: 100%;
+            }
+        }
+      }
+      
     }
   }
 `;

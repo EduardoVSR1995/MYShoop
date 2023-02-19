@@ -84,12 +84,17 @@ const Top = styled.div`
     height: 150px ;
   }
   span{
+    background-color: #FFFFFF ;
     width: 30vw ;
     input{
+      padding-left: 20px ;
+      text-align: start ;
       height: 120px ;
     }
     img{
-      top: 80px ;
+      height: 80px ;
+      width: 80px ;
+      top: 40px ;
     }
    }
   }

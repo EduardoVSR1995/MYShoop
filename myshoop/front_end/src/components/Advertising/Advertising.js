@@ -10,7 +10,7 @@ import { autorize } from "../../services/userConnectApi";
 import OwnerConfig from "../OwnerConfig/OwnerConfig";
  
 export default function Adverti() {
-  const { setValue, useData } = useContext(UserContext);
+  const { setValue } = useContext(UserContext);
   const [product, setProduct] = useState();
   function load(token) {
     cart(token)
