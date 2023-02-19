@@ -47,8 +47,6 @@ a{
        width: 100vw ;
        height: 100px ;
        font-size: 50px ;
-      
-
      }
   }
 `;
