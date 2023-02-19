@@ -64,6 +64,14 @@ const BoxLayout = styled.div`
     height: 15%;
     overflow: auto ;
   }
+  @media (max-width: 1000px) {        
+    width: 25vw;
+    height: 30vh;
+    > div{
+      font-size: 30px ;
+    }
+    
+  }
 `;
 
 export { Products, Box, BoxImage, BoxLayout };
