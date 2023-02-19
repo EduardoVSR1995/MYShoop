@@ -127,7 +127,11 @@ const Sub = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  @media (max-width: 1000px) {        
+    width: 300px;
+    height: 100px;
+    font-size: 40px ;
+  }
 `;
 
 const BoxConfig = styled.div`
@@ -172,6 +176,7 @@ const BoxConfig = styled.div`
         }
     }
   }  
+  
 `;
 
 const BoxOwner = styled.span`

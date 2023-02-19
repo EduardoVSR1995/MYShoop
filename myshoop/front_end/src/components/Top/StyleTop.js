@@ -85,7 +85,7 @@ const Top = styled.div`
   }
   span{
     background-color: #FFFFFF ;
-    width: 30vw ;
+    width: 40vw ;
     input{
       padding-left: 20px ;
       text-align: start ;
