@@ -10,10 +10,10 @@ export async function conect( url, body ) {
 }
 
 //export async function store() {
-//  const store = await (await fetch("http://localhost:4000/store", { method: "GET" })).json();
+//  const store = await (await fetch("http://192.168.2.113:4000/store", { method: "GET" })).json();
 //
 //  return store;
 //}
 //export async function conect( url, body ) {   
-//  return await (await fetch("http://localhost:4000"+shopName+url, body)).json();
+//  return await (await fetch("http://192.168.2.113:4000"+shopName+url, body)).json();
 //}

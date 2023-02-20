@@ -40,18 +40,6 @@ h2{
       width:40% ;
   }
 }  
-h2{
-  margin: 10px 0px 0px 0px ;
-  font-size: 40px ;
-  display: block ;
-  margin:0px ;
-  max-width: 100% ;
-  > button{
-      font-size: 40px ;
-      height: 140px ;
-      width: 40% ;
-    }
-}
   @media (max-width: 1000px) {  
     max-width: 100% ;
     height: 250px ;
@@ -119,7 +107,9 @@ const Quantiti = styled.div`
 const Apresentation = styled.div`
   word-wrap: normal ;
   width: 75% ;
+  height: 400px ;
   h1{
+    height: 100px ;
     font-weight: 600;
     font-size: 30px;
      > h2{

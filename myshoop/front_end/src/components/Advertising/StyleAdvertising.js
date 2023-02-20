@@ -204,7 +204,7 @@ const BoxOwner = styled.span`
     overflow: scroll;
   }
   @media (max-width: 1000px) {   
-    height: 70vh ;
+    height: 60vh;
     > div{
       width: 200px ;
     }
