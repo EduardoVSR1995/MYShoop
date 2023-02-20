@@ -119,13 +119,13 @@ export default function Sales({ type, load }) {
             <Input type="text" maxLength={8} onChange={e =>
               setProduct({ ...product, cep: e.target.value })} />
             <button onClick={() => fret(id, product.cont, product.cep)}>
-              Digite o cep para saber o preço do frete
+              Digite o cep e aperte aqui para saber o preço do frete antes de comprar
             </button>
           </EnvPrice>
           <EnvPrice>
             <h2>
-              R$ {(product.cont * (product?.price / 100)).toFixed(2)}
-              {product.dais ?
+              R$ {(product.cont * (product?.price / 100)).toFixed(2)} 
+              {product.dais ? 
                 <> Seu produto chegara em {product.dais} dias <br />
                   Com o valor do frete ${(product.fret / 100).toFixed(2)} </>
                 :

@@ -106,7 +106,13 @@ const Afiliat = styled.span`
       align-items: center;
     }
   }
+  @media (max-width: 1000px) {   
+    h2{
+      width: 90% ;
+      font-size: 30px ;
 
+    }
+  }
   
 `;
 

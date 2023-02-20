@@ -7,10 +7,7 @@ const Products = styled.div`
   margin-top: 30px;
   div{
     display: flow-root ;
-    div{
-    }
-    div{
-    }
+    
   }
 `;
 
@@ -26,6 +23,17 @@ const BoxImage = styled.div`
       width: 0px ;
     }
   }
+  @media (max-width: 1000px) {     
+    margin: 0px ;
+    width: 35vw;
+    > div{
+      width: 30vw ;
+      > img{
+        width: 30vw ;
+      }
+    }
+  }
+  
 `;
 
 const Box = styled.div`
@@ -63,6 +71,14 @@ const BoxLayout = styled.div`
     margin: 5px ;
     height: 15%;
     overflow: auto ;
+  }
+  @media (max-width: 1000px) {        
+    width: 25vw;
+    height: 30vh;
+    > div{
+      font-size: 30px ;
+    }
+    
   }
 `;
 

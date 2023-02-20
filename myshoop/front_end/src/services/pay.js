@@ -11,6 +11,7 @@ export async function paydPix(
   cep,
   code
 ) {
+  console.log(token);
   const response = await conect("/payment/pix", 
     { method: "POST",
       headers: {

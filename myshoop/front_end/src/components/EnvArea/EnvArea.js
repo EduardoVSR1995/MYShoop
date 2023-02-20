@@ -5,6 +5,11 @@ const Area = styled.span`
   border-radius: 20px ;
   overflow: scroll;
   opacity: 1;
+  @media (max-width: 1000px) {        
+        h2{
+          font-size: 40px ;
+        }
+    }
   
 `;
 
@@ -21,6 +26,12 @@ const SoldList = styled.span`
     }
   }
 
+  @media (max-width: 1000px) {   
+    h2{
+      width: 90% ;
+      font-size: 30px ;
+    }
+  }
   
 `;
 
@@ -58,6 +69,7 @@ const Env = styled.span`
     height: 100% ;
     margin: 0px ;
    }
+  
    
 `;
 

@@ -131,8 +131,8 @@ function Dialog({ type }) {
     try {
       if(type) {
         removCart(type, userData.token);
-        return;
       };
+
       setForms({ ...forms, activ: true });
       toast("Aguarde o QR Code");
       const imgPix = await paydPix(
@@ -146,10 +146,12 @@ function Dialog({ type }) {
         forms.cep,
         userData.code,
       );
+      console.log(imgPix);
       const valid = imgPix.imgQrcod ? setForms({ ...forms, imgQrcod: imgPix.imgQrcod }) : "";
-      
+
       return;
     } catch (error) {
+      console.log(error);
       setForms({ ...forms, activ: false });
       toast("Ouve um erro");
     }
