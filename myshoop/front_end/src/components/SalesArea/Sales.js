@@ -129,7 +129,7 @@ export default function Sales({ type, load }) {
                 <> Seu produto chegara em {product.dais} dias <br />
                   Com o valor do frete ${(product.fret / 100).toFixed(2)} </>
                 :
-                " Coloque o cep a acima"}
+                " Coloque o cep a acima para saber o valor da entrega"}
 
               <button onClick={ async() =>
                 type ?
