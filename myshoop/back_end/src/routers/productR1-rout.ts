@@ -13,7 +13,6 @@ productsRoute
   .delete("/remov/:id", deletProductsCart)
   .delete("/remov/store/:id", deletProductStore)
   .put("/advertising", advertising)
-  
   ;
   
 
