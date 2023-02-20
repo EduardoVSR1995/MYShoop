@@ -4,7 +4,7 @@ import UserContext from "../../contexts/UserContext";
 
 export function Dialog({ setDialog, children, load }) {
   const { userData } = useContext(UserContext);
-
+  
   return (
     <AllBox>
       <DialogBox onClick={() => { setDialog(""); const i = load ? load(userData.token) : "";}} />

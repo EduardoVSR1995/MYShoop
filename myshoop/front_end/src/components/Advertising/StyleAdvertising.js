@@ -203,6 +203,12 @@ const BoxOwner = styled.span`
   p{
     overflow: scroll;
   }
+  @media (max-width: 1000px) {   
+    height: 70vh ;
+    > div{
+      width: 200px ;
+    }
+  }
   
 `;
 

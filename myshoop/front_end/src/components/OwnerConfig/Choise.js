@@ -104,13 +104,14 @@ function Incert() {
 }
 
 function Remov() {
-  const { setValue, SetProductData } = useContext(UserContext);
-  const { productData } = useContext(ProductContext);
+  const { setValue } = useContext(UserContext);
+  const { productData, SetProductData } = useContext(ProductContext);
 
   async function del(id) {
     const { token } = setValue();
 
     if(!window.confirm("Deseja remover o produto")) return;
+    console.log(token);
     try {
       await deleteProductStore(id, token);
       toast("Produto deletado");

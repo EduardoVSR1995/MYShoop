@@ -80,7 +80,6 @@ async function deleteCart(ProductId: number, userId: number) {
 
 async function deleteProductStore(ProductId: number, nameStore: string) {
   const cart = await ProductRepository.findFirstProductIdStore(ProductId, nameStore);  
-
   if( cart.length === 0 ) throw notmatch();
   
   await ProductRepository.deleteProductShop(ProductId);

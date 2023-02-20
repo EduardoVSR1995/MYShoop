@@ -7,8 +7,6 @@ import paymentService from "@/services/payment-service";
 import userService from "@/services/user-service";
 
 export async function postPayment(req: AuthenticatedRequest, res: Response) {
-  console.log(req.body);
-
   try {
     const {  id, phone, quantiti, street, city, house, cep, code } = req.body;
 
@@ -38,7 +36,6 @@ export async function postPayment(req: AuthenticatedRequest, res: Response) {
 
     res.send({ imgQrcod: payment.imgQrcod }).status(httpStatus.OK);
   } catch (error) {
-    console.log(error);
     res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
