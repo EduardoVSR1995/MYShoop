@@ -33,7 +33,6 @@ export async function deletProductsCart(req: AuthenticatedRequest, res: Response
   try {
     const { id } = req.params;
     const userId = req.userId;
-
     await productService.deleteCart(Number(id), userId);
 
     res.send([]).status(httpStatus.OK);
@@ -43,6 +42,8 @@ export async function deletProductsCart(req: AuthenticatedRequest, res: Response
 }
 
 export async function deletProductStore(req: AuthenticatedRequest, res: Response) {
+  console.log(req.params);
+  
   try {
     const shoop = req.baseUrl.split("/")[1];
 

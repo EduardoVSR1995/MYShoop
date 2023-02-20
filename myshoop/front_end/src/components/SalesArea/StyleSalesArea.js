@@ -55,6 +55,7 @@ h2{
   @media (max-width: 1000px) {  
     max-width: 100% ;
     height: 250px ;
+    align-items: center !important;
     > input{
       height: 100px ;
       width: 39% !important ;
@@ -70,14 +71,14 @@ h2{
       
       > h3{
         > button{
-          height: 100px ;
+          height: 150px ;
           width: 50% ;
           font-size: 30px ;
         }
         flex-wrap: wrap ;
         width: 100% ;
         height: 450px ;
-        >h4{
+        > h4{
           width: 100% ;
         }
       }
