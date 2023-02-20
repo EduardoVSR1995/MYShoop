@@ -40,6 +40,18 @@ h2{
       width:40% ;
   }
 }  
+h2{
+  margin: 10px 0px 0px 0px ;
+  font-size: 40px ;
+  display: block ;
+  margin:0px ;
+  max-width: 100% ;
+  > button{
+      font-size: 40px ;
+      height: 140px ;
+      width: 40% ;
+    }
+}
   @media (max-width: 1000px) {  
     max-width: 100% ;
     height: 250px ;
@@ -52,18 +64,24 @@ h2{
       height: 180px ;
       width: 300px ;
     }
-  }
-  h2{
-    margin: 10px 0px 0px 0px ;
-    font-size: 40px ;
-    display: block ;
-    margin:0px ;
-    max-width: 100% ;
-    > button{
-        font-size: 40px ;
-        height: 140px ;
-        width: 40% ;
+    > h2{
+      margin: 200px 0px 0px 0px ;
+      width: 100% ;
+      
+      > h3{
+        > button{
+          height: 100px ;
+          width: 50% ;
+          font-size: 30px ;
+        }
+        flex-wrap: wrap ;
+        width: 100% ;
+        height: 450px ;
+        >h4{
+          width: 100% ;
+        }
       }
+    }  
   }
 `;
 

@@ -32,10 +32,14 @@ const ComandBox = styled.span`
     height: 70%; 
     border-radius: 20px ;
     background: #FFFFFF ;
-    @media (max-width: 1000px) {        
+    @media (max-width: 1000px) {   
+      width: 100vw ;
       h1{
         font-size: 50px ;
       }   
+      > img{
+        width: 1000px ;
+      }
     }
 `;
 
