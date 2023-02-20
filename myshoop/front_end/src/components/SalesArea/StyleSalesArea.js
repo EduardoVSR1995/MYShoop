@@ -54,22 +54,31 @@ h2{
       width: 300px ;
     }
     > h2{
-      margin: 200px 0px 0px 0px ;
+      margin: 50px 0px 0px 0px ;
       width: 100% ;
-      
-      > h3{
+      font-size: 30px ;
+      max-height: 300px ;
         > button{
           height: 150px ;
-          width: 50% ;
+          width: 40% ;
           font-size: 30px ;
         }
         flex-wrap: wrap ;
         width: 100% ;
         height: 450px ;
-        > h4{
+        > h3{
+          display: contents ;
           width: 100% ;
+          height: 400px ;
+          > button{
+            font-size: 30px ;
+            height: 150px ;
+            width: 40% ;
+          }
+          > h4{
+            width: 100% ;
         }
-      }
+      }  
     }  
   }
 `;
@@ -93,6 +102,7 @@ const Quantiti = styled.div`
     justify-content: center;
   }
   @media (max-width: 1000px) {        
+    margin: 40px 0px 0px 20px ;
     width: 250px;
     height: 100px ;
     > button{
