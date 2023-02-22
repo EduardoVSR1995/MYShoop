@@ -143,8 +143,14 @@ async function creatAddres(data: Omit<Addres, "id">) {
 }
 
 async function creatAfiliat(data: Omit<Affiliated, "id">) {
+  console.log(data);
   return prisma.affiliated.create({
-    data
+    data: {
+      code: data.code,
+      cellPhone: data.cellPhone,
+      email: data.email,
+      StoreId: data.StoreId
+    }
   });
 }
 

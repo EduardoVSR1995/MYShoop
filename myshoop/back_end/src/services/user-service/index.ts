@@ -65,7 +65,7 @@ async function creatAddres(obj: Omit<Addres, "id">) {
   return true; 
 }
 
-async function creatAfiliat(cellPhone: number, email: string, nameStore: string) {
+async function creatAfiliat(cellPhone: string, email: string, nameStore: string) {
 
   const verify = await userRepository.findFirstAfiliat(email, nameStore);
 

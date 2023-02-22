@@ -76,7 +76,7 @@ model Cart {
 model Affiliated {
   id                 Int        @id @default(autoincrement())
   code               String     @unique
-  cellPhone          Int
+  cellPhone          String
   email              String
   StoreId            Int
   SalesAffiliated    SalesAffiliated[]
