@@ -44,7 +44,7 @@ export async function creatAfiliat(req: AuthenticatedRequest, res: Response) {
 
     await userService.autorize(userId, url);
 
-    const code = await userService.creatAfiliat( Number(cellPhone), email, url);
+    const code = await userService.creatAfiliat( cellPhone, email, url);
 
     res.send({code: code}).status(httpStatus.OK);
   } catch (error) {

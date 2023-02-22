@@ -107,10 +107,18 @@ const Afiliat = styled.span`
     }
   }
   @media (max-width: 1000px) {   
+
     h2{
       width: 90% ;
       font-size: 30px ;
+    }
 
+    > span{
+      > p{
+        margin: 20px ;
+        width: 100% ;
+        font-size: 35px ;
+      }
     }
   }
   
